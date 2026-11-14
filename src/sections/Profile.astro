@@ -1,0 +1,23 @@
+---
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { fieldAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import Pic from './Pic.astro';
+import Render from './Render.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const details = (s.details ?? []).filter((d: any) => d?.label || d?.value);
+---
+<Sec node={node} edit={edit} class="profile">
+  <div class="profile__side stack">
+    <div class="profile__photo frame ratio-tall"><Pic img={s.image} edit={edit} loading="eager" /></div>
+    {details.length > 0 && <dl class="facts facts--stacked">{details.map((d: any) => <div><dt>{d.label}</dt><dd>{d.value}</dd></div>)}</dl>}
+  </div>
+  <div class="profile__body stack">
+    {s.eyebrow && <p class="eyebrow" {...fieldAttrs(edit, 'eyebrow', 'text')}>{s.eyebrow}</p>}
+    <h2 class="profile__name" {...fieldAttrs(edit, 'title', 'text')} set:html={s.title ?? ''} />
+    {s.text && <div class="rich" {...fieldAttrs(edit, 'text', 'richtext')} set:html={s.text} />}
+    {node.blocks?.length ? <div class="actions"><Render nodes={node.blocks} edit={edit} /></div> : null}
+  </div>
+</Sec>

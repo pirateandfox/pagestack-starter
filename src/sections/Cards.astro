@@ -1,0 +1,28 @@
+---
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+import Pic from './Pic.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const style = s.style || 'image';
+---
+<Sec node={node} edit={edit} class:list={['cards', `cards--${style}`]}>
+  <SecHead s={s} edit={edit} />
+  <ul class="cards__grid" style={`--cols: ${s.columns || 3}`}>
+    {(node.blocks ?? []).map((it, i) => { const ie = child(edit, i); const c = it.settings; const Tag = c.href && !edit ? 'a' : 'div'; return (
+      <li {...nodeAttrs(ie, it)}>
+        <Tag class="card" href={Tag === 'a' ? c.href : undefined}>
+          {style !== 'bordered' && <div class="card__media frame ratio-wide"><Pic img={c.image} edit={ie} alt="" /></div>}
+          <div class="card__body">
+            <h3 {...fieldAttrs(ie, 'title', 'text')} set:html={c.title ?? ''} />
+            {c.text && style !== 'overlay' && <div class="rich muted" {...fieldAttrs(ie, 'text', 'richtext')} set:html={c.text} />}
+            {c.href && style === 'bordered' && <span class="card__more" aria-hidden="true">→</span>}
+          </div>
+        </Tag>
+      </li>
+    ); })}
+  </ul>
+</Sec>

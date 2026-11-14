@@ -1,0 +1,28 @@
+---
+// Tabs (role=tablist, arrow keys move between tabs; site.ts). Each tab holds ordinary blocks.
+// Without JavaScript every panel shows, one after another, under its label (the <noscript> style).
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+import Render from './Render.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const tabs = node.blocks ?? [];
+const base = `tabs-${node.id}`;
+---
+<Sec node={node} edit={edit} class="tabs">
+  <SecHead s={s} edit={edit} />
+  <div class:list={['tabs__box', edit && 'tabs__box--edit']} data-tabs>
+    <div class="tabs__list" role="tablist">
+      {tabs.map((t, i) => <button type="button" role="tab" class="tabs__tab" id={`${base}-t${i}`} aria-controls={`${base}-p${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} {...fieldAttrs(child(edit, i), 'title', 'text')}>{t.settings.title}</button>)}
+    </div>
+    {tabs.map((t, i) => (
+      <div class="tabs__panel flow" role="tabpanel" id={`${base}-p${i}`} aria-labelledby={`${base}-t${i}`} data-label={t.settings.title} hidden={!edit && i !== 0} {...nodeAttrs(child(edit, i), t)}>
+        <Render nodes={t.blocks} edit={child(edit, i)} />
+      </div>
+    ))}
+  </div>
+  <noscript><style>.tabs__list { display: none; } .tabs__panel[hidden] { display: grid; } .tabs__panel::before { content: attr(data-label); font-weight: 600; }</style></noscript>
+</Sec>

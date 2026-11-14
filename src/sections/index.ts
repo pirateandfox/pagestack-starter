@@ -175,6 +175,222 @@ export const presets: Preset[] = [
     description: 'Clients, partners or press.',
     create: () => make('logos', { title: 'As featured in' }, [1, 2, 3, 4, 5, 6].map((i) => make('logo', { image: img(`logo-${i}`, ['Northfold', 'Calder & Co', 'Halden', 'Oyster Bay', 'Pellworth', 'Vantage'][i - 1]) }))),
   },
+  /* ---------- Text and media (more) ---------- */
+  {
+    label: 'Embed: video',
+    description: 'A YouTube or Vimeo video from a link.',
+    create: () => make('embed', { title: 'Inside the Harbour Street studio', intro: '<p>Three minutes on how a former net store became a place to draw.</p>', url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ', caption: 'Sample video: Big Buck Bunny, Blender Foundation (CC BY 3.0). Paste your own link.' }),
+  },
+  {
+    label: 'Embed: booking calendar',
+    description: 'A Calendly (or similar) booking page in the page.',
+    create: () => make('embed', { title: 'Book a site visit', intro: '<p>Thirty minutes on site, free, with the architect who would draw your building.</p>', url: 'https://calendly.com/acmesales', shape: 'tall', background: 'muted' }),
+  },
+  {
+    label: 'Gallery',
+    description: 'An even grid of photos that open full size.',
+    create: () => make('gallery', { title: 'Recent work', columns: '4' }, [1, 2, 3, 4, 5, 6, 7, 8].map((i) => make('photo', { image: img(`project-${i}`, `Project ${i}`), caption: '' }))),
+  },
+  {
+    label: 'Gallery, masonry',
+    description: 'Photos keeping their own shape, with captions.',
+    create: () => make('gallery', { title: 'Cliff House', eyebrow: 'Photographs', layout: 'masonry', columns: '3' }, [
+      make('photo', { image: img('tall-1', 'The entrance'), caption: 'The entrance, from the lane' }),
+      make('photo', { image: img('project-2', 'Living room'), caption: 'Living room at dawn' }),
+      make('photo', { image: img('tall-2', 'Stair'), caption: 'The stair' }),
+      make('photo', { image: img('project-3', 'Kitchen'), caption: '' }),
+      make('photo', { image: img('tall-3', 'Bedroom window'), caption: 'Bedroom window' }),
+      make('photo', { image: img('project-6', 'Garden'), caption: 'From the garden' }),
+    ]),
+  },
+  {
+    label: 'Slideshow',
+    description: 'Large photos one at a time.',
+    create: () => make('slideshow', { title: 'Harbour Street, from start to finish' }, [
+      make('slide', { image: img('project-1', 'The net store before work began'), caption: 'March: the net store as we found it.' }),
+      make('slide', { image: img('project-4', 'The frame going up'), caption: 'June: the new frame inside the old walls.' }),
+      make('slide', { image: img('project-7', 'The finished studio'), caption: 'November: the studio, finished.' }),
+    ]),
+  },
+
+  /* ---------- Explain (more) ---------- */
+  {
+    label: 'Cards',
+    description: 'Linked cards with a picture on top.',
+    create: () => make('cards', { title: 'Where to start', columns: '3' }, [
+      make('card', { title: 'New homes', text: '<p>From a first sketch to the keys.</p>', image: img('project-2', ''), href: '/services/' }),
+      make('card', { title: 'Extensions', text: '<p>More room and more light.</p>', image: img('project-5', ''), href: '/services/' }),
+      make('card', { title: 'Shops and studios', text: '<p>Spaces that make people come in.</p>', image: img('project-8', ''), href: '/services/' }),
+    ]),
+  },
+  {
+    label: 'Cards, bordered',
+    description: 'Text-only cards with a border.',
+    create: () => make('cards', { eyebrow: 'Services', title: 'What we can help with', columns: '4', style: 'bordered', background: 'muted' }, [
+      make('card', { title: 'Feasibility', text: '<p>Is the site worth it? A short report and a sketch.</p>', href: '/services/' }),
+      make('card', { title: 'Planning', text: '<p>Drawings and the application, start to decision.</p>', href: '/services/' }),
+      make('card', { title: 'Building control', text: '<p>The technical drawings your builder needs.</p>', href: '/services/' }),
+      make('card', { title: 'On site', text: '<p>Weekly visits until the last coat of paint.</p>', href: '/services/' }),
+    ]),
+  },
+  {
+    label: 'Cards, title on picture',
+    description: 'Big pictures with the title over them.',
+    create: () => make('cards', { title: 'Selected projects', columns: '3', style: 'overlay' }, [
+      make('card', { title: 'Cliff House', image: img('tall-1', ''), href: '/work/' }),
+      make('card', { title: 'Okafor Ceramics', image: img('tall-2', ''), href: '/work/' }),
+      make('card', { title: 'The Long Barn', image: img('tall-4', ''), href: '/work/' }),
+    ]),
+  },
+  {
+    label: 'Comparison',
+    description: 'Options side by side, ticks and dashes.',
+    create: () => make('compare', { title: 'Which service is right for you?', col1: 'Planning only', col2: 'Full service', col3: '', highlight: '2' }, [
+      make('compare-row', { label: 'Site visit and brief', c1: 'yes', c2: 'yes' }),
+      make('compare-row', { label: 'Planning drawings and application', c1: 'yes', c2: 'yes' }),
+      make('compare-row', { label: 'Technical drawings', c1: 'no', c2: 'yes' }),
+      make('compare-row', { label: 'Builder tender', c1: 'no', c2: 'yes' }),
+      make('compare-row', { label: 'Visits during the build', c1: 'no', c2: 'Weekly' }),
+      make('compare-row', { label: 'Typical fee', c1: 'From $4,000', c2: '8–12% of build' }),
+    ]),
+  },
+  {
+    label: 'Tabs',
+    description: 'Content in tabs.',
+    create: () => make('tabs', { title: 'Our three kinds of project' }, [
+      make('tab', { title: 'New homes' }, [make('heading', { text: 'A house that fits its site', level: 'h3' }), make('paragraph', { text: '<p>We start with the land: the light, the wind, the view you will want from the kitchen sink. Most of our houses are timber-framed and built by local firms.</p>' }), button('See our houses', '/work/', 'text')]),
+      make('tab', { title: 'Extensions' }, [make('heading', { text: 'More room, same house', level: 'h3' }), make('paragraph', { text: '<p>A good extension makes the old house work better, not just bigger. We often find the space is already there.</p>' })]),
+      make('tab', { title: 'Commercial' }, [make('heading', { text: 'Small shops and studios', level: 'h3' }), make('paragraph', { text: '<p>Fit-outs and conversions for makers, cafés and small offices, usually on a tight programme.</p>' })]),
+    ]),
+  },
+  {
+    label: 'Timeline',
+    description: 'Dated moments in order.',
+    create: () => make('timeline', { eyebrow: 'About', title: 'Twelve years on Harbour Street' }, [
+      make('moment', { date: '2014', title: 'Two desks above the chandlery', text: '<p>Ana and Joe leave a big London practice and come home to Portwell.</p>' }),
+      make('moment', { date: '2017', title: 'Our first house', text: '<p>Kettle Cove, a timber house on a cliff, wins a regional award.</p>' }),
+      make('moment', { date: '2021', title: 'The net store', text: '<p>We buy and convert the old net store. It becomes the studio.</p>' }),
+      make('moment', { date: '2026', title: 'Sixty-four buildings', text: '<p>Seven people, one long table, still answering our own phone.</p>' }),
+    ]),
+  },
+
+  /* ---------- Offer ---------- */
+  {
+    label: 'Pricing',
+    description: 'Three plans, monthly and yearly.',
+    create: () => make('pricing', { eyebrow: 'Membership', title: 'Join the drawing club', intro: '<p>Evening classes in the studio for anyone who wants to learn to draw buildings.</p>', yearly: true, background: 'muted' }, [
+      make('plan', { name: 'Drop in', price: '$18', yearlyPrice: '', period: '/class', yearlyPeriod: '', text: '<p>Come when you can.</p>', features: '<ul><li>One evening class</li><li>Paper and pencils</li></ul>', button: 'Book a class', href: '/#contact' }),
+      make('plan', { name: 'Regular', price: '$55', yearlyPrice: '$550', period: '/month', yearlyPeriod: '/year', text: '<p>Every Tuesday and Thursday.</p>', features: '<ul><li>Eight classes a month</li><li>All materials</li><li>Studio open hours</li></ul>', button: 'Join', href: '/#contact', featured: true, badge: 'Most popular' }),
+      make('plan', { name: 'Studio', price: '$120', yearlyPrice: '$1,200', period: '/month', yearlyPeriod: '/year', text: '<p>For people working on a project.</p>', features: '<ul><li>Unlimited classes</li><li>A desk on Saturdays</li><li>A monthly review with an architect</li></ul>', button: 'Join', href: '/#contact' }),
+    ]),
+  },
+  {
+    label: 'Menu',
+    description: 'A menu in two columns with dietary marks.',
+    create: () => make('menu', { eyebrow: 'Open studio, 4 December', title: 'The supper menu' }, [
+      make('menu-group', { title: 'To start', note: 'Served from 5 p.m.' }, [
+        make('menu-item', { name: 'Harbour oysters', text: 'Shallot vinegar, lemon', price: 'market', marks: ['GF'] }),
+        make('menu-item', { name: 'Leek and potato soup', text: 'Brown butter, sourdough', price: '9', marks: ['V'] }),
+        make('menu-item', { name: 'Beetroot, walnut, labneh', text: '', price: '11', marks: ['V', 'GF'] }),
+      ]),
+      make('menu-group', { title: 'To follow', note: '' }, [
+        make('menu-item', { name: 'Hake, mussels, cider', text: 'Samphire and new potatoes', price: '24', marks: ['GF'] }),
+        make('menu-item', { name: 'Squash and chestnut pie', text: 'Mustard greens', price: '19', marks: ['VG'] }),
+        make('menu-item', { name: 'Apple cake', text: 'Clotted cream', price: '8', marks: ['V'] }),
+      ]),
+    ]),
+  },
+  {
+    label: 'Services list',
+    description: 'Services with price and duration.',
+    create: () => make('services', { title: 'Fixed-price services', intro: '<p>For smaller jobs we work to a fixed price, agreed before we start.</p>' }, [
+      make('service', { title: 'Site appraisal', text: '<p>A visit, a sketch and a short report on what the site could take.</p>', price: '$650', duration: '2 weeks', href: '/services/' }),
+      make('service', { title: 'Pre-application advice', text: '<p>We meet the planners with you before you commit to a design.</p>', price: '$1,200', duration: '4–6 weeks', href: '/services/' }),
+      make('service', { title: 'Measured survey', text: '<p>Accurate drawings of your building as it stands today.</p>', price: 'From $900', duration: '1 week' }),
+    ]),
+  },
+  {
+    label: 'Products or rooms',
+    description: 'Things to buy or book, each with a price.',
+    create: () => make('products', { title: 'Stay in one of our buildings', intro: '<p>Three of our houses are let for short stays.</p>' }, [
+      make('product', { title: 'Cliff House', text: '<p>Sleeps 4. A timber house above the cove.</p>', image: img('project-2', 'Cliff House'), price: '$320 / night', badge: 'New', button: 'Check dates', href: '/stay/' }),
+      make('product', { title: 'The Long Barn', text: '<p>Sleeps 8. A stone barn with a new oak roof.</p>', image: img('project-6', 'The Long Barn'), price: '$480 / night', badge: '', button: 'Check dates', href: '/stay/' }),
+      make('product', { title: 'Net Loft', text: '<p>Sleeps 2. Above the studio, on the harbour.</p>', image: img('project-7', 'Net Loft'), price: '$180 / night', badge: '', button: 'Check dates', href: '/stay/' }),
+    ]),
+  },
+  {
+    label: 'Donate',
+    description: 'Suggested amounts to a donation page.',
+    create: () => make('donate', { title: 'Help us save the old lifeboat house', text: '<p>Meridian is restoring Portwell’s 1890 lifeboat house as a free community space. Every gift goes to the building.</p>', button: 'Give now' }),
+  },
+  {
+    label: 'Weekly timetable',
+    description: 'Classes that repeat every week.',
+    create: () => make('timetable', { title: 'Studio week', intro: '<p>Open sessions and classes. All in the Harbour Street studio.</p>' }, [
+      make('session', { day: 'mon', time: '9:00', name: 'Open studio', who: 'Drop in', note: '' }),
+      make('session', { day: 'tue', time: '18:30', name: 'Drawing club', who: 'With Ana', note: '' }),
+      make('session', { day: 'wed', time: '12:30', name: 'Lunchtime talk', who: 'Guest', note: 'First Wednesday only' }),
+      make('session', { day: 'thu', time: '18:30', name: 'Drawing club', who: 'With Joe', note: '' }),
+      make('session', { day: 'sat', time: '10:00', name: 'Model making', who: 'With Sam', note: 'Ages 8 and up' }),
+      make('session', { day: 'sat', time: '14:00', name: 'Studio desk', who: 'Members', note: '' }),
+    ]),
+  },
+
+  /* ---------- Proof (more) ---------- */
+  {
+    label: 'Case study',
+    description: 'One project: facts, story and a quote.',
+    create: () => make('case-study', {
+      title: 'Okafor Ceramics', eyebrow: 'Case study',
+      text: '<p>Ruth needed a shop, a workshop and a kiln room in a 40 square metre fisherman’s store. We dropped the floor, opened the roof and put the wheel in the window, so the street can watch.</p>',
+      image: img('tall-2', 'The Okafor Ceramics shop'),
+      facts: [{ label: 'Where', value: 'Quay Street, Portwell' }, { label: 'Size', value: '40 m²' }, { label: 'Built', value: '2024' }, { label: 'Result', value: 'Sales up 60% in year one' }],
+      quote: '<p>People stop to watch, then they come in.</p>', cite: 'Ruth Okafor', href: '/work/',
+    }),
+  },
+
+  /* ---------- People ---------- */
+  {
+    label: 'Team',
+    description: 'People with photos, names and roles.',
+    create: () => make('team', { title: 'The studio', intro: '<p>Seven people, one long table.</p>' }, [
+      make('person', { name: 'Ana Ferreira', role: 'Architect, founder', image: img('person-1', ''), href: '/team/ana/' }),
+      make('person', { name: 'Joe Pascoe', role: 'Architect, founder', image: img('person-2', ''), href: '/team/joe/' }),
+      make('person', { name: 'Sam Riley', role: 'Architectural designer', image: img('person-3', '') }),
+      make('person', { name: 'Imogen Hart', role: 'Studio manager', image: img('person-4', '') }),
+    ]),
+  },
+  {
+    label: 'Team, circles',
+    description: 'Round photos, centred, with a short bio.',
+    create: () => make('team', { title: 'Who you will work with', columns: '3', shape: 'circle', background: 'muted' }, [
+      make('person', { name: 'Ana Ferreira', role: 'Houses', text: '<p>Twenty years designing homes on difficult sites.</p>', image: img('person-1', '') }),
+      make('person', { name: 'Joe Pascoe', role: 'Shops and studios', text: '<p>Fit-outs, conversions and anything with a kiln.</p>', image: img('person-2', '') }),
+      make('person', { name: 'Sam Riley', role: 'Models and drawings', text: '<p>Makes the models you will fall in love with.</p>', image: img('person-3', '') }),
+    ]),
+  },
+  {
+    label: 'Profile',
+    description: 'One person in depth.',
+    create: () => make('profile', {
+      title: 'Ana Ferreira', eyebrow: 'Architect and founder',
+      text: '<p>Ana grew up two streets from the studio and trained in Lisbon and London. Before Meridian she spent eight years on housing schemes for a large practice, and came home wanting to build smaller, better.</p><p>She leads every house project from the first visit to handover, and still answers the studio phone on Mondays.</p>',
+      image: img('person-1', 'Ana Ferreira'),
+      details: [{ label: 'Registered', value: 'ARB, RIBA' }, { label: 'Focus', value: 'Houses, low-energy design' }, { label: 'Email', value: 'ana@meridian.example' }],
+    }, [button('Book a call with Ana', '/#contact')]),
+  },
+
+  /* ---------- Act (more) ---------- */
+  {
+    label: 'Map and hours',
+    description: 'Address, opening hours and a map.',
+    create: () => make('map', {
+      title: 'Visit the studio', address: 'Meridian\n2 Harbour Street\nPortwell', query: 'Harbour Street, St Ives, Cornwall',
+      hours: [{ days: 'Monday to Thursday', time: '9:00–17:30' }, { days: 'Friday', time: '9:00–16:00' }, { days: 'Weekends', time: 'By appointment' }],
+      phone: '(555) 018-4420', email: 'studio@meridian.example',
+      text: '<p>Parking on the quay. The studio is up one flight of stairs; tell us if that is a problem and we will meet you at the café below.</p>',
+    }),
+  },
   {
     label: 'Call to action',
     description: 'A band that asks for one thing.',

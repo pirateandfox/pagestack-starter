@@ -1,0 +1,40 @@
+---
+// Plans side by side. With the yearly switch on, both prices are in the page and site.ts flips
+// data-period on the section; without JavaScript the monthly prices show.
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const plans = node.blocks ?? [];
+---
+<Sec node={node} edit={edit} class="pricing">
+  <SecHead s={s} edit={edit} center />
+  <div data-pricing data-period="monthly">
+    {s.yearly && (
+      <div class="pricing__switch" role="group" aria-label="Billing period">
+        <button type="button" data-set="monthly" aria-pressed="true">{s.monthlyLabel || 'Monthly'}</button>
+        <button type="button" data-set="yearly" aria-pressed="false">{s.yearlyLabel || 'Yearly'}</button>
+      </div>
+    )}
+    <ul class="pricing__grid" style={`--cols: ${Math.min(Math.max(plans.length, 1), 4)}`}>
+      {plans.map((it, i) => { const ie = child(edit, i); const p = it.settings; const dual = s.yearly && p.yearlyPrice; return (
+        <li class:list={['plan', p.featured && 'plan--featured']} {...nodeAttrs(ie, it)}>
+          {p.badge && <p class="plan__badge" {...fieldAttrs(ie, 'badge', 'text')}>{p.badge}</p>}
+          <h3 class="plan__name" {...fieldAttrs(ie, 'name', 'text')}>{p.name}</h3>
+          <p class="plan__price">
+            <span class:list={['plan__amount', dual && 'is-monthly']} {...fieldAttrs(ie, 'price', 'text')}>{p.price}</span>
+            {p.period && <span class:list={['muted', dual && 'is-monthly']}>{p.period}</span>}
+            {dual && <span class="plan__amount is-yearly">{p.yearlyPrice}</span>}
+            {dual && p.yearlyPeriod && <span class="muted is-yearly">{p.yearlyPeriod}</span>}
+          </p>
+          {p.text && <div class="rich muted" {...fieldAttrs(ie, 'text', 'richtext')} set:html={p.text} />}
+          {p.features && <div class="plan__features rich" {...fieldAttrs(ie, 'features', 'richtext')} set:html={p.features} />}
+          {p.button && <a class:list={['btn', !p.featured && 'btn--outline']} href={p.href || '#'}>{p.button}</a>}
+        </li>
+      ); })}
+    </ul>
+  </div>
+</Sec>

@@ -1,0 +1,30 @@
+---
+// Suggested amounts as a plain GET form to the donation page (?amount=25). Works with any
+// provider that reads the amount from the link; no payment details touch this site.
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { fieldAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const amounts: string[] = (s.amounts ?? []).filter((a: string) => /^\d+(\.\d{1,2})?$/.test(String(a).trim()));
+const param = /^[\w-]{1,40}$/.test(s.param ?? '') ? s.param : 'amount';
+const href = /^https?:\/\//.test(s.href ?? '') || (s.href ?? '').startsWith('/') ? s.href : '#';
+const fid = `don-${node.id}`;
+---
+<Sec node={node} edit={edit} class="donate" width="narrow">
+  <div class="donate__inner center stack">
+    <h2 {...fieldAttrs(edit, 'title', 'text')} set:html={s.title ?? ''} />
+    {s.text && <div class="lede rich" {...fieldAttrs(edit, 'text', 'richtext')} set:html={s.text} />}
+    <form class="donate__form" action={href} method="get">
+      <fieldset class="donate__amounts">
+        <legend class="sr-only">Amount</legend>
+        {amounts.map((a, i) => (
+          <label class="chip"><input type="radio" name={param} value={a} checked={i === 1 || (amounts.length < 2 && i === 0)} /><span>{s.currency}{a}</span></label>
+        ))}
+        <label class="chip chip--other"><span class="sr-only">Other amount</span><span aria-hidden="true">{s.currency}</span><input type="number" min="1" step="1" inputmode="numeric" placeholder="Other" id={fid} data-other={param} /></label>
+      </fieldset>
+      <button class="btn" type="submit">{s.button || 'Donate'}</button>
+    </form>
+  </div>
+</Sec>

@@ -1,0 +1,32 @@
+---
+// A comparison table. A cell that says yes / no shows a tick / a dash, with the word kept for
+// screen readers; anything else shows as written.
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const cols = (['col1', 'col2', 'col3'] as const).filter((c, i) => i < 2 || (s[c] ?? '').trim());
+const hi = (i: number) => s.highlight === String(i + 1);
+const yes = /^(yes|y|✓|true|included)$/i, no = /^(no|n|-|—|false|)$/i;
+---
+<Sec node={node} edit={edit} class="compare">
+  <SecHead s={s} edit={edit} />
+  <div class="compare__scroll" tabindex="0" role="region" aria-label={s.title ? s.title.replace(/<[^>]*>/g, '') : 'Comparison'}>
+    <table class="compare__table">
+      <thead><tr><td></td>{cols.map((c, i) => <th scope="col" class:list={[hi(i) && 'is-hi']} {...fieldAttrs(edit, c, 'text')}>{s[c]}</th>)}</tr></thead>
+      <tbody>
+        {(node.blocks ?? []).map((it, r) => { const ie = child(edit, r); const v = it.settings; return (
+          <tr {...nodeAttrs(ie, it)}>
+            <th scope="row" {...fieldAttrs(ie, 'label', 'text')}>{v.label}</th>
+            {cols.map((_, i) => { const key = `c${i + 1}`; const val = String(v[key] ?? '').trim(); return (
+              <td class:list={[hi(i) && 'is-hi']}>{yes.test(val) ? <span class="tick" aria-label="Yes">✓</span> : no.test(val) ? <span class="dash" aria-label="No">—</span> : <span {...fieldAttrs(ie, key, 'text')}>{val}</span>}</td>
+            ); })}
+          </tr>
+        ); })}
+      </tbody>
+    </table>
+  </div>
+</Sec>

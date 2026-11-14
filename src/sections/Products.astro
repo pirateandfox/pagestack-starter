@@ -1,0 +1,29 @@
+---
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+import Pic from './Pic.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+---
+<Sec node={node} edit={edit} class="products">
+  <SecHead s={s} edit={edit} />
+  <ul class="products__grid" style={`--cols: ${s.columns || 3}`}>
+    {(node.blocks ?? []).map((it, i) => { const ie = child(edit, i); const p = it.settings; return (
+      <li class="product" {...nodeAttrs(ie, it)}>
+        <div class="product__media frame ratio-square">
+          <Pic img={p.image} edit={ie} />
+          {p.badge && <span class="product__badge" {...fieldAttrs(ie, 'badge', 'text')}>{p.badge}</span>}
+        </div>
+        <div class="product__line">
+          <h3 {...fieldAttrs(ie, 'title', 'text')} set:html={p.title ?? ''} />
+          {p.price && <span class="product__price" {...fieldAttrs(ie, 'price', 'text')}>{p.price}</span>}
+        </div>
+        {p.text && <div class="rich muted" {...fieldAttrs(ie, 'text', 'richtext')} set:html={p.text} />}
+        {p.button && p.href && <a class="btn btn--outline" href={p.href}>{p.button}</a>}
+      </li>
+    ); })}
+  </ul>
+</Sec>

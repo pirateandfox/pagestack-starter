@@ -1,0 +1,38 @@
+---
+// A menu in groups. Prices that are numbers get the currency-free tabular look; words such as
+// "market" show as written. Marks (V, VG, GF) are explained by the key line.
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+---
+<Sec node={node} edit={edit} class="dishes">
+  <SecHead s={s} edit={edit} center />
+  <div class="dishes__groups" style={`--cols: ${s.columns || 2}`}>
+    {(node.blocks ?? []).map((g, gi) => { const ge = child(edit, gi); return (
+      <section class="dishes__group" {...nodeAttrs(ge, g)}>
+        <header class="dishes__head">
+          <h3 {...fieldAttrs(ge, 'title', 'text')} set:html={g.settings.title ?? ''} />
+          {g.settings.note && <p class="muted" {...fieldAttrs(ge, 'note', 'text')}>{g.settings.note}</p>}
+        </header>
+        <ul class="dishes__items">
+          {(g.blocks ?? []).map((it, i) => { const ie = child(ge, i); const d = it.settings; return (
+            <li class="dish" {...nodeAttrs(ie, it)}>
+              <p class="dish__line">
+                <span class="dish__name" {...fieldAttrs(ie, 'name', 'text')}>{d.name}</span>
+                {(d.marks ?? []).map((m: string) => <abbr class="dish__mark" title={m}>{m}</abbr>)}
+                <span class="dish__dots" aria-hidden="true"></span>
+                <span class="dish__price" {...fieldAttrs(ie, 'price', 'text')}>{d.price}</span>
+              </p>
+              {d.text && <p class="dish__text muted" {...fieldAttrs(ie, 'text', 'text')}>{d.text}</p>}
+            </li>
+          ); })}
+        </ul>
+      </section>
+    ); })}
+  </div>
+  {s.key && <p class="dishes__key muted" {...fieldAttrs(edit, 'key', 'text')}>{s.key}</p>}
+</Sec>

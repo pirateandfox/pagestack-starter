@@ -1,0 +1,34 @@
+---
+// A week of repeating sessions, grouped by day and sorted by time. Days with nothing are left out.
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const DAYS: [string, string][] = [['mon', 'Monday'], ['tue', 'Tuesday'], ['wed', 'Wednesday'], ['thu', 'Thursday'], ['fri', 'Friday'], ['sat', 'Saturday'], ['sun', 'Sunday']];
+const mins = (t: string) => { const m = String(t).match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/i); if (!m) return 9999; let h = +m[1] % 24; if (m[3]?.toLowerCase() === 'pm' && h < 12) h += 12; if (m[3]?.toLowerCase() === 'am' && h === 12) h = 0; return h * 60 + (+m[2] || 0); };
+const all = (node.blocks ?? []).map((n, i) => ({ n, i }));
+const days = DAYS.map(([key, label]) => ({ key, label, items: all.filter(({ n }) => (n.settings.day || 'mon') === key).sort((a, b) => mins(a.n.settings.time) - mins(b.n.settings.time)) })).filter((d) => d.items.length);
+---
+<Sec node={node} edit={edit} class="timetable">
+  <SecHead s={s} edit={edit} />
+  <div class="timetable__week" style={`--days: ${days.length || 1}`}>
+    {days.map((d) => (
+      <section class="timetable__day">
+        <h3>{d.label}</h3>
+        <ul>
+          {d.items.map(({ n, i }) => { const ie = child(edit, i); const v = n.settings; return (
+            <li class="session" {...nodeAttrs(ie, n)}>
+              <span class="session__time" {...fieldAttrs(ie, 'time', 'text')}>{v.time}</span>
+              <strong class="session__name" {...fieldAttrs(ie, 'name', 'text')}>{v.name}</strong>
+              {v.who && <span class="muted" {...fieldAttrs(ie, 'who', 'text')}>{v.who}</span>}
+              {v.note && <span class="session__note" {...fieldAttrs(ie, 'note', 'text')}>{v.note}</span>}
+            </li>
+          ); })}
+        </ul>
+      </section>
+    ))}
+  </div>
+</Sec>

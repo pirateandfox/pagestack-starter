@@ -1,0 +1,31 @@
+---
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { fieldAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import { mapSrc } from '../lib/embed';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const address = String(s.address ?? '').trim();
+const q = (s.query || address).trim();
+const src = s.map !== 'none' ? mapSrc(q) : '';
+const directions = q ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(q.replace(/\s+/g, ' '))}` : '';
+const hours = (s.hours ?? []).filter((h: any) => h?.days || h?.time);
+const tel = String(s.phone ?? '').replace(/[^\d+]/g, '');
+---
+<Sec node={node} edit={edit} class:list={['map', !src && 'map--nomap']}>
+  <div class="map__info stack">
+    <h2 {...fieldAttrs(edit, 'title', 'text')} set:html={s.title ?? ''} />
+    {address && <address class="map__address">{address.split('\n').map((l) => <>{l}<br /></>)}</address>}
+    {hours.length > 0 && <dl class="hours">{hours.map((h: any) => <div><dt>{h.days}</dt><dd>{h.time}</dd></div>)}</dl>}
+    {(s.phone || s.email) && (
+      <p class="map__contact">
+        {s.phone && <a href={`tel:${tel}`}>{s.phone}</a>}
+        {s.email && <a href={`mailto:${s.email}`}>{s.email}</a>}
+      </p>
+    )}
+    {s.text && <div class="rich muted" {...fieldAttrs(edit, 'text', 'richtext')} set:html={s.text} />}
+    {directions && <p><a class="btn btn--outline" href={directions} rel="noopener" target="_blank">Get directions</a></p>}
+  </div>
+  {src && <div class="map__frame frame"><iframe src={src} title={`Map: ${q.replace(/\s+/g, ' ')}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" /></div>}
+</Sec>

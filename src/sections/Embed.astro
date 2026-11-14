@@ -1,0 +1,22 @@
+---
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { fieldAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+import { embedSrc } from '../lib/embed';
+import { plainText } from '../lib/text';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const src = embedSrc(s.url);
+const title = plainText(s.title) || plainText(s.caption) || 'Embedded content';
+---
+<Sec node={node} edit={edit} class="embed" width={s.shape === 'audio' ? 'narrow' : 'normal'}>
+  <SecHead s={s} edit={edit} />
+  <figure class="figure">
+    {src
+      ? <div class:list={['embed__frame', `embed--${s.shape || 'wide'}`]}><iframe src={src} title={title} loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; clipboard-write" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" /></div>
+      : edit && <div class="placeholder">Paste a link in the sidebar: YouTube, Vimeo, Spotify, SoundCloud, Calendly or any https page that allows embedding.</div>}
+    {s.caption && <figcaption class="muted" {...fieldAttrs(edit, 'caption', 'text')}>{s.caption}</figcaption>}
+  </figure>
+</Sec>

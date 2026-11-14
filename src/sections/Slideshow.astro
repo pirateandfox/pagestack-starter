@@ -1,0 +1,34 @@
+---
+// A row of slides that scrolls with swipe, trackpad or the arrow buttons (site.ts). No autoplay.
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+import Pic from './Pic.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const slides = node.blocks ?? [];
+---
+<Sec node={node} edit={edit} class="slideshow">
+  <SecHead s={s} edit={edit} />
+  <div class="slideshow__wrap" data-slideshow>
+    <ul class="slideshow__track" tabindex="0" aria-label="Slides">
+      {slides.map((it, i) => { const ie = child(edit, i); const p = it.settings; return (
+        <li class="slideshow__slide" {...nodeAttrs(ie, it)} aria-label={`${i + 1} of ${slides.length}`}>
+          <figure>
+            <div class:list={['frame', `ratio-${s.shape || 'wide'}`]}><Pic img={p.image} edit={ie} loading={i === 0 ? 'eager' : 'lazy'} /></div>
+            {p.caption && <figcaption class="muted" {...fieldAttrs(ie, 'caption', 'text')}>{p.caption}</figcaption>}
+          </figure>
+        </li>
+      ); })}
+    </ul>
+    {slides.length > 1 && (
+      <div class="slideshow__nav">
+        <button type="button" class="icon-btn" data-dir="-1" aria-label="Previous slide">←</button>
+        <span class="slideshow__count muted" aria-live="polite"><span data-current>1</span> / {slides.length}</span>
+        <button type="button" class="icon-btn" data-dir="1" aria-label="Next slide">→</button>
+      </div>
+    )}
+  </div>
+</Sec>

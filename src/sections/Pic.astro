@@ -1,0 +1,8 @@
+---
+// An image field: the <img>, or in the editor a "Choose an image" box to click.
+import type { EditCtx } from '@pirateandfox/pagestack/runtime';
+import { fieldAttrs } from '@pirateandfox/pagestack/runtime';
+interface Props { img?: { src?: string; alt?: string }; edit?: EditCtx; field?: string; alt?: string; loading?: 'lazy' | 'eager' }
+const { img = {}, edit, field = 'image', alt, loading = 'lazy' } = Astro.props;
+---
+{img.src ? <img src={img.src} alt={alt ?? img.alt ?? ''} loading={loading} decoding="async" {...fieldAttrs(edit, field, 'image')} /> : edit && <div class="placeholder" {...fieldAttrs(edit, field, 'image')}>Choose an image</div>}

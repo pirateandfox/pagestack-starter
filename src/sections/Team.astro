@@ -1,0 +1,25 @@
+---
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+import Pic from './Pic.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+---
+<Sec node={node} edit={edit} class:list={['team', `team--${s.shape || 'portrait'}`]}>
+  <SecHead s={s} edit={edit} />
+  <ul class="team__grid" style={`--cols: ${s.columns || 4}`}>
+    {(node.blocks ?? []).map((it, i) => { const ie = child(edit, i); const p = it.settings; return (
+      <li class="person" {...nodeAttrs(ie, it)}>
+        <div class="person__photo frame"><Pic img={p.image} edit={ie} alt="" /></div>
+        <div class="stack stack--tight">
+          <h3>{p.href && !edit ? <a href={p.href} set:html={p.name ?? ''} /> : <span {...fieldAttrs(ie, 'name', 'text')} set:html={p.name ?? ''} />}</h3>
+          {p.role && <p class="muted" {...fieldAttrs(ie, 'role', 'text')}>{p.role}</p>}
+          {p.text && <div class="rich person__bio" {...fieldAttrs(ie, 'text', 'richtext')} set:html={p.text} />}
+        </div>
+      </li>
+    ); })}
+  </ul>
+</Sec>
