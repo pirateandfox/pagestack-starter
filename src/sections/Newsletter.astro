@@ -1,0 +1,42 @@
+---
+// Email sign-up. Same send function as the form block (_kind=newsletter): it goes to
+// NEWSLETTER_WEBHOOK_URL if set (Mailchimp, Kit, Buttondown via Zapier or Make), else by email.
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { fieldAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import site from '../data/site.json';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const id = `nl-${node.id}`;
+const turnstile = (site as any).turnstileSiteKey && !edit;
+---
+<Sec node={node} edit={edit} class:list={['newsletter', s.layout === 'split' && 'newsletter--split']}>
+  <div class="newsletter__inner">
+    <div class="stack stack--tight">
+      <h2 {...fieldAttrs(edit, 'title', 'text')} set:html={s.title ?? ''} />
+      {s.text && <div class="lede rich" {...fieldAttrs(edit, 'text', 'richtext')} set:html={s.text} />}
+    </div>
+    <div class="newsletter__form">
+      <form class="form form--inline" action="/api/form" method="post" data-form>
+        <input type="hidden" name="_kind" value="newsletter" />
+        <input type="hidden" name="_form" value="Newsletter" />
+        <input type="hidden" name="_page" value={Astro.url.pathname} />
+        <input type="hidden" name="_next" value="/thanks/" />
+        <input type="hidden" name="_email" value="email" />
+        <input type="hidden" name="_labels" value={JSON.stringify({ first_name: 'First name', email: 'Email' })} />
+        <input type="hidden" name="_t" value="" />
+        <div class="form__hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website_url" tabindex="-1" autocomplete="off" /></label></div>
+        {s.name && <><label class="sr-only" for={`${id}-n`}>First name</label><input id={`${id}-n`} name="first_name" autocomplete="given-name" placeholder="First name" maxlength="100" /></>}
+        <label class="sr-only" for={`${id}-e`}>Email address</label>
+        <input id={`${id}-e`} type="email" name="email" required autocomplete="email" placeholder={s.placeholder || 'you@example.com'} maxlength="254" />
+        <button class="btn" type="submit">{s.button || 'Subscribe'}</button>
+        {turnstile && <div class="cf-turnstile" data-sitekey={(site as any).turnstileSiteKey} data-size="flexible"></div>}
+        <p class="form__status" role="status" aria-live="polite"></p>
+      </form>
+      <div class="form__done rich" hidden tabindex="-1" set:html={s.success || '<p>Thanks! Check your inbox to confirm.</p>'} />
+      {s.notice && <div class="form__notice rich muted" {...fieldAttrs(edit, 'notice', 'richtext')} set:html={s.notice} />}
+    </div>
+  </div>
+</Sec>
+{turnstile && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}

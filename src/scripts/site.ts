@@ -115,3 +115,30 @@ document.addEventListener('change', (e) => {
   const other = r.form!.querySelector<HTMLInputElement>('[data-other]');
   if (other) { other.value = ''; other.name = ''; }
 });
+
+/* ---------- Forms: stamp the load time, send in place, show the thank-you ---------- */
+const stamp = () => { for (const i of $$<HTMLInputElement>(document, 'form[data-form] input[name="_t"]')) if (!i.value) i.value = String(Date.now()); };
+stamp();
+document.addEventListener('focusin', (e) => { if ((e.target as Element).closest?.('form[data-form]')) stamp(); });
+document.addEventListener('submit', async (e) => {
+  const form = e.target as HTMLFormElement;
+  if (!form.matches('form[data-form]')) return;
+  e.preventDefault();
+  if (form.getAttribute('aria-busy') === 'true') return;
+  const status = form.querySelector<HTMLElement>('.form__status');
+  const say = (msg: string, error = false) => { if (status) { status.textContent = msg; status.classList.toggle('is-error', error); } };
+  form.setAttribute('aria-busy', 'true');
+  say('Sending…');
+  try {
+    const res = await fetch(form.action, { method: 'POST', body: new URLSearchParams(new FormData(form) as any), headers: { Accept: 'application/json' } });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) throw new Error(data.error || 'The message was not sent. Please try again.');
+    const done = form.parentElement?.querySelector<HTMLElement>('.form__done');
+    if (done) { form.hidden = true; done.hidden = false; done.focus(); } else say('Sent. Thank you.');
+  } catch (err) {
+    say((err as Error).message || 'The message was not sent. Please try again.', true);
+    (window as any).turnstile?.reset?.();
+  } finally {
+    form.removeAttribute('aria-busy');
+  }
+});

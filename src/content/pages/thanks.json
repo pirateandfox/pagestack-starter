@@ -1,0 +1,52 @@
+{
+  "title": "Thank you",
+  "description": "Your message has been sent.",
+  "layout": {
+    "announcement": false
+  },
+  "sections": [
+    {
+      "id": "thanks-head",
+      "type": "page-header",
+      "settings": {
+        "title": "Thank you",
+        "eyebrow": "Message sent",
+        "intro": "<p>We have your message and will reply within two working days. If it is urgent, call us on (555) 018-4420.</p>",
+        "align": "left",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "thanks-more",
+      "type": "content",
+      "settings": {
+        "width": "narrow",
+        "align": "left",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "thanks-p",
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>While you wait, have a look at <a href=\"/journal/\">the journal</a> or <a href=\"/events/\">what is on at the studio</a>.</p>",
+            "size": "normal"
+          }
+        },
+        {
+          "id": "thanks-b",
+          "type": "button",
+          "settings": {
+            "label": "Back to the home page",
+            "href": "/",
+            "style": "outline"
+          }
+        }
+      ]
+    }
+  ]
+}

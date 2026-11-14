@@ -1,0 +1,12 @@
+---
+import { render } from 'astro:content';
+import ArticlePage from '../../components/ArticlePage.astro';
+import { articles } from '../../lib/content';
+export async function getStaticPaths() {
+  const all = await articles();
+  return all.map((a) => ({ params: { slug: a.id }, props: { a, related: all.filter((x) => x.id !== a.id && x.data.tags.some((t) => a.data.tags.includes(t))).concat(all.filter((x) => x.id !== a.id)).filter((x, i, arr) => arr.indexOf(x) === i).slice(0, 3) } }));
+}
+const { a, related } = Astro.props;
+const { Content } = await render(a);
+---
+<ArticlePage data={a.data} body={a.body} related={related} url={Astro.url.href}><Content /></ArticlePage>

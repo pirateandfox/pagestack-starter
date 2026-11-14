@@ -27,6 +27,10 @@ import CaseStudy from './CaseStudy.astro';
 import Team from './Team.astro';
 import Profile from './Profile.astro';
 import MapHours from './MapHours.astro';
+import ArticlesFeed from './ArticlesFeed.astro';
+import EventsFeed from './EventsFeed.astro';
+import Form from './Form.astro';
+import Newsletter from './Newsletter.astro';
 import Heading from './blocks/Heading.astro';
 import Paragraph from './blocks/Paragraph.astro';
 import Image from './blocks/Image.astro';
@@ -40,5 +44,6 @@ export const components: Record<string, any> = {
   embed: Embed, gallery: Gallery, slideshow: Slideshow, cards: Cards, compare: Compare, tabs: Tabs, timeline: Timeline,
   pricing: Pricing, menu: Menu, services: Services, products: Products, donate: Donate, timetable: Timetable,
   'case-study': CaseStudy, team: Team, profile: Profile, map: MapHours,
+  articles: ArticlesFeed, events: EventsFeed, form: Form, newsletter: Newsletter,
   heading: Heading, paragraph: Paragraph, image: Image, button: Button, quote: Quote, divider: Divider,
 };

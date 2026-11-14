@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { articles } from '../../lib/content';
+const list = await articles();
+const [first, ...rest] = list;
+---
+<Base title="Journal" description="Projects, notes and news from the studio.">
+  <section class="sec page-header bg--muted"><div class="wrap"><div class="sec-head"><h1>Journal</h1><p class="lede">Projects, notes and news from the studio.</p></div></div></section>
+  <section class="sec">
+    <div class="wrap stack">
+      {first && <ArticleCard a={first} layout="row" />}
+      {rest.length > 0 && <ul class="articles__grid" style="--cols: 3">{rest.map((a) => <li><ArticleCard a={a} /></li>)}</ul>}
+      {!list.length && <p class="muted">Nothing here yet.</p>}
+    </div>
+  </section>
+</Base>

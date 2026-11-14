@@ -1,0 +1,14 @@
+---
+import { fmtDate, excerpt, localIso, type Article } from '../lib/content';
+interface Props { a: Article; layout?: 'card' | 'row' }
+const { a, layout = 'card' } = Astro.props;
+const href = `/journal/${a.id}/`;
+---
+<article class:list={['acard', `acard--${layout}`]}>
+  {a.data.image && <a href={href} class="acard__media frame ratio-wide" tabindex="-1" aria-hidden="true"><img src={a.data.image} alt="" loading="lazy" decoding="async" /></a>}
+  <div class="acard__body">
+    <p class="acard__meta muted"><time datetime={localIso(a.data.date, true)}>{fmtDate(a.data.date)}</time>{a.data.tags[0] && <span>{a.data.tags[0]}</span>}</p>
+    <h3><a href={href}>{a.data.title}</a></h3>
+    <p class="muted">{excerpt(a)}</p>
+  </div>
+</article>

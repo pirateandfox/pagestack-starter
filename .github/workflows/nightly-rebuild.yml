@@ -1,0 +1,33 @@
+# Rebuilds the live site every night, so past events drop off the lists and articles dated in the
+# future appear on their day. It calls a Cloudflare Pages deploy hook; nothing in the repo changes.
+#
+# Set up once (README: Nightly rebuild):
+#   1. Cloudflare → Workers & Pages → your site → Settings → Builds → Deploy hooks → Add
+#      (branch: the one your live site builds from). Copy the URL.
+#   2. GitHub → this repo → Settings → Secrets and variables → Actions → New repository secret
+#      named CF_DEPLOY_HOOK, with that URL.
+# Without the secret this does nothing and says so.
+name: Nightly rebuild
+
+on:
+  schedule:
+    - cron: "15 7 * * *" # 07:15 UTC, after midnight across the Americas, early morning in Europe
+  workflow_dispatch: {}
+
+permissions: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Call the Cloudflare Pages deploy hook
+        env:
+          HOOK: ${{ secrets.CF_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::notice::No CF_DEPLOY_HOOK secret, so nothing to do. See README: Nightly rebuild."
+            exit 0
+          fi
+          curl --fail --silent --show-error --max-time 30 -X POST "$HOOK" > /dev/null
+          echo "Rebuild requested."

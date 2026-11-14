@@ -1,0 +1,33 @@
+---
+// One article: title, meta, image, body, and related articles. Used by the real page
+// (src/pages/journal/[slug].astro) and by the editor's preview, so the two always match.
+import { itemField } from '@pirateandfox/pagestack/runtime';
+import Base from '../layouts/Base.astro';
+import ArticleCard from './ArticleCard.astro';
+import site from '../data/site.json';
+import { fmtDate, localIso, readTime, type Article } from '../lib/content';
+interface Props { data: Article['data']; body?: string; related?: Article[]; editing?: boolean; url?: string }
+const { data, body, related = [], editing = false, url } = Astro.props;
+const ld = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: data.title, description: data.description, datePublished: localIso(data.date, true), author: data.author ? { '@type': 'Person', name: data.author } : { '@type': 'Organization', name: site.name }, image: data.image && url ? new URL(data.image, url).href : undefined, mainEntityOfPage: url };
+---
+<Base title={data.title} description={data.description}>
+  {!editing && <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld).replace(/</g, '\\u003c')} />}
+  <article class="post">
+    <header class="post__head wrap wrap--narrow stack">
+      <p class="eyebrow"><a href="/journal/">Journal</a>{data.tags[0] && <> · {data.tags[0]}</>}</p>
+      <h1 {...itemField(editing, 'title')}>{data.title}</h1>
+      {data.description && <p class="lede" {...itemField(editing, 'description')}>{data.description}</p>}
+      <p class="post__meta muted">{data.author && <span>{data.author}</span>}<time datetime={localIso(data.date, true)}>{fmtDate(data.date)}</time><span>{readTime(body)}</span></p>
+    </header>
+    {data.image && <figure class="post__image wrap"><div class="frame ratio-hero"><img src={data.image} alt={data.imageAlt ?? ''} {...itemField(editing, 'image', 'image')} /></div></figure>}
+    <div class="post__body wrap wrap--narrow rich"><slot /></div>
+  </article>
+  {related.length > 0 && (
+    <section class="sec bg--muted">
+      <div class="wrap">
+        <div class="sec-head"><h2>More from the journal</h2></div>
+        <ul class="articles__grid" style="--cols: 3">{related.map((a) => <li><ArticleCard a={a} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+</Base>

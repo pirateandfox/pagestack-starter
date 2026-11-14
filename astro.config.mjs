@@ -15,7 +15,11 @@ function allBlocksPage() {
     name: "starter:all-blocks",
     hooks: {
       "astro:config:setup": ({ command, injectRoute }) => {
-        if (command === "dev" || editor) injectRoute({ pattern: "/blocks", entrypoint: "./src/editor/AllBlocks.astro", prerender: false });
+        if (command === "dev" || editor) {
+          injectRoute({ pattern: "/blocks", entrypoint: "./src/editor/AllBlocks.astro", prerender: false });
+          // Forms post here instead of the live send function: printed, never sent.
+          injectRoute({ pattern: "/api/form", entrypoint: "./src/editor/form-dev.ts", prerender: false });
+        }
       },
     },
   };
@@ -38,6 +42,10 @@ export default defineConfig({
             // For a deployed editor see the PageStack README (auth: "passkey", storage: "github").
             auth: "none",
             storage: "local",
+            // Articles and events open on their real page in the editor.
+            previews: { articles: "./src/editor/previews/Article.astro", events: "./src/editor/previews/Event.astro" },
+            // List pages that show saved changes in a deployed editor without a redeploy.
+            liveRoutes: ["/", "/journal", "/events"],
           }),
         ]
       : []),

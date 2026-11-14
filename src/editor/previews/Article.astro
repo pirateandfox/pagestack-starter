@@ -1,0 +1,11 @@
+---
+// An article as the editor shows it: the real page, from the unsaved item. Frontmatter arrives as
+// written (dates are strings), so apply what the content schema would.
+import ArticlePage from '../../components/ArticlePage.astro';
+import { localDate } from '../../lib/schemas';
+import type { ItemPreviewProps } from '@pirateandfox/pagestack/runtime';
+const { item, editing } = Astro.props as ItemPreviewProps;
+const d = item.data;
+const data = { ...d, title: d.title || 'Untitled', date: d.date ? new Date(localDate(d.date) as any) : new Date(), tags: Array.isArray(d.tags) ? d.tags : [], draft: d.draft === true } as any;
+---
+<ArticlePage data={data} body={item.body} editing={editing}><Fragment set:html={item.html} /></ArticlePage>

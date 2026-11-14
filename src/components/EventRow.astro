@@ -1,0 +1,19 @@
+---
+import { dayMonth, localIso, whenText, type Event } from '../lib/content';
+interface Props { e: Event; layout?: 'list' | 'card' }
+const { e, layout = 'list' } = Astro.props;
+const d = dayMonth(e.data.start);
+const href = `/events/${e.id}/`;
+---
+<article class:list={['erow', `erow--${layout}`]}>
+  <p class="erow__date" aria-hidden="true"><span class="erow__month">{d.month}</span><span class="erow__day">{d.day}</span><span class="erow__wd">{d.weekday}</span></p>
+  <div class="erow__body">
+    <h3><a href={href}>{e.data.title}</a></h3>
+    <p class="erow__when"><time datetime={localIso(e.data.start, e.data.allDay)}>{whenText(e.data)}</time>{e.data.place && <span>{e.data.place}</span>}</p>
+    {e.data.description && <p class="muted">{e.data.description}</p>}
+  </div>
+  <p class="erow__act">
+    {e.data.price && <span class="muted">{e.data.price}</span>}
+    {e.data.tickets ? <a class="btn btn--outline" href={e.data.tickets} rel="noopener">Tickets</a> : <a class="btn btn--text" href={href}>Details</a>}
+  </p>
+</article>

@@ -1,0 +1,12 @@
+---
+import { render } from 'astro:content';
+import EventPage from '../../components/EventPage.astro';
+import { events } from '../../lib/content';
+// Past events keep their pages (links to them still work); only the lists leave them out.
+export async function getStaticPaths() {
+  return (await events({ upcoming: false })).map((e) => ({ params: { slug: e.id }, props: { e } }));
+}
+const { e } = Astro.props;
+const { Content } = await render(e);
+---
+<EventPage id={e.id} data={e.data} url={Astro.url.href}><Content /></EventPage>

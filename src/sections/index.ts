@@ -4,7 +4,8 @@
 //   pageFields   the Page tab, stored in page.layout
 //   templates    starting points for "Add page"
 //   globals      site-wide settings edited on their own screens (site details, theme)
-import type { Field, GlobalDoc, Node, PageTemplate, Preset } from '@pirateandfox/pagestack/runtime';
+//   collections  Markdown folders edited as lists of items (journal articles, events)
+import type { CollectionDoc, Field, GlobalDoc, Node, PageTemplate, Preset } from '@pirateandfox/pagestack/runtime';
 import { newId } from '@pirateandfox/pagestack/runtime';
 import { fontPairings, themes } from '../data/themes';
 import { schemas } from './schema';
@@ -381,6 +382,36 @@ export const presets: Preset[] = [
   },
 
   /* ---------- Act (more) ---------- */
+  /* ---------- Forms ---------- */
+  {
+    label: 'Contact form',
+    description: 'Name, email, what it is about, and a message.',
+    create: () => make('form', { title: 'Tell us about your project', intro: '<p>A few lines is plenty. We reply within two working days.</p>', anchor: 'contact', layout: 'side', notice: '<p>We only use your details to reply to you.</p>' }, [
+      make('form-field', { label: 'Your name', kind: 'text', required: true, width: 'half' }),
+      make('form-field', { label: 'Email', kind: 'email', required: true, width: 'half' }),
+      make('form-field', { label: 'Phone', kind: 'phone', width: 'half' }),
+      make('form-field', { label: 'Kind of project', kind: 'select', options: ['New house', 'Extension', 'Shop or studio', 'Something else'], width: 'half' }),
+      make('form-field', { label: 'Tell us about it', kind: 'textarea', required: true, placeholder: 'Where it is, what you would like, any dates that matter.' }),
+      make('form-field', { label: 'Send me the monthly newsletter', kind: 'checkbox' }),
+    ]),
+  },
+  {
+    label: 'Booking request form',
+    description: 'A date, a choice and a few details.',
+    create: () => make('form', { title: 'Book a site visit', formName: 'Site visit request', button: 'Request a visit', background: 'muted', success: '<p>Thank you. We will call you to confirm a time.</p>' }, [
+      make('form-field', { label: 'Your name', kind: 'text', required: true }),
+      make('form-field', { label: 'Phone', kind: 'phone', required: true, width: 'half' }),
+      make('form-field', { label: 'Email', kind: 'email', width: 'half' }),
+      make('form-field', { label: 'Preferred date', kind: 'date', required: true, width: 'half' }),
+      make('form-field', { label: 'Time of day', kind: 'choice', options: ['Morning', 'Afternoon'], width: 'half' }),
+      make('form-field', { label: 'Site address', kind: 'text', required: true }),
+    ]),
+  },
+  {
+    label: 'Newsletter sign-up',
+    description: 'Title on the left, email box on the right.',
+    create: () => make('newsletter', { title: 'Notes from the studio', text: '<p>New projects and the occasional essay, once a month.</p>', notice: '<p>Unsubscribe any time.</p>' }),
+  },
   {
     label: 'Map and hours',
     description: 'Address, opening hours and a map.',
@@ -391,6 +422,28 @@ export const presets: Preset[] = [
       text: '<p>Parking on the quay. The studio is up one flight of stairs; tell us if that is a problem and we will meet you at the café below.</p>',
     }),
   },
+  /* ---------- Feeds ---------- */
+  {
+    label: 'Articles feed',
+    description: 'The latest three articles as cards.',
+    create: () => make('articles', { title: 'From the journal', eyebrow: 'Journal', count: '3' }),
+  },
+  {
+    label: 'Articles feed, list',
+    description: 'Articles as a list with small pictures.',
+    create: () => make('articles', { title: 'Notes and news', count: '4', layout: 'list', background: 'muted' }),
+  },
+  {
+    label: 'Events feed',
+    description: 'Upcoming events as a dated list.',
+    create: () => make('events', { title: 'What’s on at the studio', anchor: 'events' }),
+  },
+  {
+    label: 'Events feed, cards',
+    description: 'Upcoming events as cards.',
+    create: () => make('events', { title: 'Coming up', count: '3', layout: 'cards', background: 'muted', more: '' }),
+  },
+
   {
     label: 'Call to action',
     description: 'A band that asks for one thing.',
@@ -426,6 +479,7 @@ export const globals: Record<string, GlobalDoc> = {
       phone: { type: 'text', label: 'Phone' },
       email: { type: 'text', label: 'Email' },
       footerLinks: { ...nav, label: 'Footer links' },
+      turnstileSiteKey: { type: 'text', label: 'Turnstile site key', group: 'advanced', help: 'Optional spam check on forms (Cloudflare Turnstile). Set TURNSTILE_SECRET on the host as well.' },
     },
   },
   theme: {
@@ -448,3 +502,44 @@ export const templates: PageTemplate[] = [
   { label: 'Blank', description: 'A page header and nothing else.', create: () => ({ title: 'New page', sections: [presets[3].create()] }) },
   { label: 'Service page', description: 'Header, image and text, steps, FAQ and a call to action.', create: () => ({ title: 'New service', sections: [presets[3].create(), presets[6].create(), presets[10].create(), presets[12].create(), presets[16].create()] }) },
 ];
+
+/** Markdown folders, edited under Journal and Events. Fields match src/lib/schemas.ts. */
+export const collections: Record<string, CollectionDoc> = {
+  articles: {
+    label: 'Journal',
+    singular: 'article',
+    dir: 'src/content/articles',
+    url: (slug) => `/journal/${slug}/`,
+    fields: {
+      title: { type: 'text', label: 'Title' },
+      description: { type: 'textarea', label: 'Summary', help: 'One or two sentences, shown on cards and in search results.' },
+      date: { type: 'date', label: 'Date', time: false, help: 'A future date schedules it: it appears on the first build on or after that day.' },
+      author: { type: 'text', label: 'Author' },
+      image: { type: 'image', label: 'Image', asUrl: true, altField: 'imageAlt' },
+      imageAlt: { type: 'text', label: 'Image description' },
+      tags: { type: 'tags', label: 'Tags' },
+      draft: { type: 'boolean', label: 'Draft' },
+    },
+  },
+  events: {
+    label: 'Events',
+    singular: 'event',
+    dir: 'src/content/events',
+    url: (slug) => `/events/${slug}/`,
+    fields: {
+      title: { type: 'text', label: 'Title' },
+      description: { type: 'textarea', label: 'Summary' },
+      start: { type: 'date', label: 'Starts', help: 'In the venue’s local time.' },
+      end: { type: 'date', label: 'Ends' },
+      allDay: { type: 'boolean', label: 'All day (times are ignored)' },
+      place: { type: 'text', label: 'Place' },
+      address: { type: 'text', label: 'Address', help: 'Links to a map.' },
+      online: { type: 'link', label: 'Online link', help: 'For online or hybrid events.' },
+      tickets: { type: 'link', label: 'Tickets link' },
+      price: { type: 'text', label: 'Price', help: 'As it should read, e.g. "Free" or "$8, free for students".' },
+      image: { type: 'image', label: 'Image', asUrl: true, altField: 'imageAlt' },
+      imageAlt: { type: 'text', label: 'Image description' },
+      draft: { type: 'boolean', label: 'Draft' },
+    },
+  },
+};

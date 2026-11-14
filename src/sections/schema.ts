@@ -143,6 +143,36 @@ export const schemas: SchemaRegistry = {
     fields: { title: heading('Title', 'Trusted by'), ...section() },
   },
 
+  /* ---------- Feeds ---------- */
+  articles: {
+    label: 'Articles feed',
+    description: 'The latest articles from the Journal, as cards or a list.',
+    category: 'Feeds',
+    keywords: ['blog', 'news', 'posts', 'journal', 'latest', 'articles'],
+    fields: {
+      ...head('From the journal', ''),
+      count: select('How many', '3', [['2', 'Two'], ['3', 'Three'], ['4', 'Four'], ['6', 'Six']]),
+      layout: select('Layout', 'grid', [['grid', 'Cards'], ['list', 'List']]),
+      tag: { type: 'text', label: 'Only this tag', default: '', help: 'Blank shows every article.' },
+      more: text('Link to all', 'All articles', { inline: false, help: 'Blank for no link.' }),
+      ...section(),
+    },
+  },
+  events: {
+    label: 'Events feed',
+    description: 'Upcoming events, soonest first, with dates, places and ticket links.',
+    category: 'Feeds',
+    keywords: ['events', 'calendar', 'whats on', 'upcoming', 'dates', 'gigs', 'classes'],
+    fields: {
+      ...head('What’s on', ''),
+      count: select('How many', '3', [['2', 'Two'], ['3', 'Three'], ['4', 'Four'], ['6', 'Six']]),
+      layout: select('Layout', 'list', [['list', 'List'], ['cards', 'Cards']]),
+      more: text('Link to all', 'All events', { inline: false, help: 'Blank for no link.' }),
+      empty: text('When nothing is planned', 'Nothing planned right now.', { inline: false }),
+      ...section(),
+    },
+  },
+
   /* ---------- Act ---------- */
   cta: {
     label: 'Call to action',
@@ -361,6 +391,40 @@ export const schemas: SchemaRegistry = {
   },
 
   /* ---------- Act (more) ---------- */
+  form: {
+    label: 'Form',
+    description: 'A contact or enquiry form. Add, remove and reorder its fields; it emails you or sends to your CRM.',
+    category: 'Act',
+    keywords: ['contact', 'form', 'enquiry', 'booking request', 'quote', 'email', 'rsvp'],
+    blocks: ['form-field'],
+    fields: {
+      ...head('Get in touch', ''),
+      formName: { type: 'text', label: 'Form name', default: 'Contact form', help: 'Names the email subject and the webhook’s form_name.' },
+      button: text('Button label', 'Send'),
+      success: rich('Thank-you message', '<p>Thank you. We will be in touch within two working days.</p>'),
+      notice: rich('Small print', '', { help: 'e.g. how you use their details, with a link to your privacy policy.' }),
+      next: { type: 'link', label: 'Thank-you page', default: '/thanks/', group: 'advanced', help: 'Where people land when their browser has JavaScript off.' },
+      layout: select('Layout', 'stacked', [['stacked', 'Title above the form'], ['side', 'Title beside the form']]),
+      ...section(),
+    },
+  },
+  newsletter: {
+    label: 'Newsletter sign-up',
+    description: 'An email box and a button.',
+    category: 'Act',
+    keywords: ['newsletter', 'subscribe', 'email', 'mailing list', 'signup', 'mailchimp'],
+    fields: {
+      title: heading('Title', 'Get the newsletter'),
+      text: rich('Text', '<p>Once a month. No spam.</p>'),
+      button: text('Button label', 'Subscribe', { inline: false }),
+      placeholder: text('Email placeholder', 'you@example.com', { inline: false }),
+      name: bool('Ask for a first name', false, { group: 'content' }),
+      success: rich('Thank-you message', '<p>Thanks! Check your inbox to confirm.</p>', { inline: false }),
+      notice: rich('Small print', ''),
+      layout: select('Layout', 'split', [['split', 'Title left, form right'], ['center', 'Centred']]),
+      ...section('muted'),
+    },
+  },
   map: {
     label: 'Map and hours',
     description: 'Where you are, when you are open and how to reach you.',
@@ -479,6 +543,15 @@ export const schemas: SchemaRegistry = {
     name: text('Name', 'A class'),
     who: text('With', ''),
     note: text('Note', ''),
+  }),
+  'form-field': item('Field', {
+    label: text('Label', 'Your name'),
+    kind: select('Type', 'text', [['text', 'Short text'], ['email', 'Email'], ['phone', 'Phone'], ['textarea', 'Message (long text)'], ['select', 'Dropdown'], ['choice', 'Choose one (buttons)'], ['checkbox', 'Tick box'], ['date', 'Date'], ['number', 'Number']], { group: 'content' }),
+    required: bool('Required', false, { group: 'content' }),
+    options: { type: 'tags', label: 'Choices', default: [], help: 'For Dropdown and Choose one.' },
+    placeholder: { type: 'text', label: 'Placeholder', default: '' },
+    help: text('Help text', ''),
+    width: select('Width', 'full', [['full', 'Full'], ['half', 'Half (two side by side)']]),
   }),
   person: item('Person', { name: heading('Name', 'Name'), role: text('Role', ''), text: rich('Short bio', ''), image: image('Photo'), href: link('Profile link') }),
 };

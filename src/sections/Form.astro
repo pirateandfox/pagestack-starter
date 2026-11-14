@@ -1,0 +1,65 @@
+---
+// A form whose fields are edited in the editor. Posts to /api/form (src/lib/form-server.ts):
+// on the live site that emails and/or calls a webhook; in dev and the editor it only prints.
+// Works without JavaScript (a plain post that lands on the thank-you page); with it, site.ts
+// sends it in place and shows the thank-you message.
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+import site from '../data/site.json';
+import { fieldNames } from '../lib/form-fields';
+import { plainText } from '../lib/text';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const items = node.blocks ?? [];
+const names = fieldNames(items.map((f) => f.settings.label));
+const labels = Object.fromEntries(items.map((f, i) => [names[i], plainText(f.settings.label)]));
+const emailField = items.findIndex((f) => f.settings.kind === 'email');
+const side = s.layout === 'side';
+const id = `form-${node.id}`;
+const turnstile = (site as any).turnstileSiteKey && !edit;
+---
+<Sec node={node} edit={edit} class:list={['form-block', side && 'form-block--side']} width={side ? 'normal' : 'narrow'}>
+  <SecHead s={s} edit={edit} />
+  <div class="form__wrap">
+    <form class="form" action="/api/form" method="post" data-form novalidate={false}>
+      <input type="hidden" name="_form" value={plainText(s.formName) || 'Contact form'} />
+      <input type="hidden" name="_page" value={Astro.url.pathname} />
+      <input type="hidden" name="_next" value={s.next || '/thanks/'} />
+      <input type="hidden" name="_labels" value={JSON.stringify(labels)} />
+      {emailField >= 0 && <input type="hidden" name="_email" value={names[emailField]} />}
+      <input type="hidden" name="_t" value="" />
+      <div class="form__hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website_url" tabindex="-1" autocomplete="off" /></label></div>
+      <div class="form__fields">
+        {items.map((f, i) => { const ie = child(edit, i); const v = f.settings; const name = names[i]; const fid = `${id}-${name}`; const req = !!v.required; const opts: string[] = (v.options ?? []).filter(Boolean); const help = v.help ? `${fid}-help` : undefined; return (
+          <div class:list={['field', `field--${v.kind || 'text'}`, v.width === 'half' && 'field--half']} {...nodeAttrs(ie, f)}>
+            {v.kind === 'checkbox'
+              ? <label class="check"><input type="checkbox" name={name} value="Yes" id={fid} required={req} aria-describedby={help} /><span {...fieldAttrs(ie, 'label', 'text')}>{v.label}</span>{req && <span class="req" aria-hidden="true">*</span>}</label>
+              : v.kind === 'choice'
+                ? <fieldset class="choices" aria-describedby={help}><legend><span {...fieldAttrs(ie, 'label', 'text')}>{v.label}</span>{req && <span class="req" aria-hidden="true">*</span>}</legend>{opts.map((o, k) => <label class="check"><input type="radio" name={name} value={o} required={req && k === 0} /><span>{o}</span></label>)}</fieldset>
+                : <>
+                    <label for={fid}><span {...fieldAttrs(ie, 'label', 'text')}>{v.label}</span>{req && <span class="req" aria-hidden="true">*</span>}</label>
+                    {v.kind === 'textarea' ? <textarea id={fid} name={name} rows="5" required={req} maxlength="5000" aria-describedby={help} placeholder={v.placeholder || undefined} />
+                      : v.kind === 'select' ? <select id={fid} name={name} required={req} aria-describedby={help}><option value="">Choose…</option>{opts.map((o) => <option>{o}</option>)}</select>
+                      : <input id={fid} name={name} required={req} aria-describedby={help} placeholder={v.placeholder || undefined} maxlength="500"
+                          type={({ email: 'email', phone: 'tel', date: 'date', number: 'number' } as Record<string, string>)[v.kind] ?? 'text'}
+                          autocomplete={({ email: 'email', phone: 'tel', name: 'name' } as Record<string, string>)[v.kind === 'text' && /name/i.test(v.label) ? 'name' : v.kind]} />}
+                  </>}
+            {v.help && <p class="field__help muted" id={help} {...fieldAttrs(ie, 'help', 'text')}>{v.help}</p>}
+          </div>
+        ); })}
+      </div>
+      {turnstile && <div class="cf-turnstile" data-sitekey={(site as any).turnstileSiteKey}></div>}
+      {s.notice && <div class="form__notice rich muted" {...fieldAttrs(edit, 'notice', 'richtext')} set:html={s.notice} />}
+      <div class="form__foot">
+        <button class="btn" type="submit" {...fieldAttrs(edit, 'button', 'text')}>{s.button || 'Send'}</button>
+        <p class="form__status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+    <div class="form__done rich" hidden tabindex="-1" {...fieldAttrs(edit, 'success', 'richtext')} set:html={s.success || '<p>Thank you. We will be in touch soon.</p>'} />
+    {edit && <p class="form__editnote">In the editor and while developing, this form doesn’t send: submissions are printed in the terminal. On the live site it sends to the email or webhook set up for the site (README: Forms).</p>}
+  </div>
+</Sec>
+{turnstile && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}

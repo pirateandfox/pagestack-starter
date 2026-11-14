@@ -34,6 +34,7 @@ const pageTitle = title === 'Home' ? `${site.name} — ${site.tagline}` : `${pla
     <link id="theme" rel="stylesheet" href={`/themes/${themeName}.css`} />
     {fonts && <link rel="stylesheet" href={fonts.url} />}
     {vars && <style set:html={`:root { ${vars} }`} />}
+    <slot name="head" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

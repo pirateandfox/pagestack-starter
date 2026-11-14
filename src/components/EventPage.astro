@@ -1,0 +1,47 @@
+---
+// One event. Used by the real page and the editor's preview.
+import { itemField } from '@pirateandfox/pagestack/runtime';
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import { localIso, whenText, type Event } from '../lib/content';
+interface Props { id: string; data: Event['data']; editing?: boolean; url?: string }
+const { id, data, editing = false, url } = Astro.props;
+// Times are local to the venue, written without a zone, so they stay as written everywhere.
+const local = (d: Date) => localIso(d, data.allDay);
+const ld = {
+  '@context': 'https://schema.org', '@type': 'Event', name: data.title, description: data.description,
+  startDate: local(data.start), endDate: data.end ? local(data.end) : undefined,
+  eventAttendanceMode: data.online ? (data.place ? 'https://schema.org/MixedEventAttendanceMode' : 'https://schema.org/OnlineEventAttendanceMode') : 'https://schema.org/OfflineEventAttendanceMode',
+  location: data.place ? { '@type': 'Place', name: data.place, address: data.address } : data.online ? { '@type': 'VirtualLocation', url: data.online } : undefined,
+  image: data.image && url ? new URL(data.image, url).href : undefined,
+  organizer: { '@type': 'Organization', name: site.name },
+  offers: data.tickets ? { '@type': 'Offer', url: data.tickets } : undefined,
+};
+const map = data.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.address)}` : '';
+---
+<Base title={data.title} description={data.description}>
+  {!editing && <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld).replace(/</g, '\\u003c')} />}
+  <article class="event sec">
+    <div class="wrap event__grid">
+      <header class="stack">
+        <p class="eyebrow"><a href="/events/">Events</a></p>
+        <h1 {...itemField(editing, 'title')}>{data.title}</h1>
+        {data.description && <p class="lede" {...itemField(editing, 'description')}>{data.description}</p>}
+        {data.image && <div class="frame ratio-wide"><img src={data.image} alt={data.imageAlt ?? ''} {...itemField(editing, 'image', 'image')} /></div>}
+        <div class="rich"><slot /></div>
+      </header>
+      <aside class="event__card stack">
+        <dl class="facts facts--stacked">
+          <div><dt>When</dt><dd>{whenText(data)}</dd></div>
+          {data.place && <div><dt>Where</dt><dd>{data.place}{data.address && <><br /><a href={map} rel="noopener">{data.address}</a></>}</dd></div>}
+          {data.online && <div><dt>Online</dt><dd><a href={data.online} rel="noopener">Join link</a></dd></div>}
+          {data.price && <div><dt>Price</dt><dd>{data.price}</dd></div>}
+        </dl>
+        <div class="actions">
+          {data.tickets && <a class="btn" href={data.tickets} rel="noopener">Get tickets</a>}
+          {!editing && <a class="btn btn--outline" href={`/events/${id}.ics`} download>Add to calendar</a>}
+        </div>
+      </aside>
+    </div>
+  </article>
+</Base>

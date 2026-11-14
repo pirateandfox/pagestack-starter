@@ -1,13 +1,28 @@
 {
   "name": "Meridian",
   "tagline": "Architecture and interiors for small buildings that matter.",
-  "announcement": "Open studio on Thursday 4 December, 5 to 8 p.m. <a href=\"/events/\">Come by</a>",
+  "announcement": "Open studio on Friday 4 December, 5 to 8 p.m. <a href=\"/events/open-studio-december/\">Come by</a>",
   "nav": [
-    { "label": "Work", "href": "/#work" },
-    { "label": "Services", "href": "/#services" },
-    { "label": "Journal", "href": "/journal/" },
-    { "label": "Events", "href": "/events/" },
-    { "label": "Contact", "href": "/#contact" }
+    {
+      "label": "Work",
+      "href": "/#work"
+    },
+    {
+      "label": "Services",
+      "href": "/#services"
+    },
+    {
+      "label": "Journal",
+      "href": "/journal/"
+    },
+    {
+      "label": "Events",
+      "href": "/events/"
+    },
+    {
+      "label": "Contact",
+      "href": "/#contact"
+    }
   ],
   "ctaLabel": "Start a project",
   "ctaHref": "/#contact",
@@ -15,7 +30,14 @@
   "phone": "(555) 018-4420",
   "email": "studio@meridian.example",
   "footerLinks": [
-    { "label": "Instagram", "href": "https://instagram.com" },
-    { "label": "LinkedIn", "href": "https://linkedin.com" }
-  ]
+    {
+      "label": "Instagram",
+      "href": "https://instagram.com"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://linkedin.com"
+    }
+  ],
+  "turnstileSiteKey": ""
 }
