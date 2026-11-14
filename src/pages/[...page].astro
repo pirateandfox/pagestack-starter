@@ -1,0 +1,9 @@
+---
+// Every page in src/content/pages, including ones added in the editor: a new JSON file is a new
+// URL. Drafts are left out of the build.
+import { staticPages } from '@pirateandfox/pagestack/runtime';
+import SectionPage from '../components/SectionPage.astro';
+export const getStaticPaths = () => staticPages(import.meta.glob('../content/pages/**/*.json', { eager: true }));
+const { page } = Astro.props;
+---
+<SectionPage page={page} />

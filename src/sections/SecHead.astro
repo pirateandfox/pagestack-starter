@@ -1,0 +1,16 @@
+---
+// Eyebrow, title and intro at the top of a section. Each part is optional except the title.
+import type { EditCtx } from '@pirateandfox/pagestack/runtime';
+import { fieldAttrs } from '@pirateandfox/pagestack/runtime';
+interface Props { s: Record<string, any>; edit?: EditCtx; center?: boolean; tag?: string }
+const { s, edit, center = false, tag = 'h2' } = Astro.props;
+const Tag = tag as any;
+const has = (v: unknown) => typeof v === 'string' && v.replace(/<[^>]*>/g, '').trim() !== '';
+---
+{(has(s.title) || has(s.eyebrow) || has(s.intro) || edit) && (
+  <div class:list={['sec-head', center && 'center']}>
+    {(has(s.eyebrow) || (edit && s.eyebrow !== undefined && has(s.eyebrow))) && <p class="eyebrow" {...fieldAttrs(edit, 'eyebrow', 'text')} set:html={s.eyebrow} />}
+    {(has(s.title) || edit) && <Tag {...fieldAttrs(edit, 'title', 'text')} set:html={s.title ?? ''} />}
+    {has(s.intro) && <div class="lede rich" {...fieldAttrs(edit, 'intro', 'richtext')} set:html={s.intro} />}
+  </div>
+)}

@@ -1,0 +1,23 @@
+/* Theme: Editorial. A magazine serif for headings, warm paper, an oxblood accent, square corners. */
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap");
+:root {
+  --color-bg: #fbfaf6;
+  --color-surface: #f1ede4;
+  --color-ink: #1d1b17;
+  --color-muted: #5f5a50;
+  --color-line: #e2dccf;
+  --color-accent: #8a2c1d;
+  --color-accent-ink: #fbfaf6;
+  --color-inverse-bg: #1d1b17;
+  --color-inverse-ink: #f1ede4;
+
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "Instrument Sans", system-ui, sans-serif;
+  --weight-display: 400;
+  --tracking-display: -0.015em;
+  --leading-display: 1.06;
+  --case-display: none;
+
+  --radius: 0px;
+  --radius-button: 0px;
+}

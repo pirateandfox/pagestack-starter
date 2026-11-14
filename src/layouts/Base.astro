@@ -1,0 +1,70 @@
+---
+// The site frame: theme, announcement bar, header, footer. Every page renders inside it.
+// The theme is one stylesheet in public/themes; Theme settings (src/data/theme.json) layer on top.
+import site from '../data/site.json';
+import settings from '../data/theme.json';
+import { fontPairings } from '../data/themes';
+import { plainText, safeColor } from '../lib/text';
+import '../styles/base.css';
+import '../styles/blocks.css';
+interface Props { title: string; description?: string; announcement?: boolean; theme?: string }
+const { title, description, announcement = true, theme } = Astro.props;
+const here = Astro.url.pathname.replace(/\/?$/, '/');
+const year = new Date().getFullYear();
+const themeName = theme || settings.theme || 'plain';
+const fonts = settings.fonts ? fontPairings[settings.fonts] : undefined;
+// Settings become variables over the theme's own. Only values that are plainly colours get through.
+const vars = [
+  safeColor(settings.accent) && `--color-accent: ${settings.accent};`,
+  safeColor(settings.accentInk) && `--color-accent-ink: ${settings.accentInk};`,
+  fonts && `--font-display: ${fonts.display}; --font-body: ${fonts.body}; --weight-display: ${fonts.weight};`,
+].filter(Boolean).join(' ');
+const pageTitle = title === 'Home' ? `${site.name} — ${site.tagline}` : `${plainText(title)} — ${site.name}`;
+---
+<!doctype html>
+<html lang="en" data-corners={settings.corners || undefined} data-buttons={settings.buttons || undefined} data-spacing={settings.spacing || undefined}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link id="theme" rel="stylesheet" href={`/themes/${themeName}.css`} />
+    {fonts && <link rel="stylesheet" href={fonts.url} />}
+    {vars && <style set:html={`:root { ${vars} }`} />}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    {announcement && site.announcement && <p class="announce" set:html={site.announcement} />}
+    <header class="header">
+      <div class="wrap header__inner">
+        <a class="brand" href="/">{site.name}</a>
+        <nav class="nav" aria-label="Main">
+          {site.nav.map((l) => <a href={l.href} aria-current={here === l.href ? 'page' : undefined}>{l.label}</a>)}
+        </nav>
+        <a class="btn" href={site.ctaHref}>{site.ctaLabel}</a>
+        <details class="menu">
+          <summary aria-label="Menu"><span></span><span></span><span></span></summary>
+          <nav class="menu__panel" aria-label="Main">
+            {site.nav.map((l) => <a href={l.href}>{l.label}</a>)}
+            <a class="btn" href={site.ctaHref}>{site.ctaLabel}</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer__grid">
+          <div class="footer__about"><a class="brand" href="/">{site.name}</a><p>{site.tagline}</p></div>
+          <div><h2>Visit</h2><p>{site.address}</p></div>
+          <div><h2>Contact</h2><ul><li><a href={`tel:${site.phone.replace(/[^\d+]/g, '')}`}>{site.phone}</a></li><li><a href={`mailto:${site.email}`}>{site.email}</a></li></ul></div>
+          <div><h2>Elsewhere</h2><ul>{site.footerLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul></div>
+        </div>
+        <div class="footer__base"><span>© {year} {site.name}</span><span>Built with PageStack</span></div>
+      </div>
+    </footer>
+  </body>
+</html>

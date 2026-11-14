@@ -1,0 +1,21 @@
+{
+  "name": "pagestack-starter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A starter site for PageStack: a library of minimal blocks, swappable themes, Markdown feeds and forms that work on static hosting.",
+  "scripts": {
+    "dev": "astro dev",
+    "dev:editor": "EDITOR=dev astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@pirateandfox/pagestack": "0.1.0-beta.15",
+    "astro": "^7.4.7"
+  },
+  "engines": {
+    "node": ">=22.23.4"
+  }
+}

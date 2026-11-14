@@ -1,0 +1,22 @@
+---
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import SecHead from './SecHead.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const center = s.align === 'center';
+---
+<Sec node={node} edit={edit} class:list={['features', `features--${s.style || 'plain'}`]}>
+  <SecHead s={s} edit={edit} center={center} />
+  <ol class:list={['features__grid', center && 'center']} style={`--cols: ${s.columns || 3}`}>
+    {(node.blocks ?? []).map((it, i) => { const ie = child(edit, i); const f = it.settings; return (
+      <li class="feature" {...nodeAttrs(ie, it)}>
+        <h3 {...fieldAttrs(ie, 'title', 'text')} set:html={f.title ?? ''} />
+        {f.text && <div class="rich muted" {...fieldAttrs(ie, 'text', 'richtext')} set:html={f.text} />}
+        {f.href && <a class="feature__link" href={f.href}>Learn more <span aria-hidden="true">→</span></a>}
+      </li>
+    ); })}
+  </ol>
+</Sec>

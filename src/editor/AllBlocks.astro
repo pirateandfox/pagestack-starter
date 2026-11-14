@@ -1,0 +1,58 @@
+---
+// /blocks: every preset in the block library, one after another, each under a labelled bar,
+// with a theme switcher. Only exists in `astro dev` and the editor (see astro.config.mjs).
+// This is the page to work on when giving the starter a brand: change the theme file, reload,
+// check every block.
+import Base from '../layouts/Base.astro';
+import Render from '../sections/Render.astro';
+import { presets, schemas } from '../sections/index';
+import { themes } from '../data/themes';
+import settings from '../data/theme.json';
+const pick = Astro.url.searchParams.get('theme');
+const theme = themes.some((t) => t.value === pick) ? pick! : settings.theme;
+const list = presets.map((p) => ({ preset: p, node: p.create() }));
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+---
+<Base title="All blocks" theme={theme} announcement={true}>
+  <nav class="ab-top" aria-label="Blocks">
+    <div class="ab-top__row">
+      <strong>All blocks</strong>
+      <span>{list.length} presets of {new Set(list.map((l) => l.node.type)).size} blocks</span>
+      <span class="ab-themes" role="group" aria-label="Theme">
+        {themes.map((t) => <a href={`?theme=${t.value}`} aria-current={t.value === theme ? 'true' : undefined}>{t.label}</a>)}
+      </span>
+    </div>
+    <details class="ab-index"><summary>Jump to a block</summary>
+      <ol>{list.map((l, i) => <li><a href={`#b-${i + 1}`}>{pad(i)} {l.preset.label}</a></li>)}</ol>
+    </details>
+  </nav>
+  {list.map((l, i) => (
+    <>
+      <div class="ab-bar" id={`b-${i + 1}`}>
+        <span class="ab-bar__n">{pad(i)}</span>
+        <span class="ab-bar__name">{l.preset.label}</span>
+        <span class="ab-bar__type">{schemas[l.node.type]?.label} · <code>{l.node.type}</code>{schemas[l.node.type]?.category && ` · ${schemas[l.node.type].category}`}</span>
+      </div>
+      <Render nodes={[l.node]} root />
+    </>
+  ))}
+</Base>
+
+<style is:global>
+  /* Tool chrome: fixed colours, never themed, so it is obviously not part of the design. */
+  .ab-top { position: sticky; top: 0; z-index: 40; background: #111; color: #f2f2f2; font: 13px/1.4 ui-monospace, "SF Mono", Menlo, monospace; }
+  .ab-top__row { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: center; padding: 0.6rem var(--gutter); }
+  .ab-themes { display: flex; gap: 0.35rem; margin-left: auto; }
+  .ab-themes a { color: inherit; text-decoration: none; padding: 0.25rem 0.65rem; border: 1px solid #444; border-radius: 999px; }
+  .ab-themes a[aria-current] { background: #ff4f1f; border-color: #ff4f1f; color: #fff; }
+  .ab-index { padding: 0 var(--gutter) 0.6rem; }
+  .ab-index summary { cursor: pointer; color: #aaa; }
+  .ab-index ol { list-style: none; padding: 0.5rem 0 0; margin: 0; columns: 3 220px; }
+  .ab-index a { color: #f2f2f2; text-decoration: none; }
+  .ab-bar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1rem; padding: 0.55rem var(--gutter); background: #ff4f1f; color: #fff; font: 600 13px/1.4 ui-monospace, "SF Mono", Menlo, monospace; scroll-margin-top: 6rem; }
+  .ab-bar__n { opacity: 0.7; }
+  .ab-bar__name { font-size: 15px; }
+  .ab-bar__type { opacity: 0.85; font-weight: 400; margin-left: auto; }
+  .ab-bar code { font: inherit; }
+  .header { position: static; }
+</style>

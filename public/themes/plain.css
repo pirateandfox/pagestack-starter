@@ -1,0 +1,23 @@
+/* Theme: Plain. Neutral, crisp, near-black accent. A theme sets variables only; every block reads them. */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap");
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f2;
+  --color-ink: #141414;
+  --color-muted: #5f5f5b;
+  --color-line: #e4e4e0;
+  --color-accent: #141414;
+  --color-accent-ink: #ffffff;
+  --color-inverse-bg: #141414;
+  --color-inverse-ink: #f4f4f2;
+
+  --font-display: "Geist", system-ui, sans-serif;
+  --font-body: "Geist", system-ui, sans-serif;
+  --weight-display: 600;
+  --tracking-display: -0.03em;
+  --leading-display: 1.04;
+  --case-display: none;
+
+  --radius: 10px;
+  --radius-button: 8px;
+}

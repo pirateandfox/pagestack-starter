@@ -1,0 +1,11 @@
+---
+// Renders a list of nodes with the component for each type. `root` means these are the page's
+// sections (edit paths `sections.N`); otherwise paths extend the parent's.
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, rootEdit } from '@pirateandfox/pagestack/runtime';
+import { components } from './components';
+interface Props { nodes?: Node[]; edit?: EditCtx; root?: boolean; editing?: boolean }
+const { nodes = [], edit, root = false, editing = false } = Astro.props;
+const ctx = (i: number) => (root ? rootEdit(editing, i) : child(edit, i));
+---
+{nodes.map((n, i) => { const Cmp = components[n.type]; return Cmp ? <Cmp node={n} edit={ctx(i)} /> : null; })}

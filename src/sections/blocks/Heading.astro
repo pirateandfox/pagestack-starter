@@ -1,0 +1,8 @@
+---
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const Tag = (['h2', 'h3', 'h4'].includes(node.settings.level) ? node.settings.level : 'h2') as any;
+---
+<Tag {...nodeAttrs(edit, node)} {...fieldAttrs(edit, 'text', 'text')} set:html={node.settings.text ?? ''} />

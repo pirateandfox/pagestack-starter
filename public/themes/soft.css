@@ -1,0 +1,23 @@
+/* Theme: Soft. Rounded and calm: sage on oat, a friendly geometric sans, generous corners. */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+:root {
+  --color-bg: #f6f3ec;
+  --color-surface: #ebe6da;
+  --color-ink: #23302a;
+  --color-muted: #59665e;
+  --color-line: #ddd6c6;
+  --color-accent: #4c6e55;
+  --color-accent-ink: #f6f3ec;
+  --color-inverse-bg: #23302a;
+  --color-inverse-ink: #ebe6da;
+
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --weight-display: 700;
+  --tracking-display: -0.025em;
+  --leading-display: 1.08;
+  --case-display: none;
+
+  --radius: 22px;
+  --radius-button: 999px;
+}

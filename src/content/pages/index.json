@@ -1,0 +1,356 @@
+{
+  "title": "Home",
+  "sections": [
+    {
+      "id": "bbc6dd5",
+      "type": "hero",
+      "settings": {
+        "title": "Small buildings, <em>carefully</em> made",
+        "eyebrow": "Architecture and interiors",
+        "text": "<p>We design homes, studios and shopfronts for people who care how a room feels at seven in the morning. Twelve years, sixty buildings, one coastline.</p>",
+        "image": {
+          "src": "/images/tall-1.svg",
+          "alt": "A low timber house on a grassy slope at dusk"
+        },
+        "layout": "split",
+        "align": "left",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "8df9dca",
+          "type": "button",
+          "settings": {
+            "label": "See our work",
+            "href": "/#work",
+            "style": "solid"
+          }
+        },
+        {
+          "id": "2209018",
+          "type": "button",
+          "settings": {
+            "label": "Start a project",
+            "href": "/#contact",
+            "style": "outline"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ade5600",
+      "type": "logos",
+      "settings": {
+        "title": "As featured in",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "802c053",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-1.svg",
+              "alt": "Northfold"
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "bf8c0e0",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-2.svg",
+              "alt": "Calder & Co"
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "512658d",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-3.svg",
+              "alt": "Halden"
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "42355b5",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-4.svg",
+              "alt": "Oyster Bay"
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "1b05deb",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-5.svg",
+              "alt": "Pellworth"
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "ca243be",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-6.svg",
+              "alt": "Vantage"
+            },
+            "href": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "4752e2b",
+      "type": "image-text",
+      "settings": {
+        "title": "Three architects, one long table",
+        "eyebrow": "The studio",
+        "text": "<p>We work from a converted sail loft on Harbour Street. Everyone who works on your project sits at the same table, so nothing gets lost between drawings.</p>",
+        "image": {
+          "src": "/images/tall-2.svg",
+          "alt": "A long worktable under a north-facing window"
+        },
+        "side": "left",
+        "ratio": "tall",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "8f5737b",
+          "type": "button",
+          "settings": {
+            "label": "Meet the team",
+            "href": "/about/",
+            "style": "outline"
+          }
+        }
+      ]
+    },
+    {
+      "id": "8a92c02",
+      "type": "features",
+      "settings": {
+        "title": "Why clients come back",
+        "eyebrow": "",
+        "intro": "",
+        "columns": "4",
+        "style": "cards",
+        "align": "left",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "c38e6ee",
+          "type": "feature",
+          "settings": {
+            "title": "Fixed fees",
+            "text": "<p>Agreed at the start, broken into stages.</p>",
+            "href": ""
+          }
+        },
+        {
+          "id": "7cbbde0",
+          "type": "feature",
+          "settings": {
+            "title": "One architect",
+            "text": "<p>The person you meet draws your building.</p>",
+            "href": ""
+          }
+        },
+        {
+          "id": "719e029",
+          "type": "feature",
+          "settings": {
+            "title": "Local builders",
+            "text": "<p>A short list we have worked with for years.</p>",
+            "href": ""
+          }
+        },
+        {
+          "id": "0bc4781",
+          "type": "feature",
+          "settings": {
+            "title": "Low energy",
+            "text": "<p>Every project is designed to Passivhaus principles.</p>",
+            "href": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "4a30980",
+      "type": "stats",
+      "settings": {
+        "title": "",
+        "eyebrow": "",
+        "intro": "",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "d754ab7",
+          "type": "stat",
+          "settings": {
+            "value": "12",
+            "label": "Years on Harbour Street"
+          }
+        },
+        {
+          "id": "3941ba4",
+          "type": "stat",
+          "settings": {
+            "value": "64",
+            "label": "Buildings finished"
+          }
+        },
+        {
+          "id": "5f851bf",
+          "type": "stat",
+          "settings": {
+            "value": "9",
+            "label": "Design awards"
+          }
+        },
+        {
+          "id": "8efbe0a",
+          "type": "stat",
+          "settings": {
+            "value": "0",
+            "label": "Projects over budget since 2019"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5dff965",
+      "type": "testimonials",
+      "settings": {
+        "title": "",
+        "eyebrow": "",
+        "intro": "",
+        "layout": "single",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "7a1be77",
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>The house is better than anything we could have described to them. They listened to what we meant, not what we said.</p>",
+            "name": "Elena Marsh",
+            "role": "Cliff House, 2024",
+            "image": {
+              "src": "/images/person-4.svg",
+              "alt": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "3941db2",
+      "type": "faq",
+      "settings": {
+        "title": "Questions people ask",
+        "eyebrow": "",
+        "intro": "<p>Anything else, <a href=\"/#contact\">ask us</a>.</p>",
+        "layout": "side",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "c54ddfb",
+          "type": "faq-item",
+          "settings": {
+            "question": "How much does an architect cost?",
+            "answer": "<p>For most of our projects, between 8 and 12 percent of the build cost. We agree a fixed fee before we start.</p>"
+          }
+        },
+        {
+          "id": "93a6744",
+          "type": "faq-item",
+          "settings": {
+            "question": "Do you work outside Portwell?",
+            "answer": "<p>Yes, anywhere within about two hours. Further than that, we will recommend someone local.</p>"
+          }
+        },
+        {
+          "id": "db32da2",
+          "type": "faq-item",
+          "settings": {
+            "question": "How long does planning take?",
+            "answer": "<p>Usually eight to thirteen weeks from submission. We will tell you early if a site looks difficult.</p>"
+          }
+        },
+        {
+          "id": "3a9a91e",
+          "type": "faq-item",
+          "settings": {
+            "question": "Can you work with my builder?",
+            "answer": "<p>Of course. We are happy to tender too, if you would like to compare.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ff034fc",
+      "type": "cta",
+      "settings": {
+        "title": "Have a building in mind?",
+        "text": "<p>Tell us about it. We reply within two working days.</p>",
+        "layout": "center",
+        "background": "accent",
+        "padding": "normal",
+        "anchor": "contact"
+      },
+      "blocks": [
+        {
+          "id": "32600e5",
+          "type": "button",
+          "settings": {
+            "label": "Book a site visit",
+            "href": "mailto:studio@meridian.example",
+            "style": "solid"
+          }
+        },
+        {
+          "id": "c761aa1",
+          "type": "button",
+          "settings": {
+            "label": "(555) 018-4420",
+            "href": "tel:+15550184420",
+            "style": "outline"
+          }
+        }
+      ]
+    }
+  ]
+}

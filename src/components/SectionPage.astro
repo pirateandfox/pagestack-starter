@@ -1,0 +1,13 @@
+---
+// PageStack's `renderer`: one page (src/content/pages/<slug>.json) inside the site frame.
+// `editing` is true only in the editor's preview; it turns on the data-ps-* markers.
+import type { PageDoc } from '@pirateandfox/pagestack/runtime';
+import Base from '../layouts/Base.astro';
+import Render from '../sections/Render.astro';
+interface Props { page: PageDoc; editing?: boolean }
+const { page, editing = false } = Astro.props;
+const layout = page.layout ?? {};
+---
+<Base title={page.title} description={page.description} announcement={layout.announcement !== false}>
+  <Render nodes={page.sections} root editing={editing} />
+</Base>

@@ -1,0 +1,19 @@
+---
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { fieldAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+import Render from './Render.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+const split = s.layout === 'split';
+---
+<Sec node={node} edit={edit} class:list={['cta', split && 'cta--split']}>
+  <div class:list={['cta__inner', !split && 'center']}>
+    <div class="stack stack--tight">
+      <h2 {...fieldAttrs(edit, 'title', 'text')} set:html={s.title ?? ''} />
+      {s.text && <div class="lede rich" {...fieldAttrs(edit, 'text', 'richtext')} set:html={s.text} />}
+    </div>
+    {node.blocks?.length ? <div class="actions"><Render nodes={node.blocks} edit={edit} /></div> : null}
+  </div>
+</Sec>

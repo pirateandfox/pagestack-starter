@@ -1,0 +1,16 @@
+---
+import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
+import { child, fieldAttrs, nodeAttrs } from '@pirateandfox/pagestack/runtime';
+import Sec from './Sec.astro';
+interface Props { node: Node; edit?: EditCtx }
+const { node, edit } = Astro.props;
+const s = node.settings;
+---
+<Sec node={node} edit={edit} class="logos">
+  {s.title && <p class="eyebrow logos__title" {...fieldAttrs(edit, 'title', 'text')} set:html={s.title} />}
+  <ul class="logos__row">
+    {(node.blocks ?? []).map((it, i) => { const ie = child(edit, i); const img = it.settings.image ?? {}; const pic = <img src={img.src} alt={img.alt ?? ''} {...fieldAttrs(ie, 'image', 'image')} />; return (
+      <li {...nodeAttrs(ie, it)}>{it.settings.href && !edit ? <a href={it.settings.href}>{pic}</a> : pic}</li>
+    ); })}
+  </ul>
+</Sec>
