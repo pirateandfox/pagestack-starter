@@ -488,8 +488,8 @@ export const globals: Record<string, GlobalDoc> = {
     file: 'src/data/theme.json',
     fields: {
       theme: { type: 'select', label: 'Theme', options: themes, help: 'Each theme sets colours, fonts and corners. The settings below change one thing at a time on top of it.' },
-      accent: { type: 'color', label: 'Accent colour', help: "Buttons, links and accent backgrounds. Blank uses the theme's." },
-      accentInk: { type: 'color', label: 'Text on the accent colour', help: 'Usually white or near-black. Pick whichever is easier to read on the accent.' },
+      accent: { type: 'color', label: 'Accent colour', help: "Buttons, links and accent backgrounds. Blank uses the theme's. Links use it too, so it needs to stand out against the page (a pale yellow won't)." },
+      accentInk: { type: 'color', label: 'Text on the accent colour', help: 'Leave blank and the site picks white or near-black, whichever reads better on your accent. The all-blocks page (/blocks) flags any colours that are hard to read.' },
       fonts: { type: 'select', label: 'Fonts', options: [{ value: '', label: "The theme's own" }, ...Object.entries(fontPairings).map(([value, f]) => ({ value, label: f.label }))] },
       corners: { type: 'select', label: 'Corners', options: [{ value: '', label: "The theme's own" }, { value: 'square', label: 'Square' }, { value: 'soft', label: 'Soft' }, { value: 'round', label: 'Round' }] },
       buttons: { type: 'select', label: 'Buttons', options: [{ value: '', label: "The theme's own" }, { value: 'pill', label: 'Pill' }, { value: 'square', label: 'Square' }, { value: 'outline', label: 'Outline' }] },

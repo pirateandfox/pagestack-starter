@@ -5,6 +5,7 @@ import site from '../data/site.json';
 import settings from '../data/theme.json';
 import { fontPairings } from '../data/themes';
 import { plainText, safeColor } from '../lib/text';
+import { bestOn, parseColor } from '../lib/contrast';
 import '../styles/base.css';
 import '../styles/blocks.css';
 interface Props { title: string; description?: string; announcement?: boolean; theme?: string }
@@ -17,6 +18,8 @@ const fonts = settings.fonts ? fontPairings[settings.fonts] : undefined;
 const vars = [
   safeColor(settings.accent) && `--color-accent: ${settings.accent};`,
   safeColor(settings.accentInk) && `--color-accent-ink: ${settings.accentInk};`,
+  // A custom accent with no text colour set gets whichever of white or near-black reads better on it.
+  safeColor(settings.accent) && !settings.accentInk && parseColor(settings.accent) && `--color-accent-ink: ${bestOn(settings.accent)};`,
   fonts && `--font-display: ${fonts.display}; --font-body: ${fonts.body}; --weight-display: ${fonts.weight};`,
 ].filter(Boolean).join(' ');
 const pageTitle = title === 'Home' ? `${site.name} — ${site.tagline}` : `${plainText(title)} — ${site.name}`;

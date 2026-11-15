@@ -8,9 +8,19 @@ import Render from '../sections/Render.astro';
 import { presets, schemas } from '../sections/index';
 import { themes } from '../data/themes';
 import settings from '../data/theme.json';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { checkTheme, themeVars, withSettings } from '../lib/contrast';
 const pick = Astro.url.searchParams.get('theme');
 const theme = themes.some((t) => t.value === pick) ? pick! : settings.theme;
 const list = presets.map((p) => ({ preset: p, node: p.create() }));
+// Contrast: the theme file's colours with the Theme settings on top, checked the way
+// `npm run check:contrast` does. Shown in the bar so a brand pass sees it while it works.
+let issues: ReturnType<typeof checkTheme> = [];
+try {
+  const vars = themeVars(readFileSync(join(process.cwd(), 'public/themes', `${theme}.css`), 'utf8'));
+  issues = checkTheme(theme === settings.theme ? withSettings(vars, settings) : vars);
+} catch {}
 const pad = (i: number) => String(i + 1).padStart(2, '0');
 ---
 <Base title="All blocks" theme={theme} announcement={true}>
@@ -22,6 +32,12 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
         {themes.map((t) => <a href={`?theme=${t.value}`} aria-current={t.value === theme ? 'true' : undefined}>{t.label}</a>)}
       </span>
     </div>
+    {issues.length > 0 && (
+      <details class="ab-contrast" open>
+        <summary>Hard to read: {issues.length} colour {issues.length === 1 ? 'pair' : 'pairs'} in this theme</summary>
+        <ul>{issues.map((i) => <li><span class="ab-sw" style={`background:${i.bg};color:${i.fg}`}>Aa</span> {i.what}: {i.fg} on {i.bg} is {i.ratio}:1, needs {i.min}:1</li>)}</ul>
+      </details>
+    )}
     <details class="ab-index"><summary>Jump to a block</summary>
       <ol>{list.map((l, i) => <li><a href={`#b-${i + 1}`}>{pad(i)} {l.preset.label}</a></li>)}</ol>
     </details>
@@ -45,6 +61,10 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
   .ab-themes { display: flex; gap: 0.35rem; margin-left: auto; }
   .ab-themes a { color: inherit; text-decoration: none; padding: 0.25rem 0.65rem; border: 1px solid #444; border-radius: 999px; }
   .ab-themes a[aria-current] { background: #ff4f1f; border-color: #ff4f1f; color: #fff; }
+  .ab-contrast { padding: 0.5rem var(--gutter); background: #5c1d00; color: #ffe8dc; }
+  .ab-contrast summary { cursor: pointer; font-weight: 600; }
+  .ab-contrast ul { list-style: none; margin: 0.4rem 0 0; padding: 0; display: grid; gap: 0.3rem; }
+  .ab-sw { display: inline-block; padding: 0 0.4rem; border: 1px solid #fff4; border-radius: 3px; font-weight: 700; }
   .ab-index { padding: 0 var(--gutter) 0.6rem; }
   .ab-index summary { cursor: pointer; color: #aaa; }
   .ab-index ol { list-style: none; padding: 0.5rem 0 0; margin: 0; columns: 3 220px; }
