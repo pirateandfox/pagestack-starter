@@ -26,7 +26,11 @@ The editor saves straight into `src/` while you develop. Commit what you want to
   new look.
 - **Three themes**: Plain, Editorial and Soft (`public/themes/*.css`). A theme is one file of
   colours, fonts and corners; the blocks use nothing else. **Site settings → Theme** picks one and
-  overrides the accent colour, fonts, corners, button shape and spacing.
+  overrides the accent colour, fonts, corners, button shape and spacing. A custom accent with no
+  text colour gets white or near-black, whichever reads better. `npm run check:contrast` checks
+  every theme and your settings for hard-to-read colours, and `/blocks` shows the same warnings.
+- **Instructions for Claude** in `CLAUDE.md`: a brand pass (a new theme from a brand), a build
+  pass (pages from a brief, real words, no lorem ipsum) and a recipe for adding a block.
 - **Journal and Events**: folders of Markdown (`src/content/articles`, `src/content/events`),
   edited in the editor on their real page. `/journal/` and `/events/` list them, each has its own
   page, events have an **Add to calendar** file, and both carry search-engine markup. The
@@ -104,6 +108,8 @@ src/content/events/      events (Markdown)
 src/data/                site details and theme settings
 src/lib/form-server.ts   the send function's logic
 src/editor/              /blocks, editor previews, the dev-only form route
+scripts/check-contrast.ts  npm run check:contrast
+CLAUDE.md                how Claude should brand, build and extend the site
 ```
 
 ## License
