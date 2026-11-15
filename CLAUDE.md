@@ -180,7 +180,10 @@ say what you chose.
 7. **Articles and events.** Write them as Markdown with front matter that matches
    `src/lib/schemas.ts` (see the samples). Dates are local: `2027-03-14`, or
    `2027-03-14T19:30` for events.
-8. **Remove the starter's sample business.** Replace every Meridian article and event, the
+8. **Remove the starter's sample business.** Start with `npm run start-fresh`: it makes the
+   sample home page, articles and events into hidden drafts (kept for reference, never built) and
+   clears the announcement. `src/content/pages/reference.json` is a hidden draft with every
+   section. Then replace every remaining Meridian mention: the
    Journal and Events titles and intros in `site.json`, and the wording of `thanks.json`. Then
    search for leftovers: `grep -ri "meridian\|studio\|harbour" src` (some hits in presets are
    fine; nothing on a real page should mention them).

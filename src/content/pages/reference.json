@@ -1,0 +1,2347 @@
+{
+  "title": "Reference: every section",
+  "description": "Every ready-made section, filled in. A draft: it is never published. Copy what you need.",
+  "status": "draft",
+  "sections": [
+    {
+      "id": "f6cadf3",
+      "type": "hero",
+      "settings": {
+        "title": "Small buildings, <em>carefully</em> made",
+        "eyebrow": "Architecture and interiors",
+        "text": "<p>We design homes, studios and shopfronts for people who care how a room feels at seven in the morning. Twelve years, sixty buildings, one coastline.</p>",
+        "image": {
+          "src": "/images/tall-1.svg",
+          "alt": "A low timber house on a grassy slope at dusk"
+        },
+        "layout": "split",
+        "align": "left",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "d8f7720",
+          "type": "button",
+          "settings": {
+            "label": "See our work",
+            "href": "/#work",
+            "style": "solid"
+          }
+        },
+        {
+          "id": "6c27551",
+          "type": "button",
+          "settings": {
+            "label": "Start a project",
+            "href": "/#contact",
+            "style": "outline"
+          }
+        }
+      ]
+    },
+    {
+      "id": "03dadf2",
+      "type": "hero",
+      "settings": {
+        "title": "Light first. Everything else follows.",
+        "eyebrow": "Harbour Street Studio, 2025",
+        "text": "<p>A former net store turned into a studio and two flats.</p>",
+        "image": {
+          "src": "/images/hero.svg",
+          "alt": "The converted net store seen from the harbour wall"
+        },
+        "layout": "image",
+        "align": "left",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "84bbe9f",
+          "type": "button",
+          "settings": {
+            "label": "Read the story",
+            "href": "/journal/",
+            "style": "solid"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e84c017",
+      "type": "hero",
+      "settings": {
+        "title": "A shop that works as hard as the people in it",
+        "eyebrow": "New: the Quay Street shopfront",
+        "text": "<p>Forty square metres, a counter, a workshop and a window that sells. See how we fitted it all in.</p>",
+        "image": {
+          "src": "/images/hero.svg",
+          "alt": "The finished shopfront on Quay Street, doors open"
+        },
+        "layout": "stacked",
+        "align": "center",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "5a25f06",
+          "type": "button",
+          "settings": {
+            "label": "See the project",
+            "href": "/journal/",
+            "style": "solid"
+          }
+        },
+        {
+          "id": "a958f1b",
+          "type": "button",
+          "settings": {
+            "label": "Start a project",
+            "href": "/#contact",
+            "style": "outline"
+          }
+        }
+      ]
+    },
+    {
+      "id": "27f4f84",
+      "type": "hero",
+      "settings": {
+        "title": "We take on <strong>six projects a year</strong>, so each one gets our full attention.",
+        "eyebrow": "",
+        "text": "",
+        "image": {
+          "src": "",
+          "alt": ""
+        },
+        "layout": "minimal",
+        "align": "left",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "6718534",
+          "type": "button",
+          "settings": {
+            "label": "How we work",
+            "href": "/#process",
+            "style": "text"
+          }
+        }
+      ]
+    },
+    {
+      "id": "05ecf47",
+      "type": "page-header",
+      "settings": {
+        "title": "From first sketch to the keys",
+        "eyebrow": "Services",
+        "intro": "<p>Every project starts with a conversation on site. Here is what happens after that.</p>",
+        "align": "left",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "e9b8e2f",
+      "type": "content",
+      "settings": {
+        "width": "narrow",
+        "align": "left",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "fc8317b",
+          "type": "heading",
+          "settings": {
+            "text": "Why small buildings",
+            "level": "h2"
+          }
+        },
+        {
+          "id": "bf56568",
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Small buildings are where design matters most. Every square metre has a job, every window frames something, and there is nowhere for a bad decision to hide.</p><p>We started Meridian to work at that scale: close to the people who will live in the rooms, and close to the builders who make them.</p>",
+            "size": "normal"
+          }
+        },
+        {
+          "id": "5f780ac",
+          "type": "button",
+          "settings": {
+            "label": "About the studio",
+            "href": "/about/",
+            "style": "text"
+          }
+        }
+      ]
+    },
+    {
+      "id": "6501e16",
+      "type": "content",
+      "settings": {
+        "width": "narrow",
+        "align": "left",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "ba52edd",
+          "type": "heading",
+          "settings": {
+            "text": "The net store, <em>slowly</em>",
+            "level": "h2"
+          }
+        },
+        {
+          "id": "ced4eff",
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>The building had stood empty for eleven years. Salt had eaten the window frames and the roof leaked in four places, but the walls were good: half a metre of local stone.</p>",
+            "size": "normal"
+          }
+        },
+        {
+          "id": "4788745",
+          "type": "image",
+          "settings": {
+            "image": {
+              "src": "/images/project-3.svg",
+              "alt": "Stone walls and a new timber roof under construction"
+            },
+            "caption": "The new roof going on, March 2025.",
+            "ratio": "wide"
+          }
+        },
+        {
+          "id": "9a4c77b",
+          "type": "quote",
+          "settings": {
+            "text": "We kept everything the sea had not already taken.",
+            "cite": "Ana Ruiz, project architect"
+          }
+        },
+        {
+          "id": "6441623",
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Inside, a single oak stair connects the studio to the flats above, lit from a long rooflight that follows the ridge.</p>",
+            "size": "normal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5871dd0",
+      "type": "image-text",
+      "settings": {
+        "title": "Three architects, one long table",
+        "eyebrow": "The studio",
+        "text": "<p>We work from a converted sail loft on Harbour Street. Everyone who works on your project sits at the same table, so nothing gets lost between drawings.</p>",
+        "image": {
+          "src": "/images/tall-2.svg",
+          "alt": "A long worktable under a north-facing window"
+        },
+        "side": "left",
+        "ratio": "tall",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "346c9ea",
+          "type": "button",
+          "settings": {
+            "label": "Meet the team",
+            "href": "/about/",
+            "style": "outline"
+          }
+        }
+      ]
+    },
+    {
+      "id": "3141c22",
+      "type": "image-text",
+      "settings": {
+        "title": "We handle the paperwork, too",
+        "eyebrow": "Planning",
+        "text": "<p>Planning applications, building regulations, party wall agreements and the tender. You will know what is happening, but you will not have to chase it.</p>",
+        "image": {
+          "src": "/images/project-5.svg",
+          "alt": "Drawings pinned to a wall"
+        },
+        "side": "right",
+        "ratio": "square",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "fc69b4a",
+      "type": "features",
+      "settings": {
+        "title": "What we do",
+        "eyebrow": "Services",
+        "intro": "",
+        "columns": "3",
+        "style": "plain",
+        "align": "left",
+        "background": "default",
+        "padding": "normal",
+        "anchor": "services"
+      },
+      "blocks": [
+        {
+          "id": "e54266a",
+          "type": "feature",
+          "settings": {
+            "title": "New homes",
+            "text": "<p>Houses and cabins on difficult, beautiful sites. Coastal, rural and infill.</p>",
+            "href": "",
+            "linkLabel": ""
+          }
+        },
+        {
+          "id": "4270231",
+          "type": "feature",
+          "settings": {
+            "title": "Extensions and conversions",
+            "text": "<p>More room, more light, and a building that still looks like itself.</p>",
+            "href": "",
+            "linkLabel": ""
+          }
+        },
+        {
+          "id": "efffa8d",
+          "type": "feature",
+          "settings": {
+            "title": "Shops and studios",
+            "text": "<p>Small commercial spaces that work hard and make people want to come in.</p>",
+            "href": "",
+            "linkLabel": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "61c7941",
+      "type": "features",
+      "settings": {
+        "title": "Why clients come back",
+        "eyebrow": "",
+        "intro": "",
+        "columns": "4",
+        "style": "cards",
+        "align": "left",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "69215b5",
+          "type": "feature",
+          "settings": {
+            "title": "Fixed fees",
+            "text": "<p>Agreed at the start, broken into stages.</p>",
+            "href": "",
+            "linkLabel": ""
+          }
+        },
+        {
+          "id": "2afc707",
+          "type": "feature",
+          "settings": {
+            "title": "One architect",
+            "text": "<p>The person you meet draws your building.</p>",
+            "href": "",
+            "linkLabel": ""
+          }
+        },
+        {
+          "id": "aa31cfc",
+          "type": "feature",
+          "settings": {
+            "title": "Local builders",
+            "text": "<p>A short list we have worked with for years.</p>",
+            "href": "",
+            "linkLabel": ""
+          }
+        },
+        {
+          "id": "7308f9a",
+          "type": "feature",
+          "settings": {
+            "title": "Low energy",
+            "text": "<p>Every project is designed to Passivhaus principles.</p>",
+            "href": "",
+            "linkLabel": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "03cc14d",
+      "type": "features",
+      "settings": {
+        "title": "How a project runs",
+        "eyebrow": "Process",
+        "intro": "",
+        "columns": "4",
+        "style": "numbered",
+        "align": "left",
+        "background": "default",
+        "padding": "normal",
+        "anchor": "process"
+      },
+      "blocks": [
+        {
+          "id": "9c652c1",
+          "type": "feature",
+          "settings": {
+            "title": "Visit",
+            "text": "<p>We walk the site with you and listen. No charge.</p>",
+            "href": "",
+            "linkLabel": ""
+          }
+        },
+        {
+          "id": "f7341d8",
+          "type": "feature",
+          "settings": {
+            "title": "Design",
+            "text": "<p>Three options, then one, drawn and modelled until it is right.</p>",
+            "href": "",
+            "linkLabel": ""
+          }
+        },
+        {
+          "id": "f1ef5ce",
+          "type": "feature",
+          "settings": {
+            "title": "Permission",
+            "text": "<p>We prepare and submit the planning application.</p>",
+            "href": "",
+            "linkLabel": ""
+          }
+        },
+        {
+          "id": "a207e6e",
+          "type": "feature",
+          "settings": {
+            "title": "Build",
+            "text": "<p>We stay on through construction, on site every week.</p>",
+            "href": "",
+            "linkLabel": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "a0cf563",
+      "type": "stats",
+      "settings": {
+        "title": "",
+        "eyebrow": "",
+        "intro": "",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "d5f37b0",
+          "type": "stat",
+          "settings": {
+            "value": "12",
+            "label": "Years on Harbour Street"
+          }
+        },
+        {
+          "id": "6c0db13",
+          "type": "stat",
+          "settings": {
+            "value": "64",
+            "label": "Buildings finished"
+          }
+        },
+        {
+          "id": "3619bec",
+          "type": "stat",
+          "settings": {
+            "value": "9",
+            "label": "Design awards"
+          }
+        },
+        {
+          "id": "f72dea9",
+          "type": "stat",
+          "settings": {
+            "value": "0",
+            "label": "Projects over budget since 2019"
+          }
+        }
+      ]
+    },
+    {
+      "id": "14df2ce",
+      "type": "faq",
+      "settings": {
+        "title": "Questions people ask",
+        "eyebrow": "",
+        "intro": "<p>Anything else, <a href=\"/#contact\">ask us</a>.</p>",
+        "layout": "side",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "dde36e9",
+          "type": "faq-item",
+          "settings": {
+            "question": "How much does an architect cost?",
+            "answer": "<p>For most of our projects, between 8 and 12 percent of the build cost. We agree a fixed fee before we start.</p>"
+          }
+        },
+        {
+          "id": "e26ca6b",
+          "type": "faq-item",
+          "settings": {
+            "question": "Do you work outside Portwell?",
+            "answer": "<p>Yes, anywhere within about two hours. Further than that, we will recommend someone local.</p>"
+          }
+        },
+        {
+          "id": "36e2c9e",
+          "type": "faq-item",
+          "settings": {
+            "question": "How long does planning take?",
+            "answer": "<p>Usually eight to thirteen weeks from submission. We will tell you early if a site looks difficult.</p>"
+          }
+        },
+        {
+          "id": "d9c317c",
+          "type": "faq-item",
+          "settings": {
+            "question": "Can you work with my builder?",
+            "answer": "<p>Of course. We are happy to tender too, if you would like to compare.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "6325b6a",
+      "type": "testimonials",
+      "settings": {
+        "title": "From our clients",
+        "eyebrow": "",
+        "intro": "",
+        "layout": "grid",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "45fd5dc",
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>They found us a whole extra bedroom in a house we thought we had outgrown.</p>",
+            "name": "Priya and Tom Hale",
+            "role": "Loft conversion, Upper Portwell",
+            "image": {
+              "src": "/images/person-1.svg",
+              "alt": ""
+            }
+          }
+        },
+        {
+          "id": "04e3461",
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Calm, clear, and on site every single week. I would not build without them.</p>",
+            "name": "Marcus Fenn",
+            "role": "New house, Kettle Cove",
+            "image": {
+              "src": "/images/person-2.svg",
+              "alt": ""
+            }
+          }
+        },
+        {
+          "id": "1407cf5",
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>Our shop finally feels like the place we wanted to make.</p>",
+            "name": "Ruth Okafor",
+            "role": "Okafor Ceramics",
+            "image": {
+              "src": "/images/person-3.svg",
+              "alt": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "e8feaf9",
+      "type": "testimonials",
+      "settings": {
+        "title": "",
+        "eyebrow": "",
+        "intro": "",
+        "layout": "single",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "a6eebec",
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>The house is better than anything we could have described to them. They listened to what we meant, not what we said.</p>",
+            "name": "Elena Marsh",
+            "role": "Cliff House, 2024",
+            "image": {
+              "src": "/images/person-4.svg",
+              "alt": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6459e97",
+      "type": "logos",
+      "settings": {
+        "title": "As featured in",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "934677a",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-1.svg",
+              "alt": "Northfold"
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "24a112f",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-2.svg",
+              "alt": "Calder & Co"
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "740f6fc",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-3.svg",
+              "alt": "Halden"
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "f5815c8",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-4.svg",
+              "alt": "Oyster Bay"
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "7338aa1",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-5.svg",
+              "alt": "Pellworth"
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "948afc4",
+          "type": "logo",
+          "settings": {
+            "image": {
+              "src": "/images/logo-6.svg",
+              "alt": "Vantage"
+            },
+            "href": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "503bf30",
+      "type": "embed",
+      "settings": {
+        "title": "Inside the Harbour Street studio",
+        "eyebrow": "",
+        "intro": "<p>Three minutes on how a former net store became a place to draw.</p>",
+        "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+        "shape": "wide",
+        "caption": "Sample video: Big Buck Bunny, Blender Foundation (CC BY 3.0). Paste your own link.",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "7f30bd1",
+      "type": "embed",
+      "settings": {
+        "title": "Book a site visit",
+        "eyebrow": "",
+        "intro": "<p>Thirty minutes on site, free, with the architect who would draw your building.</p>",
+        "url": "https://calendly.com/acmesales",
+        "shape": "tall",
+        "caption": "",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "9aefca7",
+      "type": "gallery",
+      "settings": {
+        "title": "Recent work",
+        "eyebrow": "",
+        "intro": "",
+        "layout": "grid",
+        "columns": "4",
+        "lightbox": true,
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "37b76df",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/project-1.svg",
+              "alt": "Project 1"
+            },
+            "caption": ""
+          }
+        },
+        {
+          "id": "5051376",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/project-2.svg",
+              "alt": "Project 2"
+            },
+            "caption": ""
+          }
+        },
+        {
+          "id": "92515e8",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/project-3.svg",
+              "alt": "Project 3"
+            },
+            "caption": ""
+          }
+        },
+        {
+          "id": "d22aef1",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/project-4.svg",
+              "alt": "Project 4"
+            },
+            "caption": ""
+          }
+        },
+        {
+          "id": "9f564ac",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/project-5.svg",
+              "alt": "Project 5"
+            },
+            "caption": ""
+          }
+        },
+        {
+          "id": "797930a",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/project-6.svg",
+              "alt": "Project 6"
+            },
+            "caption": ""
+          }
+        },
+        {
+          "id": "1b36a37",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/project-7.svg",
+              "alt": "Project 7"
+            },
+            "caption": ""
+          }
+        },
+        {
+          "id": "0e79a09",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/project-8.svg",
+              "alt": "Project 8"
+            },
+            "caption": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "770f28f",
+      "type": "gallery",
+      "settings": {
+        "title": "Cliff House",
+        "eyebrow": "Photographs",
+        "intro": "",
+        "layout": "masonry",
+        "columns": "3",
+        "lightbox": true,
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "712e19b",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/tall-1.svg",
+              "alt": "The entrance"
+            },
+            "caption": "The entrance, from the lane"
+          }
+        },
+        {
+          "id": "c9ab2e2",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/project-2.svg",
+              "alt": "Living room"
+            },
+            "caption": "Living room at dawn"
+          }
+        },
+        {
+          "id": "b0ae604",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/tall-2.svg",
+              "alt": "Stair"
+            },
+            "caption": "The stair"
+          }
+        },
+        {
+          "id": "c9d6edf",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/project-3.svg",
+              "alt": "Kitchen"
+            },
+            "caption": ""
+          }
+        },
+        {
+          "id": "a1f8810",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/tall-3.svg",
+              "alt": "Bedroom window"
+            },
+            "caption": "Bedroom window"
+          }
+        },
+        {
+          "id": "72962f5",
+          "type": "photo",
+          "settings": {
+            "image": {
+              "src": "/images/project-6.svg",
+              "alt": "Garden"
+            },
+            "caption": "From the garden"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5dac361",
+      "type": "slideshow",
+      "settings": {
+        "title": "Harbour Street, from start to finish",
+        "eyebrow": "",
+        "intro": "",
+        "shape": "wide",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "d3d7a08",
+          "type": "slide",
+          "settings": {
+            "image": {
+              "src": "/images/project-1.svg",
+              "alt": "The net store before work began"
+            },
+            "caption": "March: the net store as we found it."
+          }
+        },
+        {
+          "id": "0440997",
+          "type": "slide",
+          "settings": {
+            "image": {
+              "src": "/images/project-4.svg",
+              "alt": "The frame going up"
+            },
+            "caption": "June: the new frame inside the old walls."
+          }
+        },
+        {
+          "id": "243b082",
+          "type": "slide",
+          "settings": {
+            "image": {
+              "src": "/images/project-7.svg",
+              "alt": "The finished studio"
+            },
+            "caption": "November: the studio, finished."
+          }
+        }
+      ]
+    },
+    {
+      "id": "f0d15ea",
+      "type": "cards",
+      "settings": {
+        "title": "Where to start",
+        "eyebrow": "",
+        "intro": "",
+        "columns": "3",
+        "style": "image",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "9f9220c",
+          "type": "card",
+          "settings": {
+            "title": "New homes",
+            "text": "<p>From a first sketch to the keys.</p>",
+            "image": {
+              "src": "/images/project-2.svg",
+              "alt": ""
+            },
+            "href": "/services/"
+          }
+        },
+        {
+          "id": "2837edb",
+          "type": "card",
+          "settings": {
+            "title": "Extensions",
+            "text": "<p>More room and more light.</p>",
+            "image": {
+              "src": "/images/project-5.svg",
+              "alt": ""
+            },
+            "href": "/services/"
+          }
+        },
+        {
+          "id": "549c118",
+          "type": "card",
+          "settings": {
+            "title": "Shops and studios",
+            "text": "<p>Spaces that make people come in.</p>",
+            "image": {
+              "src": "/images/project-8.svg",
+              "alt": ""
+            },
+            "href": "/services/"
+          }
+        }
+      ]
+    },
+    {
+      "id": "6ef93c8",
+      "type": "cards",
+      "settings": {
+        "title": "What we can help with",
+        "eyebrow": "Services",
+        "intro": "",
+        "columns": "4",
+        "style": "bordered",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "6310ba3",
+          "type": "card",
+          "settings": {
+            "title": "Feasibility",
+            "text": "<p>Is the site worth it? A short report and a sketch.</p>",
+            "image": {
+              "src": "",
+              "alt": ""
+            },
+            "href": "/services/"
+          }
+        },
+        {
+          "id": "3c235a9",
+          "type": "card",
+          "settings": {
+            "title": "Planning",
+            "text": "<p>Drawings and the application, start to decision.</p>",
+            "image": {
+              "src": "",
+              "alt": ""
+            },
+            "href": "/services/"
+          }
+        },
+        {
+          "id": "9db1156",
+          "type": "card",
+          "settings": {
+            "title": "Building control",
+            "text": "<p>The technical drawings your builder needs.</p>",
+            "image": {
+              "src": "",
+              "alt": ""
+            },
+            "href": "/services/"
+          }
+        },
+        {
+          "id": "ca4def1",
+          "type": "card",
+          "settings": {
+            "title": "On site",
+            "text": "<p>Weekly visits until the last coat of paint.</p>",
+            "image": {
+              "src": "",
+              "alt": ""
+            },
+            "href": "/services/"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e2bc1ae",
+      "type": "cards",
+      "settings": {
+        "title": "Selected projects",
+        "eyebrow": "",
+        "intro": "",
+        "columns": "3",
+        "style": "overlay",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "3d222cc",
+          "type": "card",
+          "settings": {
+            "title": "Cliff House",
+            "text": "<p>One line about it.</p>",
+            "image": {
+              "src": "/images/tall-1.svg",
+              "alt": ""
+            },
+            "href": "/work/"
+          }
+        },
+        {
+          "id": "25669e6",
+          "type": "card",
+          "settings": {
+            "title": "Okafor Ceramics",
+            "text": "<p>One line about it.</p>",
+            "image": {
+              "src": "/images/tall-2.svg",
+              "alt": ""
+            },
+            "href": "/work/"
+          }
+        },
+        {
+          "id": "139081b",
+          "type": "card",
+          "settings": {
+            "title": "The Long Barn",
+            "text": "<p>One line about it.</p>",
+            "image": {
+              "src": "/images/tall-4.svg",
+              "alt": ""
+            },
+            "href": "/work/"
+          }
+        }
+      ]
+    },
+    {
+      "id": "821c110",
+      "type": "compare",
+      "settings": {
+        "title": "Which service is right for you?",
+        "eyebrow": "",
+        "intro": "",
+        "col1": "Planning only",
+        "col2": "Full service",
+        "col3": "",
+        "highlight": "2",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "0753d29",
+          "type": "compare-row",
+          "settings": {
+            "label": "Site visit and brief",
+            "c1": "yes",
+            "c2": "yes",
+            "c3": ""
+          }
+        },
+        {
+          "id": "163e141",
+          "type": "compare-row",
+          "settings": {
+            "label": "Planning drawings and application",
+            "c1": "yes",
+            "c2": "yes",
+            "c3": ""
+          }
+        },
+        {
+          "id": "e317f19",
+          "type": "compare-row",
+          "settings": {
+            "label": "Technical drawings",
+            "c1": "no",
+            "c2": "yes",
+            "c3": ""
+          }
+        },
+        {
+          "id": "978a01d",
+          "type": "compare-row",
+          "settings": {
+            "label": "Builder tender",
+            "c1": "no",
+            "c2": "yes",
+            "c3": ""
+          }
+        },
+        {
+          "id": "08217ad",
+          "type": "compare-row",
+          "settings": {
+            "label": "Visits during the build",
+            "c1": "no",
+            "c2": "Weekly",
+            "c3": ""
+          }
+        },
+        {
+          "id": "0c63732",
+          "type": "compare-row",
+          "settings": {
+            "label": "Typical fee",
+            "c1": "From $4,000",
+            "c2": "8–12% of build",
+            "c3": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "9a68eed",
+      "type": "tabs",
+      "settings": {
+        "title": "Our three kinds of project",
+        "eyebrow": "",
+        "intro": "",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "6ccd232",
+          "type": "tab",
+          "settings": {
+            "title": "New homes"
+          },
+          "blocks": [
+            {
+              "id": "4385207",
+              "type": "heading",
+              "settings": {
+                "text": "A house that fits its site",
+                "level": "h3"
+              }
+            },
+            {
+              "id": "3d11bd1",
+              "type": "paragraph",
+              "settings": {
+                "text": "<p>We start with the land: the light, the wind, the view you will want from the kitchen sink. Most of our houses are timber-framed and built by local firms.</p>",
+                "size": "normal"
+              }
+            },
+            {
+              "id": "3877e47",
+              "type": "button",
+              "settings": {
+                "label": "See our houses",
+                "href": "/work/",
+                "style": "text"
+              }
+            }
+          ]
+        },
+        {
+          "id": "40ff8b7",
+          "type": "tab",
+          "settings": {
+            "title": "Extensions"
+          },
+          "blocks": [
+            {
+              "id": "4a74902",
+              "type": "heading",
+              "settings": {
+                "text": "More room, same house",
+                "level": "h3"
+              }
+            },
+            {
+              "id": "cdb6fa2",
+              "type": "paragraph",
+              "settings": {
+                "text": "<p>A good extension makes the old house work better, not just bigger. We often find the space is already there.</p>",
+                "size": "normal"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a89eedd",
+          "type": "tab",
+          "settings": {
+            "title": "Commercial"
+          },
+          "blocks": [
+            {
+              "id": "0a292ad",
+              "type": "heading",
+              "settings": {
+                "text": "Small shops and studios",
+                "level": "h3"
+              }
+            },
+            {
+              "id": "a52bea2",
+              "type": "paragraph",
+              "settings": {
+                "text": "<p>Fit-outs and conversions for makers, cafés and small offices, usually on a tight programme.</p>",
+                "size": "normal"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a1fbdf8",
+      "type": "timeline",
+      "settings": {
+        "title": "Twelve years on Harbour Street",
+        "eyebrow": "About",
+        "intro": "",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "c348f42",
+          "type": "moment",
+          "settings": {
+            "date": "2014",
+            "title": "Two desks above the chandlery",
+            "text": "<p>Ana and Joe leave a big London practice and come home to Portwell.</p>"
+          }
+        },
+        {
+          "id": "f6a6236",
+          "type": "moment",
+          "settings": {
+            "date": "2017",
+            "title": "Our first house",
+            "text": "<p>Kettle Cove, a timber house on a cliff, wins a regional award.</p>"
+          }
+        },
+        {
+          "id": "47692be",
+          "type": "moment",
+          "settings": {
+            "date": "2021",
+            "title": "The net store",
+            "text": "<p>We buy and convert the old net store. It becomes the studio.</p>"
+          }
+        },
+        {
+          "id": "a82ce02",
+          "type": "moment",
+          "settings": {
+            "date": "2026",
+            "title": "Sixty-four buildings",
+            "text": "<p>Seven people, one long table, still answering our own phone.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "id": "42ba5ba",
+      "type": "pricing",
+      "settings": {
+        "title": "Join the drawing club",
+        "eyebrow": "Membership",
+        "intro": "<p>Evening classes in the studio for anyone who wants to learn to draw buildings.</p>",
+        "yearly": true,
+        "monthlyLabel": "Monthly",
+        "yearlyLabel": "Yearly (2 months free)",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "e3548cb",
+          "type": "plan",
+          "settings": {
+            "name": "Drop in",
+            "price": "$18",
+            "yearlyPrice": "",
+            "period": "/class",
+            "yearlyPeriod": "",
+            "text": "<p>Come when you can.</p>",
+            "features": "<ul><li>One evening class</li><li>Paper and pencils</li></ul>",
+            "button": "Book a class",
+            "href": "/#contact",
+            "featured": false,
+            "badge": ""
+          }
+        },
+        {
+          "id": "084d516",
+          "type": "plan",
+          "settings": {
+            "name": "Regular",
+            "price": "$55",
+            "yearlyPrice": "$550",
+            "period": "/month",
+            "yearlyPeriod": "/year",
+            "text": "<p>Every Tuesday and Thursday.</p>",
+            "features": "<ul><li>Eight classes a month</li><li>All materials</li><li>Studio open hours</li></ul>",
+            "button": "Join",
+            "href": "/#contact",
+            "featured": true,
+            "badge": "Most popular"
+          }
+        },
+        {
+          "id": "dfd9bc6",
+          "type": "plan",
+          "settings": {
+            "name": "Studio",
+            "price": "$120",
+            "yearlyPrice": "$1,200",
+            "period": "/month",
+            "yearlyPeriod": "/year",
+            "text": "<p>For people working on a project.</p>",
+            "features": "<ul><li>Unlimited classes</li><li>A desk on Saturdays</li><li>A monthly review with an architect</li></ul>",
+            "button": "Join",
+            "href": "/#contact",
+            "featured": false,
+            "badge": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "a161311",
+      "type": "menu",
+      "settings": {
+        "title": "The supper menu",
+        "eyebrow": "Open studio, 4 December",
+        "intro": "",
+        "columns": "2",
+        "key": "V vegetarian · VG vegan · GF gluten free",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "1a95432",
+          "type": "menu-group",
+          "settings": {
+            "title": "To start",
+            "note": "Served from 5 p.m."
+          },
+          "blocks": [
+            {
+              "id": "4569b44",
+              "type": "menu-item",
+              "settings": {
+                "name": "Harbour oysters",
+                "text": "Shallot vinegar, lemon",
+                "price": "market",
+                "marks": [
+                  "GF"
+                ]
+              }
+            },
+            {
+              "id": "608c3d4",
+              "type": "menu-item",
+              "settings": {
+                "name": "Leek and potato soup",
+                "text": "Brown butter, sourdough",
+                "price": "9",
+                "marks": [
+                  "V"
+                ]
+              }
+            },
+            {
+              "id": "0da6d69",
+              "type": "menu-item",
+              "settings": {
+                "name": "Beetroot, walnut, labneh",
+                "text": "",
+                "price": "11",
+                "marks": [
+                  "V",
+                  "GF"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "b7719e1",
+          "type": "menu-group",
+          "settings": {
+            "title": "To follow",
+            "note": ""
+          },
+          "blocks": [
+            {
+              "id": "f5af265",
+              "type": "menu-item",
+              "settings": {
+                "name": "Hake, mussels, cider",
+                "text": "Samphire and new potatoes",
+                "price": "24",
+                "marks": [
+                  "GF"
+                ]
+              }
+            },
+            {
+              "id": "dfaf8b8",
+              "type": "menu-item",
+              "settings": {
+                "name": "Squash and chestnut pie",
+                "text": "Mustard greens",
+                "price": "19",
+                "marks": [
+                  "VG"
+                ]
+              }
+            },
+            {
+              "id": "a763d95",
+              "type": "menu-item",
+              "settings": {
+                "name": "Apple cake",
+                "text": "Clotted cream",
+                "price": "8",
+                "marks": [
+                  "V"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eec8611",
+      "type": "services",
+      "settings": {
+        "title": "Fixed-price services",
+        "eyebrow": "",
+        "intro": "<p>For smaller jobs we work to a fixed price, agreed before we start.</p>",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "c0c999d",
+          "type": "service",
+          "settings": {
+            "title": "Site appraisal",
+            "text": "<p>A visit, a sketch and a short report on what the site could take.</p>",
+            "price": "$650",
+            "duration": "2 weeks",
+            "href": "/services/"
+          }
+        },
+        {
+          "id": "bb1315c",
+          "type": "service",
+          "settings": {
+            "title": "Pre-application advice",
+            "text": "<p>We meet the planners with you before you commit to a design.</p>",
+            "price": "$1,200",
+            "duration": "4–6 weeks",
+            "href": "/services/"
+          }
+        },
+        {
+          "id": "12450aa",
+          "type": "service",
+          "settings": {
+            "title": "Measured survey",
+            "text": "<p>Accurate drawings of your building as it stands today.</p>",
+            "price": "From $900",
+            "duration": "1 week",
+            "href": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "82e3352",
+      "type": "products",
+      "settings": {
+        "title": "Stay in one of our buildings",
+        "eyebrow": "",
+        "intro": "<p>Three of our houses are let for short stays.</p>",
+        "columns": "3",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "b4f3c60",
+          "type": "product",
+          "settings": {
+            "title": "Cliff House",
+            "text": "<p>Sleeps 4. A timber house above the cove.</p>",
+            "image": {
+              "src": "/images/project-2.svg",
+              "alt": "Cliff House"
+            },
+            "price": "$320 / night",
+            "badge": "New",
+            "button": "Check dates",
+            "href": "/stay/"
+          }
+        },
+        {
+          "id": "375e00e",
+          "type": "product",
+          "settings": {
+            "title": "The Long Barn",
+            "text": "<p>Sleeps 8. A stone barn with a new oak roof.</p>",
+            "image": {
+              "src": "/images/project-6.svg",
+              "alt": "The Long Barn"
+            },
+            "price": "$480 / night",
+            "badge": "",
+            "button": "Check dates",
+            "href": "/stay/"
+          }
+        },
+        {
+          "id": "91289ba",
+          "type": "product",
+          "settings": {
+            "title": "Net Loft",
+            "text": "<p>Sleeps 2. Above the studio, on the harbour.</p>",
+            "image": {
+              "src": "/images/project-7.svg",
+              "alt": "Net Loft"
+            },
+            "price": "$180 / night",
+            "badge": "",
+            "button": "Check dates",
+            "href": "/stay/"
+          }
+        }
+      ]
+    },
+    {
+      "id": "58f7772",
+      "type": "donate",
+      "settings": {
+        "title": "Help us save the old lifeboat house",
+        "text": "<p>Meridian is restoring Portwell’s 1890 lifeboat house as a free community space. Every gift goes to the building.</p>",
+        "amounts": [
+          "10",
+          "25",
+          "50",
+          "100"
+        ],
+        "currency": "$",
+        "href": "https://example.org/donate",
+        "param": "amount",
+        "button": "Give now",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "4853cc2",
+      "type": "timetable",
+      "settings": {
+        "title": "Studio week",
+        "eyebrow": "",
+        "intro": "<p>Open sessions and classes. All in the Harbour Street studio.</p>",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "cfe9d1f",
+          "type": "session",
+          "settings": {
+            "day": "mon",
+            "time": "9:00",
+            "name": "Open studio",
+            "who": "Drop in",
+            "note": ""
+          }
+        },
+        {
+          "id": "bd9d6e6",
+          "type": "session",
+          "settings": {
+            "day": "tue",
+            "time": "18:30",
+            "name": "Drawing club",
+            "who": "With Ana",
+            "note": ""
+          }
+        },
+        {
+          "id": "bedadf6",
+          "type": "session",
+          "settings": {
+            "day": "wed",
+            "time": "12:30",
+            "name": "Lunchtime talk",
+            "who": "Guest",
+            "note": "First Wednesday only"
+          }
+        },
+        {
+          "id": "313184a",
+          "type": "session",
+          "settings": {
+            "day": "thu",
+            "time": "18:30",
+            "name": "Drawing club",
+            "who": "With Joe",
+            "note": ""
+          }
+        },
+        {
+          "id": "d8eedab",
+          "type": "session",
+          "settings": {
+            "day": "sat",
+            "time": "10:00",
+            "name": "Model making",
+            "who": "With Sam",
+            "note": "Ages 8 and up"
+          }
+        },
+        {
+          "id": "eb65227",
+          "type": "session",
+          "settings": {
+            "day": "sat",
+            "time": "14:00",
+            "name": "Studio desk",
+            "who": "Members",
+            "note": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "4649c94",
+      "type": "case-study",
+      "settings": {
+        "title": "Okafor Ceramics",
+        "eyebrow": "Case study",
+        "text": "<p>Ruth needed a shop, a workshop and a kiln room in a 40 square metre fisherman’s store. We dropped the floor, opened the roof and put the wheel in the window, so the street can watch.</p>",
+        "image": {
+          "src": "/images/tall-2.svg",
+          "alt": "The Okafor Ceramics shop"
+        },
+        "facts": [
+          {
+            "label": "Where",
+            "value": "Quay Street, Portwell"
+          },
+          {
+            "label": "Size",
+            "value": "40 m²"
+          },
+          {
+            "label": "Built",
+            "value": "2024"
+          },
+          {
+            "label": "Result",
+            "value": "Sales up 60% in year one"
+          }
+        ],
+        "quote": "<p>People stop to watch, then they come in.</p>",
+        "cite": "Ruth Okafor",
+        "href": "/work/",
+        "side": "left",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "9fb2f6a",
+      "type": "team",
+      "settings": {
+        "title": "The studio",
+        "eyebrow": "",
+        "intro": "<p>Seven people, one long table.</p>",
+        "columns": "4",
+        "shape": "portrait",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "61e02a3",
+          "type": "person",
+          "settings": {
+            "name": "Ana Ferreira",
+            "role": "Architect, founder",
+            "text": "",
+            "image": {
+              "src": "/images/person-1.svg",
+              "alt": ""
+            },
+            "href": "/team/ana/"
+          }
+        },
+        {
+          "id": "670ba05",
+          "type": "person",
+          "settings": {
+            "name": "Joe Pascoe",
+            "role": "Architect, founder",
+            "text": "",
+            "image": {
+              "src": "/images/person-2.svg",
+              "alt": ""
+            },
+            "href": "/team/joe/"
+          }
+        },
+        {
+          "id": "4c8ace8",
+          "type": "person",
+          "settings": {
+            "name": "Sam Riley",
+            "role": "Architectural designer",
+            "text": "",
+            "image": {
+              "src": "/images/person-3.svg",
+              "alt": ""
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "3f4df25",
+          "type": "person",
+          "settings": {
+            "name": "Imogen Hart",
+            "role": "Studio manager",
+            "text": "",
+            "image": {
+              "src": "/images/person-4.svg",
+              "alt": ""
+            },
+            "href": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "6b339ff",
+      "type": "team",
+      "settings": {
+        "title": "Who you will work with",
+        "eyebrow": "",
+        "intro": "",
+        "columns": "3",
+        "shape": "circle",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "e96a3ee",
+          "type": "person",
+          "settings": {
+            "name": "Ana Ferreira",
+            "role": "Houses",
+            "text": "<p>Twenty years designing homes on difficult sites.</p>",
+            "image": {
+              "src": "/images/person-1.svg",
+              "alt": ""
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "f3d6178",
+          "type": "person",
+          "settings": {
+            "name": "Joe Pascoe",
+            "role": "Shops and studios",
+            "text": "<p>Fit-outs, conversions and anything with a kiln.</p>",
+            "image": {
+              "src": "/images/person-2.svg",
+              "alt": ""
+            },
+            "href": ""
+          }
+        },
+        {
+          "id": "6866e33",
+          "type": "person",
+          "settings": {
+            "name": "Sam Riley",
+            "role": "Models and drawings",
+            "text": "<p>Makes the models you will fall in love with.</p>",
+            "image": {
+              "src": "/images/person-3.svg",
+              "alt": ""
+            },
+            "href": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "5bb8875",
+      "type": "profile",
+      "settings": {
+        "title": "Ana Ferreira",
+        "eyebrow": "Architect and founder",
+        "text": "<p>Ana grew up two streets from the studio and trained in Lisbon and London. Before Meridian she spent eight years on housing schemes for a large practice, and came home wanting to build smaller, better.</p><p>She leads every house project from the first visit to handover, and still answers the studio phone on Mondays.</p>",
+        "image": {
+          "src": "/images/person-1.svg",
+          "alt": "Ana Ferreira"
+        },
+        "details": [
+          {
+            "label": "Registered",
+            "value": "ARB, RIBA"
+          },
+          {
+            "label": "Focus",
+            "value": "Houses, low-energy design"
+          },
+          {
+            "label": "Email",
+            "value": "ana@meridian.example"
+          }
+        ],
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "6cda8cf",
+          "type": "button",
+          "settings": {
+            "label": "Book a call with Ana",
+            "href": "/#contact",
+            "style": "solid"
+          }
+        }
+      ]
+    },
+    {
+      "id": "789ef72",
+      "type": "form",
+      "settings": {
+        "title": "Tell us about your project",
+        "eyebrow": "",
+        "intro": "<p>A few lines is plenty. We reply within two working days.</p>",
+        "formName": "Contact form",
+        "button": "Send",
+        "success": "<p>Thank you. We will be in touch within two working days.</p>",
+        "notice": "<p>We only use your details to reply to you.</p>",
+        "next": "/thanks/",
+        "layout": "side",
+        "background": "default",
+        "padding": "normal",
+        "anchor": "contact"
+      },
+      "blocks": [
+        {
+          "id": "6480a93",
+          "type": "form-field",
+          "settings": {
+            "label": "Your name",
+            "kind": "text",
+            "required": true,
+            "options": [],
+            "placeholder": "",
+            "help": "",
+            "width": "half"
+          }
+        },
+        {
+          "id": "2f23e8a",
+          "type": "form-field",
+          "settings": {
+            "label": "Email",
+            "kind": "email",
+            "required": true,
+            "options": [],
+            "placeholder": "",
+            "help": "",
+            "width": "half"
+          }
+        },
+        {
+          "id": "59b6092",
+          "type": "form-field",
+          "settings": {
+            "label": "Phone",
+            "kind": "phone",
+            "required": false,
+            "options": [],
+            "placeholder": "",
+            "help": "",
+            "width": "half"
+          }
+        },
+        {
+          "id": "0ecd9ab",
+          "type": "form-field",
+          "settings": {
+            "label": "Kind of project",
+            "kind": "select",
+            "required": false,
+            "options": [
+              "New house",
+              "Extension",
+              "Shop or studio",
+              "Something else"
+            ],
+            "placeholder": "",
+            "help": "",
+            "width": "half"
+          }
+        },
+        {
+          "id": "449180a",
+          "type": "form-field",
+          "settings": {
+            "label": "Tell us about it",
+            "kind": "textarea",
+            "required": true,
+            "options": [],
+            "placeholder": "Where it is, what you would like, any dates that matter.",
+            "help": "",
+            "width": "full"
+          }
+        },
+        {
+          "id": "25da8c2",
+          "type": "form-field",
+          "settings": {
+            "label": "Send me the monthly newsletter",
+            "kind": "checkbox",
+            "required": false,
+            "options": [],
+            "placeholder": "",
+            "help": "",
+            "width": "full"
+          }
+        }
+      ]
+    },
+    {
+      "id": "6cf7968",
+      "type": "form",
+      "settings": {
+        "title": "Book a site visit",
+        "eyebrow": "",
+        "intro": "",
+        "formName": "Site visit request",
+        "button": "Request a visit",
+        "success": "<p>Thank you. We will call you to confirm a time.</p>",
+        "notice": "",
+        "next": "/thanks/",
+        "layout": "stacked",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "947b9f8",
+          "type": "form-field",
+          "settings": {
+            "label": "Your name",
+            "kind": "text",
+            "required": true,
+            "options": [],
+            "placeholder": "",
+            "help": "",
+            "width": "full"
+          }
+        },
+        {
+          "id": "815d64c",
+          "type": "form-field",
+          "settings": {
+            "label": "Phone",
+            "kind": "phone",
+            "required": true,
+            "options": [],
+            "placeholder": "",
+            "help": "",
+            "width": "half"
+          }
+        },
+        {
+          "id": "2634db7",
+          "type": "form-field",
+          "settings": {
+            "label": "Email",
+            "kind": "email",
+            "required": false,
+            "options": [],
+            "placeholder": "",
+            "help": "",
+            "width": "half"
+          }
+        },
+        {
+          "id": "3670ced",
+          "type": "form-field",
+          "settings": {
+            "label": "Preferred date",
+            "kind": "date",
+            "required": true,
+            "options": [],
+            "placeholder": "",
+            "help": "",
+            "width": "half"
+          }
+        },
+        {
+          "id": "0a77c9e",
+          "type": "form-field",
+          "settings": {
+            "label": "Time of day",
+            "kind": "choice",
+            "required": false,
+            "options": [
+              "Morning",
+              "Afternoon"
+            ],
+            "placeholder": "",
+            "help": "",
+            "width": "half"
+          }
+        },
+        {
+          "id": "3fb2291",
+          "type": "form-field",
+          "settings": {
+            "label": "Site address",
+            "kind": "text",
+            "required": true,
+            "options": [],
+            "placeholder": "",
+            "help": "",
+            "width": "full"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b228330",
+      "type": "newsletter",
+      "settings": {
+        "title": "Notes from the studio",
+        "text": "<p>New projects and the occasional essay, once a month.</p>",
+        "button": "Subscribe",
+        "placeholder": "you@example.com",
+        "name": false,
+        "success": "<p>Thanks! Check your inbox to confirm.</p>",
+        "notice": "<p>Unsubscribe any time.</p>",
+        "layout": "split",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "fbf0259",
+      "type": "map",
+      "settings": {
+        "title": "Visit the studio",
+        "address": "Meridian\n2 Harbour Street\nPortwell",
+        "hours": [
+          {
+            "days": "Monday to Thursday",
+            "time": "9:00–17:30"
+          },
+          {
+            "days": "Friday",
+            "time": "9:00–16:00"
+          },
+          {
+            "days": "Weekends",
+            "time": "By appointment"
+          }
+        ],
+        "phone": "(555) 018-4420",
+        "email": "studio@meridian.example",
+        "text": "<p>Parking on the quay. The studio is up one flight of stairs; tell us if that is a problem and we will meet you at the café below.</p>",
+        "map": "embed",
+        "query": "Harbour Street, St Ives, Cornwall",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "1a55625",
+      "type": "articles",
+      "settings": {
+        "title": "From the journal",
+        "eyebrow": "Journal",
+        "intro": "",
+        "count": "3",
+        "layout": "grid",
+        "tag": "",
+        "more": "All articles",
+        "background": "default",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "3fdd4b4",
+      "type": "articles",
+      "settings": {
+        "title": "Notes and news",
+        "eyebrow": "",
+        "intro": "",
+        "count": "4",
+        "layout": "list",
+        "tag": "",
+        "more": "All articles",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "130efc2",
+      "type": "events",
+      "settings": {
+        "title": "What’s on at the studio",
+        "eyebrow": "",
+        "intro": "",
+        "count": "3",
+        "layout": "list",
+        "more": "All events",
+        "empty": "Nothing planned right now.",
+        "background": "default",
+        "padding": "normal",
+        "anchor": "events"
+      }
+    },
+    {
+      "id": "dfe4221",
+      "type": "events",
+      "settings": {
+        "title": "Coming up",
+        "eyebrow": "",
+        "intro": "",
+        "count": "3",
+        "layout": "cards",
+        "more": "",
+        "empty": "Nothing planned right now.",
+        "background": "muted",
+        "padding": "normal",
+        "anchor": ""
+      }
+    },
+    {
+      "id": "aca02ea",
+      "type": "cta",
+      "settings": {
+        "title": "Have a building in mind?",
+        "text": "<p>Tell us about it. We reply within two working days.</p>",
+        "layout": "center",
+        "background": "accent",
+        "padding": "normal",
+        "anchor": "contact"
+      },
+      "blocks": [
+        {
+          "id": "b988862",
+          "type": "button",
+          "settings": {
+            "label": "Book a site visit",
+            "href": "mailto:studio@meridian.example",
+            "style": "solid"
+          }
+        },
+        {
+          "id": "3c14f75",
+          "type": "button",
+          "settings": {
+            "label": "(555) 018-4420",
+            "href": "tel:+15550184420",
+            "style": "outline"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2a5e947",
+      "type": "cta",
+      "settings": {
+        "title": "Our journal, once a month",
+        "text": "<p>New projects, the odd essay, no noise.</p>",
+        "layout": "split",
+        "background": "inverse",
+        "padding": "normal",
+        "anchor": ""
+      },
+      "blocks": [
+        {
+          "id": "9c48a65",
+          "type": "button",
+          "settings": {
+            "label": "Read the journal",
+            "href": "/journal/",
+            "style": "solid"
+          }
+        }
+      ]
+    }
+  ]
+}

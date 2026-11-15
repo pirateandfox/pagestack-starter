@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check:contrast": "node scripts/check-contrast.ts"
+    "check:contrast": "node scripts/check-contrast.ts",
+    "start-fresh": "node scripts/start-fresh.ts"
   },
   "dependencies": {
     "@pirateandfox/pagestack": "0.1.0-beta.15",
