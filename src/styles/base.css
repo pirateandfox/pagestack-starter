@@ -64,7 +64,7 @@ h1 { font-size: var(--step-5); }
 h2 { font-size: var(--step-4); }
 h3 { font-size: var(--step-2); letter-spacing: calc(var(--tracking-display) / 2); line-height: 1.2; }
 h4 { font-size: var(--step-1); font-weight: 600; line-height: 1.3; }
-:is(h1, h2, h3) em { font-style: italic; color: var(--color-accent); }
+:is(h1, h2, h3) em { font-style: italic; color: var(--color-accent); padding-inline-end: 0.06em; /* room for the slant, so a synthetic italic doesn't touch the next word */ }
 :is(h1, h2, h3) strong { font-weight: 800; }
 .eyebrow {
   font: 600 var(--step--1)/1.2 var(--font-body);
@@ -97,7 +97,8 @@ h4 { font-size: var(--step-1); font-weight: 600; line-height: 1.3; }
 
 /* Sections: background, spacing and width are named choices, so every theme can style them. */
 .sec { padding-block: var(--space-section); background: var(--sec-bg, var(--color-bg)); color: var(--sec-ink, var(--color-ink)); }
-.sec + .sec.bg--default, .sec.bg--default + .sec.bg--default { padding-top: 0; }
+/* Two sections on the same plain background share one gap; a change of background keeps both. */
+.sec.bg--default + .sec.bg--default, .sec.bg--muted + .sec.bg--muted { padding-top: 0; }
 .bg--muted { --sec-bg: var(--color-surface); }
 .bg--accent { --sec-bg: var(--color-accent); --sec-ink: var(--color-accent-ink); }
 .bg--inverse { --sec-bg: var(--color-inverse-bg); --sec-ink: var(--color-inverse-ink); }

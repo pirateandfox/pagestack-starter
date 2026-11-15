@@ -24,16 +24,22 @@ There are three jobs, each with its own recipe below:
 - **Never use lorem ipsum.** If the business hasn't given you the words, write plausible ones in
   their voice and list them as "needs checking" in your report.
 - **Never invent facts a customer would rely on**, such as prices, opening hours, registration
-  numbers, awards or reviews. Use clear placeholders (`$00`, `(555) 000-0000`) and list them.
+  numbers, awards, reviews or quotes. Use clear placeholders: `$00`, `(555) 000-0000`, `0:00`,
+  `[Customer name]`, `[Publication]`. List every one in your report. If the brief explicitly says
+  you may invent something (sample prices, say), do it, and list those too.
 
 ## Commands
 
 | | |
 |---|---|
-| `npm run dev` | The site at http://localhost:4321, with `/blocks`: every block, one after another, with a theme switcher. |
+| `npm run dev` | The site at http://localhost:4321 (pick another port with `npm run dev -- --port 4400`), with `/blocks`: every block, one after another, with a theme switcher. |
 | `npm run dev:editor` | The same, with the editor at `/edit` (storage: the working tree). |
 | `npm run check:contrast` | Checks every theme, and the Theme settings, for hard-to-read colour pairs. Add `--strict` to fail on one. |
 | `npm run build` | The public site in `dist/`. `/blocks` and the dev form endpoint aren't in it. |
+
+Forms ignore a submission sent less than three seconds after the page loaded, which is a spam
+check. When you test a form by script, wait a few seconds first, and only ever post to your own
+dev server.
 
 After adding `src/content.config.ts` or changing a date or schema in `src/lib/schemas.ts`, delete
 `.astro/data-store.json` and restart the dev server.
@@ -45,7 +51,7 @@ After adding `src/content.config.ts` or changing a date or schema in `src/lib/sc
 | `public/themes/<name>.css` | A theme: CSS variables only. |
 | `src/data/themes.ts` | The list of themes, and the font pairings Theme settings can swap in. |
 | `src/data/theme.json` | Theme settings: the chosen theme, plus accent, fonts, corners, buttons and spacing. Edited at `/edit/global/theme`. |
-| `src/data/site.json` | Name, tagline, announcement bar, menu, header button, address, phone, email, footer links. Edited at `/edit/global/site`. |
+| `src/data/site.json` | Name, tagline, announcement bar, menu, header button, address, phone, email, footer links, and the titles and intros of the Journal and Events pages. Edited at `/edit/global/site`. A blank address, phone or email leaves it out of the footer. |
 | `src/content/pages/*.json` | One page each. `index.json` is `/`, and `about.json` is `/about/`. |
 | `src/content/articles/*.md` | Journal articles, listed at `/journal/`. |
 | `src/content/events/*.md` | Events, listed at `/events/`. Each has an "Add to calendar" file. |
@@ -133,6 +139,9 @@ say what you chose.
    | Results | `case-study` |
    | Staff | `team` (and a `profile` per person if each needs a page) |
    | How it works | `features` with style `numbered` (the "Steps" preset) |
+   | Product screenshot | `hero` with layout `stacked` |
+   | Press quotes | `testimonials` with no photos |
+   | Opening hours without a map | `map` with map set to `none` |
 
 2. **Write each page as `src/content/pages/<slug>.json`:**
    ```json
@@ -162,15 +171,25 @@ say what you chose.
 5. **Images.**
    - If the owner gave photos, put them in `public/images/` (resized to 2000px wide at most) and
      write alt text that says what the picture shows.
-   - Otherwise keep the placeholders and list every place that needs a real photo.
-6. **Articles and events.** Write them as Markdown with front matter that matches
+   - Otherwise use the placeholders, write the alt text for the photo that belongs there, and
+     list every place that needs a real one.
+   - Leave the starter's own images in `public/images/`: the presets and `/blocks` use them.
+6. **Embeds.** Use a real link from the brief, or leave `url` blank: a blank embed shows nothing on
+   the site and a placeholder in the editor. Never paste a made-up link; it shows someone else's
+   page or an error.
+7. **Articles and events.** Write them as Markdown with front matter that matches
    `src/lib/schemas.ts` (see the samples). Dates are local: `2027-03-14`, or
    `2027-03-14T19:30` for events.
-7. **Remove the starter's sample business.** Delete or replace:
-   - the Meridian articles and events;
-   - images nobody uses;
-   - `thanks.json` wording that mentions Meridian.
-8. **Check the build.** Run `npm run build`; it must finish with no errors. Then look at every
+8. **Remove the starter's sample business.** Replace every Meridian article and event, the
+   Journal and Events titles and intros in `site.json`, and the wording of `thanks.json`. Then
+   search for leftovers: `grep -ri "meridian\|studio\|harbour" src` (some hits in presets are
+   fine; nothing on a real page should mention them).
+   - **If the site has no journal or no events**, take it out of `site.json`'s menu and leave one
+     article or event in the folder with `draft: true`. That keeps the build quiet, and the list
+     page stays unlinked and empty. To remove it completely, delete `src/pages/<journal|events>/`,
+     its entry in `src/content.config.ts` and in `collections` in `src/sections/index.ts`, and the
+     feed presets that point to it.
+9. **Check the build.** Run `npm run build`; it must finish with no errors. Then look at every
    page at desktop width and at 375px.
 
 **Report back with:**

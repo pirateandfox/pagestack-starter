@@ -39,5 +39,9 @@
       "href": "https://linkedin.com"
     }
   ],
+  "journalTitle": "Journal",
+  "journalIntro": "Projects, notes and news from the studio.",
+  "eventsTitle": "Events",
+  "eventsIntro": "Talks, open evenings and workshops. Everyone welcome.",
   "turnstileSiteKey": ""
 }

@@ -2,11 +2,12 @@
 import Base from '../../layouts/Base.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import { articles } from '../../lib/content';
+import site from '../../data/site.json';
 const list = await articles();
 const [first, ...rest] = list;
 ---
-<Base title="Journal" description="Projects, notes and news from the studio.">
-  <section class="sec page-header bg--muted"><div class="wrap"><div class="sec-head"><h1>Journal</h1><p class="lede">Projects, notes and news from the studio.</p></div></div></section>
+<Base title={site.journalTitle} description={site.journalIntro}>
+  <section class="sec page-header bg--muted"><div class="wrap"><div class="sec-head"><h1>{site.journalTitle}</h1>{site.journalIntro && <p class="lede">{site.journalIntro}</p>}</div></div></section>
   <section class="sec">
     <div class="wrap stack">
       {first && <ArticleCard a={first} layout="row" />}

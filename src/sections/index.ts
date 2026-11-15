@@ -49,6 +49,18 @@ export const presets: Preset[] = [
     }, [button('Read the story', '/journal/')]),
   },
   {
+    label: 'Hero, wide image below',
+    description: 'Title and buttons above a wide picture: a product screenshot, a room, a view.',
+    create: () => make('hero', {
+      eyebrow: 'New: the Quay Street shopfront',
+      title: 'A shop that works as hard as the people in it',
+      text: '<p>Forty square metres, a counter, a workshop and a window that sells. See how we fitted it all in.</p>',
+      image: img('hero', 'The finished shopfront on Quay Street, doors open'),
+      layout: 'stacked',
+      align: 'center',
+    }, [button('See the project', '/journal/'), button('Start a project', '/#contact', 'outline')]),
+  },
+  {
     label: 'Hero, text only',
     description: 'A big statement and nothing else. Good for services and about pages.',
     create: () => make('hero', {
@@ -479,6 +491,10 @@ export const globals: Record<string, GlobalDoc> = {
       phone: { type: 'text', label: 'Phone' },
       email: { type: 'text', label: 'Email' },
       footerLinks: { ...nav, label: 'Footer links' },
+      journalTitle: { type: 'text', label: 'Journal page title', help: 'The /journal/ page, e.g. Journal, News, Changelog.' },
+      journalIntro: { type: 'textarea', label: 'Journal page intro' },
+      eventsTitle: { type: 'text', label: 'Events page title', help: "The /events/ page, e.g. Events, What's on, Gigs." },
+      eventsIntro: { type: 'textarea', label: 'Events page intro' },
       turnstileSiteKey: { type: 'text', label: 'Turnstile site key', group: 'advanced', help: 'Optional spam check on forms (Cloudflare Turnstile). Set TURNSTILE_SECRET on the host as well.' },
     },
   },

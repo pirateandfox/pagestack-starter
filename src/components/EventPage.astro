@@ -24,7 +24,7 @@ const map = data.address ? `https://www.google.com/maps/search/?api=1&query=${en
   <article class="event sec">
     <div class="wrap event__grid">
       <header class="stack">
-        <p class="eyebrow"><a href="/events/">Events</a></p>
+        <p class="eyebrow"><a href="/events/">{site.eventsTitle}</a></p>
         <h1 {...itemField(editing, 'title')}>{data.title}</h1>
         {data.description && <p class="lede" {...itemField(editing, 'description')}>{data.description}</p>}
         {data.image && <div class="frame ratio-wide"><img src={data.image} alt={data.imageAlt ?? ''} {...itemField(editing, 'image', 'image')} /></div>}

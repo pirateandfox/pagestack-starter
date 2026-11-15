@@ -14,7 +14,7 @@ const ld = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline:
   {!editing && <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld).replace(/</g, '\\u003c')} />}
   <article class="post">
     <header class="post__head wrap wrap--narrow stack">
-      <p class="eyebrow"><a href="/journal/">Journal</a>{data.tags[0] && <> · {data.tags[0]}</>}</p>
+      <p class="eyebrow"><a href="/journal/">{site.journalTitle}</a>{data.tags[0] && <> · {data.tags[0]}</>}</p>
       <h1 {...itemField(editing, 'title')}>{data.title}</h1>
       {data.description && <p class="lede" {...itemField(editing, 'description')}>{data.description}</p>}
       <p class="post__meta muted">{data.author && <span>{data.author}</span>}<time datetime={localIso(data.date, true)}>{fmtDate(data.date)}</time><span>{readTime(body)}</span></p>
@@ -25,7 +25,7 @@ const ld = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline:
   {related.length > 0 && (
     <section class="sec bg--muted">
       <div class="wrap">
-        <div class="sec-head"><h2>More from the journal</h2></div>
+        <div class="sec-head"><h2>More from the {site.journalTitle.toLowerCase()}</h2></div>
         <ul class="articles__grid" style="--cols: 3">{related.map((a) => <li><ArticleCard a={a} /></li>)}</ul>
       </div>
     </section>

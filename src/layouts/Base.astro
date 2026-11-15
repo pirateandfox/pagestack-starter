@@ -63,9 +63,9 @@ const pageTitle = title === 'Home' ? `${site.name} — ${site.tagline}` : `${pla
       <div class="wrap">
         <div class="footer__grid">
           <div class="footer__about"><a class="brand" href="/">{site.name}</a><p>{site.tagline}</p></div>
-          <div><h2>Visit</h2><p>{site.address}</p></div>
-          <div><h2>Contact</h2><ul><li><a href={`tel:${site.phone.replace(/[^\d+]/g, '')}`}>{site.phone}</a></li><li><a href={`mailto:${site.email}`}>{site.email}</a></li></ul></div>
-          <div><h2>Elsewhere</h2><ul>{site.footerLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul></div>
+          {site.address && <div><h2>Visit</h2><p>{site.address}</p></div>}
+          {(site.phone || site.email) && <div><h2>Contact</h2><ul>{site.phone && <li><a href={`tel:${site.phone.replace(/[^\d+]/g, '')}`}>{site.phone}</a></li>}{site.email && <li><a href={`mailto:${site.email}`}>{site.email}</a></li>}</ul></div>}
+          {site.footerLinks.length > 0 && <div><h2>Elsewhere</h2><ul>{site.footerLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul></div>}
         </div>
         <div class="footer__base"><span>© {year} {site.name}</span><span>Built with PageStack</span></div>
       </div>

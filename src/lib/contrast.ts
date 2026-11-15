@@ -53,6 +53,7 @@ export const PAIRS: { fg: string; bg: string; min: number; what: string }[] = [
   { fg: 'color-muted', bg: 'color-surface', min: 4.5, what: 'Secondary text on muted sections' },
   { fg: 'color-accent-ink', bg: 'color-accent', min: 4.5, what: 'Text on the accent (buttons, accent sections, the announcement bar)' },
   { fg: 'color-accent', bg: 'color-bg', min: 3, what: 'The accent as links and highlights on the page' },
+  { fg: 'color-accent', bg: 'color-surface', min: 3, what: 'The accent as links and highlights on muted sections' },
   { fg: 'color-inverse-ink', bg: 'color-inverse-bg', min: 4.5, what: 'Text on dark (inverse) sections' },
 ];
 

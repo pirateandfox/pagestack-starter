@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import site from "./src/data/site.json" with { type: "json" };
 
 // The editor (PageStack) loads only when asked for: `EDITOR=dev astro dev` (npm run dev:editor).
 // Plain `astro dev` / `astro build` never import it, so the public site is fully static.
@@ -37,7 +38,7 @@ export default defineConfig({
           pagestack({
             renderer: "./src/components/SectionPage.astro",
             sections: "./src/sections/index.ts",
-            siteName: "Meridian",
+            siteName: site.name,
             // Local development: no login, saves write straight to the working tree.
             // For a deployed editor see the PageStack README (auth: "passkey", storage: "github").
             auth: "none",

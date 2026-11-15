@@ -20,7 +20,7 @@ The editor saves straight into `src/` while you develop. Commit what you want to
 
 ## What's in it
 
-- **47 ready-made sections from 31 blocks**, in groups: Openers, Text and media, Explain, Offer,
+- **48 ready-made sections from 31 blocks**, in groups: Openers, Text and media, Explain, Offer,
   Proof, People, Feeds, Act. See them all at **`/blocks`** (dev and editor only): one page, every
   block, a labelled bar above each, and a theme switcher. Work on that page when giving the site a
   new look.

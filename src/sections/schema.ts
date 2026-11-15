@@ -44,7 +44,7 @@ export const schemas: SchemaRegistry = {
       eyebrow: text('Eyebrow', ''),
       text: rich('Text', '<p>One or two sentences that say what you do and who it is for.</p>'),
       image: image(),
-      layout: select('Layout', 'split', [['split', 'Split: text and image side by side'], ['image', 'Full image behind the text'], ['minimal', 'Text only']]),
+      layout: select('Layout', 'split', [['split', 'Split: text and image side by side'], ['image', 'Full image behind the text'], ['stacked', 'Text above a wide image (a screenshot, a room)'], ['minimal', 'Text only']]),
       align: align('left'),
       ...section(),
     },
@@ -504,7 +504,7 @@ export const schemas: SchemaRegistry = {
   },
 
   /* ---------- Items drawn by their parent ---------- */
-  feature: item('Feature', { title: heading('Title', 'A clear point'), text: rich('Text', '<p>One or two sentences about it.</p>'), href: link('Link (optional)') }),
+  feature: item('Feature', { title: heading('Title', 'A clear point'), text: rich('Text', '<p>One or two sentences about it.</p>'), href: link('Link (optional)'), linkLabel: text('Link text', '', { help: 'What the link says, e.g. "See the menu". Blank says "More on" and the title.' }) }),
   stat: item('Number', { value: text('Number', '120'), label: text('Label', 'Projects finished') }),
   'faq-item': item('Question', { question: text('Question', 'A question people ask?'), answer: rich('Answer', '<p>A short, direct answer.</p>') }),
   testimonial: item('Testimonial', { quote: rich('Quote', '<p>What the client said, in their words.</p>'), name: text('Name', 'Name'), role: text('Role or company', ''), image: image('Photo') }),

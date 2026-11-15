@@ -2,10 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import EventRow from '../../components/EventRow.astro';
 import { events } from '../../lib/content';
+import site from '../../data/site.json';
 const list = await events();
 ---
-<Base title="Events" description="Talks, open evenings and workshops at the studio.">
-  <section class="sec page-header bg--muted"><div class="wrap"><div class="sec-head"><h1>Events</h1><p class="lede">Talks, open evenings and workshops. Everyone welcome.</p></div></div></section>
+<Base title={site.eventsTitle} description={site.eventsIntro}>
+  <section class="sec page-header bg--muted"><div class="wrap"><div class="sec-head"><h1>{site.eventsTitle}</h1>{site.eventsIntro && <p class="lede">{site.eventsIntro}</p>}</div></div></section>
   <section class="sec">
     <div class="wrap">
       {list.length ? <ul class="events__list">{list.map((e) => <li><EventRow e={e} /></li>)}</ul> : <p class="muted">Nothing planned right now. Check back soon.</p>}

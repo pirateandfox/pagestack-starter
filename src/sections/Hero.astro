@@ -22,5 +22,8 @@ const center = s.align === 'center' || layout === 'image';
     {layout === 'split' && img.src && (
       <figure class="hero__media frame ratio-tall"><img src={img.src} alt={img.alt ?? ''} {...fieldAttrs(edit, 'image', 'image')} /></figure>
     )}
+    {layout === 'stacked' && img.src && (
+      <figure class="hero__media hero__shot frame"><img src={img.src} alt={img.alt ?? ''} {...fieldAttrs(edit, 'image', 'image')} /></figure>
+    )}
   </div>
 </Sec>
