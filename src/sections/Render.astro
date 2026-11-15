@@ -1,11 +1,13 @@
 ---
 // Renders a list of nodes with the component for each type. `root` means these are the page's
-// sections (edit paths `sections.N`); otherwise paths extend the parent's.
+// sections (edit paths `sections.N`); otherwise paths extend the parent's. Settings a page file
+// leaves out get the schema's default, so a hand-written page only needs the fields it changes.
 import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
-import { child, rootEdit } from '@pirateandfox/pagestack/runtime';
+import { child, rootEdit, withDefaults } from '@pirateandfox/pagestack/runtime';
 import { components } from './components';
+import { schemas } from './schema';
 interface Props { nodes?: Node[]; edit?: EditCtx; root?: boolean; editing?: boolean }
 const { nodes = [], edit, root = false, editing = false } = Astro.props;
 const ctx = (i: number) => (root ? rootEdit(editing, i) : child(edit, i));
 ---
-{nodes.map((n, i) => { const Cmp = components[n.type]; return Cmp ? <Cmp node={n} edit={ctx(i)} /> : null; })}
+{nodes.map((n, i) => { const Cmp = components[n.type]; return Cmp ? <Cmp node={withDefaults(n, schemas[n.type])} edit={ctx(i)} /> : null; })}

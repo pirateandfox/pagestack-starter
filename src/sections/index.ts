@@ -498,9 +498,17 @@ export const globals: Record<string, GlobalDoc> = {
   },
 };
 
+/** A preset by its label, so templates don't break when the library is reordered. */
+const preset = (label: string) => {
+  const p = presets.find((x) => x.label === label);
+  if (!p) throw new Error(`No preset called "${label}"`);
+  return p.create();
+};
+
 export const templates: PageTemplate[] = [
-  { label: 'Blank', description: 'A page header and nothing else.', create: () => ({ title: 'New page', sections: [presets[3].create()] }) },
-  { label: 'Service page', description: 'Header, image and text, steps, FAQ and a call to action.', create: () => ({ title: 'New service', sections: [presets[3].create(), presets[6].create(), presets[10].create(), presets[12].create(), presets[16].create()] }) },
+  { label: 'Blank', description: 'A page header and nothing else.', create: () => ({ title: 'New page', sections: [preset('Page header')] }) },
+  { label: 'Service page', description: 'Header, image and text, steps, FAQ and a call to action.', create: () => ({ title: 'New service', sections: ['Page header', 'Image and text', 'Steps', 'FAQ', 'Call to action'].map(preset) }) },
+  { label: 'Contact page', description: 'Header, contact form, and map with opening hours.', create: () => ({ title: 'Contact', sections: ['Page header', 'Contact form', 'Map and hours'].map(preset) }) },
 ];
 
 /** Markdown folders, edited under Journal and Events. Fields match src/lib/schemas.ts. */
