@@ -8,6 +8,8 @@
 import type { CollectionDoc, Field, GlobalDoc, Node, PageTemplate, Preset } from '@pirateandfox/pagestack/runtime';
 import { newId } from '@pirateandfox/pagestack/runtime';
 import { fontPairings, themes } from '../data/themes';
+import site from '../data/site.json';
+import { sampleGlobals, sampleHome, sampleLabel } from '../lib/sample-content';
 import { schemas } from './schema';
 
 export { schemas };
@@ -526,6 +528,9 @@ export const templates: PageTemplate[] = [
   { label: 'Service page', description: 'Header, image and text, steps, FAQ and a call to action.', create: () => ({ title: 'New service', sections: ['Page header', 'Image and text', 'Steps', 'FAQ', 'Call to action'].map(preset) }) },
   { label: 'Contact page', description: 'Header, contact form, and map with opening hours.', create: () => ({ title: 'Contact', sections: ['Page header', 'Contact form', 'Map and hours'].map(preset) }) },
 ];
+
+/** The sample business: Hide / Delete sample content on the editor's Pages screen. See src/lib/sample-content.ts. */
+export const sampleContent = { label: sampleLabel, home: sampleHome(site.name), globals: sampleGlobals };
 
 /** Markdown folders, edited under Journal and Events. Fields match src/lib/schemas.ts. */
 export const collections: Record<string, CollectionDoc> = {

@@ -6,6 +6,7 @@ author: Ana Ferreira
 image: /images/tall-1.svg
 imageAlt: Cliff House from the coast path
 tags: [news, projects]
+sample: true
 ---
 
 Cliff House has won the small building category at this year's regional design awards.

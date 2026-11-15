@@ -8,6 +8,7 @@ address: 2 Harbour Street, Portwell
 price: Free
 image: /images/project-7.svg
 imageAlt: The studio at night
+sample: true
 ---
 
 Once a year we clear the long table and open the doors. Come and see what we are working on, look at the models, and ask anything.

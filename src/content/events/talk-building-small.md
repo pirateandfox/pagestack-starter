@@ -9,6 +9,7 @@ tickets: https://example.com/tickets
 price: $8, free for students
 image: /images/tall-3.svg
 imageAlt: A narrow house between two cottages
+sample: true
 ---
 
 An evening talk for anyone thinking about building, or just curious. There will be time for questions and a drink afterwards.

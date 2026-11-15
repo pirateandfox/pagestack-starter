@@ -78,22 +78,34 @@ Pick a look first, so every page you build after it already looks right.
 
 Replace `public/favicon.svg` with your mark.
 
-### 3. Move our sections to a hidden page for reference
+### 3. Hide or delete the sample content
+
+Open the editor's **Pages** screen. While Meridian is still on the site, a notice there has two
+buttons:
+
+- **Hide sample content** clears Meridian off your site without throwing it away. The sample home
+  page becomes a hidden draft (**Sample: Home**) and a one-line placeholder takes its place, the
+  sample articles and events become drafts, and the announcement bar is cleared. Drafts show in
+  the editor but are never published, so you can open them and copy what you need.
+- **Delete sample content** removes all of it, including the reference page below. Use it once
+  you're done copying, or straight away if you don't need it. The confirmation lists everything
+  that goes.
+
+Images stay either way. Anything sample you've already edited and saved counts as yours and is left
+alone: rewrite a sample article into your own and Delete won't touch it. Pages still marked
+show a **Sample** label in the page list.
+
+**Reference: every section** is a hidden draft from the start, with all 48 sections filled in.
+
+From the terminal (or for Claude), the same two things:
 
 ```sh
-npm run start-fresh
+npm run start-fresh               # hide
+npm run start-fresh -- --delete   # delete
 ```
 
-This clears Meridian off your site without throwing it away:
-
-- the sample home page becomes a hidden draft (**Reference: sample home page**);
-- the sample articles and events become drafts;
-- the announcement bar is cleared;
-- a one-line placeholder takes over the home page.
-
-There is also **Reference: every section**, a hidden page with all 48 sections filled in. Drafts
-show in the editor's page list but are never published, so you can open them, copy what you need
-and delete them when you're done.
+Sample content is whatever carries the mark: `"sample": true` in a page's JSON, `sample: true` in
+an article's or event's front matter. What replaces it is in `src/lib/sample-content.ts`.
 
 ### 4. Build your site
 
@@ -209,7 +221,8 @@ src/lib/form-server.ts   the send function's logic
 src/content/pages/reference.json   hidden draft: every section, for reference
 src/editor/              /blocks, editor previews, the dev-only form route
 scripts/check-contrast.ts  npm run check:contrast
-scripts/start-fresh.ts   npm run start-fresh
+scripts/start-fresh.ts   npm run start-fresh: hide (or --delete) the sample content
+src/lib/sample-content.ts  what replaces the sample content
 CLAUDE.md                how Claude should brand, build and extend the site
 ```
 

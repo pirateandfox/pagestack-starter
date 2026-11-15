@@ -183,7 +183,11 @@ say what you chose.
 8. **Remove the starter's sample business.** Start with `npm run start-fresh`: it makes the
    sample home page, articles and events into hidden drafts (kept for reference, never built) and
    clears the announcement. `src/content/pages/reference.json` is a hidden draft with every
-   section. Then replace every remaining Meridian mention: the
+   section. Sample content is whatever has `"sample": true` (page JSON) or `sample: true` (front
+   matter); a page or article you rewrite for the client must lose that mark, or the editor's
+   Delete sample content button will remove it. When the site is finished and the owner no longer
+   needs the samples, `npm run start-fresh -- --delete` removes them (ask first). Then replace
+   every remaining Meridian mention: the
    Journal and Events titles and intros in `site.json`, and the wording of `thanks.json`. Then
    search for leftovers: `grep -ri "meridian\|studio\|harbour" src` (some hits in presets are
    fine; nothing on a real page should mention them).

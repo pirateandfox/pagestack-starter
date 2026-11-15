@@ -6,6 +6,7 @@ author: Imogen Hart
 image: /images/project-2.svg
 imageAlt: A kitchen table with sketches on it
 tags: [advice]
+sample: true
 ---
 
 People often apologise for not having a plan. You don't need one; that is our job.

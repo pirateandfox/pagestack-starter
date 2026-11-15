@@ -6,6 +6,7 @@ author: Ana Ferreira
 image: /images/project-7.svg
 imageAlt: The Harbour Street studio from the quay
 tags: [projects, studio]
+sample: true
 ---
 
 When we bought 2 Harbour Street in 2021 it was a net store: one tall room, granite walls a metre thick, a slate roof held up by habit.

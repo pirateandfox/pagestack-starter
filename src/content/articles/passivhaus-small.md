@@ -6,6 +6,7 @@ author: Joe Pascoe
 image: /images/project-5.svg
 imageAlt: Drawings of a timber wall build-up
 tags: [design, energy]
+sample: true
 ---
 
 Passivhaus is a standard, but the ideas underneath it are simple: insulate well, stop draughts, avoid cold bridges, and bring in fresh air without throwing the heat away.
