@@ -1,17 +1,9 @@
 // Collection schemas, shared by content.config.ts (the build) and src/lib/content.ts (the editor's
 // live list pages, which parse what the editor has saved with the same rules).
 import { z } from 'astro/zod';
+import { localDate } from './dates';
 
-/**
- * Dates are the venue's local time, as written. A bare day (2026-10-02, which YAML and Date both
- * read as midnight UTC) becomes local midnight, so it never shows as the day before; a date with a
- * time and no zone (2026-12-04T17:00) is already local.
- */
-export function localDate(v: unknown): unknown {
-  if (v instanceof Date && !isNaN(+v) && v.getUTCHours() === 0 && v.getUTCMinutes() === 0 && v.getUTCSeconds() === 0) return new Date(v.getUTCFullYear(), v.getUTCMonth(), v.getUTCDate());
-  if (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v.trim())) return new Date(`${v.trim()}T00:00`);
-  return v;
-}
+/** The venue's local time, as written (see dates.ts). */
 const date = z.preprocess(localDate, z.coerce.date());
 
 export const articleSchema = z.object({

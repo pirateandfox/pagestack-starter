@@ -9,8 +9,8 @@ export async function getStaticPaths() {
 }
 
 const pad = (n: number) => String(n).padStart(2, '0');
-const day = (d: Date) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
-const stamp = (d: Date) => `${day(d)}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+const day = (d: Date) => `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}`;
+const stamp = (d: Date) => `${day(d)}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00`;
 const esc = (s = '') => s.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/[,;]/g, (c) => `\\${c}`);
 /** Lines longer than 75 octets are folded, as the format requires. */
 const fold = (line: string) => line.match(/.{1,73}/gu)!.join('\r\n ');
@@ -18,7 +18,7 @@ const fold = (line: string) => line.match(/.{1,73}/gu)!.join('\r\n ');
 export const GET: APIRoute = ({ props, site: origin }) => {
   const { e } = props as { e: Event };
   const d = e.data;
-  const nextDay = (x: Date) => new Date(x.getFullYear(), x.getMonth(), x.getDate() + 1);
+  const nextDay = (x: Date) => new Date(Date.UTC(x.getUTCFullYear(), x.getUTCMonth(), x.getUTCDate() + 1));
   const lines = [
     'BEGIN:VCALENDAR', 'VERSION:2.0', `PRODID:-//${esc(site.name)}//Events//EN`, 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
     'BEGIN:VEVENT',

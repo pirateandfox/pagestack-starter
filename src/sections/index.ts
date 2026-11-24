@@ -477,6 +477,11 @@ export const pageFields: Record<string, Field> = {
 
 const nav: Field = { type: 'list', label: 'Main menu', itemLabel: 'label', fields: { label: { type: 'text', label: 'Label', default: '' }, href: { type: 'link', label: 'Link', default: '' } } };
 
+const timeZones = [
+  { value: '', label: "The server's own (usually UTC)" },
+  ...Intl.supportedValuesOf('timeZone').map((value) => ({ value, label: value.replaceAll('_', ' ') })),
+];
+
 export const globals: Record<string, GlobalDoc> = {
   site: {
     label: 'Site details',
@@ -492,6 +497,7 @@ export const globals: Record<string, GlobalDoc> = {
       address: { type: 'text', label: 'Address' },
       phone: { type: 'text', label: 'Phone' },
       email: { type: 'text', label: 'Email' },
+      timeZone: { type: 'select', label: 'Time zone', options: timeZones, help: 'Where the business is. Decides when an event is over and when an article dated in the future appears.' },
       footerLinks: { ...nav, label: 'Footer links' },
       journalTitle: { type: 'text', label: 'Journal page title', help: 'The /journal/ page, e.g. Journal, News, Changelog.' },
       journalIntro: { type: 'textarea', label: 'Journal page intro' },

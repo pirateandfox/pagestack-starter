@@ -74,6 +74,7 @@ Pick a look first, so every page you build after it already looks right.
 - the business name, tagline, menu links and the header button;
 - the announcement bar (blank turns it off);
 - the address, phone, email and footer links (blank ones are left out);
+- the time zone, which decides when an event is over and when a scheduled article appears;
 - what the Journal and Events pages are called, e.g. "News" or "What's on".
 
 Replace `public/favicon.svg` with your mark.
@@ -188,7 +189,8 @@ edit).
 
 The site is static, so "upcoming events" and "published articles" are worked out when it is built.
 A nightly rebuild keeps them right: past events drop off, and an article dated in the future
-appears on its day.
+appears on its day. "Now" is the time in **Site settings → Site details → Time zone**, wherever the
+build runs. Event times are the venue's clock time, shown as written.
 
 1. Cloudflare → your Pages project → **Settings → Builds → Deploy hooks → Add** (the branch your
    live site builds from). Copy the URL.

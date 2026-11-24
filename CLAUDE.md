@@ -51,7 +51,7 @@ After adding `src/content.config.ts` or changing a date or schema in `src/lib/sc
 | `public/themes/<name>.css` | A theme: CSS variables only. |
 | `src/data/themes.ts` | The list of themes, and the font pairings Theme settings can swap in. |
 | `src/data/theme.json` | Theme settings: the chosen theme, plus accent, fonts, corners, buttons and spacing. Edited at `/edit/global/theme`. |
-| `src/data/site.json` | Name, tagline, announcement bar, menu, header button, address, phone, email, footer links, and the titles and intros of the Journal and Events pages. Edited at `/edit/global/site`. A blank address, phone or email leaves it out of the footer. |
+| `src/data/site.json` | Name, tagline, announcement bar, menu, header button, address, phone, email, time zone, footer links, and the titles and intros of the Journal and Events pages. Edited at `/edit/global/site`. A blank address, phone or email leaves it out of the footer. |
 | `src/content/pages/*.json` | One page each. `index.json` is `/`, and `about.json` is `/about/`. |
 | `src/content/articles/*.md` | Journal articles, listed at `/journal/`. |
 | `src/content/events/*.md` | Events, listed at `/events/`. Each has an "Add to calendar" file. |
@@ -93,8 +93,8 @@ say what you chose.
    `"theme"` in `src/data/theme.json`. Leave the other Theme settings blank: those are for the
    owner to adjust later.
 6. **Fill in the site details.** Set the name, tagline, menu, header button, address, phone,
-   email and footer links in `src/data/site.json`. Turn the announcement off (`""`) unless
-   there's something to announce.
+   email, time zone (`timeZone`, a name like `Europe/London`) and footer links in
+   `src/data/site.json`. Turn the announcement off (`""`) unless there's something to announce.
 7. **Change the favicon.** Replace `public/favicon.svg` with a simple mark in the brand colours.
 8. **Run `npm run check:contrast`.** Fix every line it reports; don't just turn the numbers off.
 9. **Check every block in the new theme.** Open `/blocks?theme=<brand>` at desktop width and at
@@ -178,8 +178,9 @@ say what you chose.
    the site and a placeholder in the editor. Never paste a made-up link; it shows someone else's
    page or an error.
 7. **Articles and events.** Write them as Markdown with front matter that matches
-   `src/lib/schemas.ts` (see the samples). Dates are local: `2027-03-14`, or
-   `2027-03-14T19:30` for events.
+   `src/lib/schemas.ts` (see the samples). Dates are the venue's clock time:
+   `2027-03-14`, or `2027-03-14T19:30` for events. Never add a zone (`Z`, `-05:00`). In code, read
+   them as `src/lib/dates.ts` says, and compare them with `siteNow()`, not `new Date()`.
 8. **Remove the starter's sample business.** Start with `npm run start-fresh`: it makes the
    sample home page, articles and events into hidden drafts (kept for reference, never built) and
    clears the announcement. `src/content/pages/reference.json` is a hidden draft with every

@@ -4,6 +4,7 @@
 import site from '../data/site.json';
 import settings from '../data/theme.json';
 import { fontPairings } from '../data/themes';
+import { siteNow } from '../lib/dates';
 import { plainText, safeColor } from '../lib/text';
 import { bestOn, parseColor } from '../lib/contrast';
 import '../styles/base.css';
@@ -11,7 +12,7 @@ import '../styles/blocks.css';
 interface Props { title: string; description?: string; announcement?: boolean; theme?: string }
 const { title, description, announcement = true, theme } = Astro.props;
 const here = Astro.url.pathname.replace(/\/?$/, '/');
-const year = new Date().getFullYear();
+const year = siteNow().getUTCFullYear();
 const themeName = theme || settings.theme || 'plain';
 const fonts = settings.fonts ? fontPairings[settings.fonts] : undefined;
 // Settings become variables over the theme's own. Only values that are plainly colours get through.

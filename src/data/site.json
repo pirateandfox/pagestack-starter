@@ -29,6 +29,7 @@
   "address": "212 Harbour Street, Portwell",
   "phone": "(555) 018-4420",
   "email": "studio@meridian.example",
+  "timeZone": "America/New_York",
   "footerLinks": [
     {
       "label": "Instagram",

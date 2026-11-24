@@ -2,6 +2,7 @@
 // feed blocks share.
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { liveEntries } from '@pirateandfox/pagestack/live';
+import { siteNow } from './dates';
 import { articleSchema, eventSchema } from './schemas';
 
 export type Article = CollectionEntry<'articles'>;
@@ -17,30 +18,32 @@ async function load<C extends 'articles' | 'events'>(name: C, schema: { parse(d:
 }
 
 /** Published articles, newest first. A future date is a scheduled post: it appears once that day is built. */
-export async function articles(now = new Date()) {
+export async function articles(now = siteNow()) {
   return (await load('articles', articleSchema)).filter((a) => !a.data.draft && a.data.date <= now).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }
 
 /** Events, soonest first. `upcoming` keeps those not yet over when the site was built (see README: nightly rebuild). */
-export async function events({ upcoming = true, now = new Date() } = {}) {
+export async function events({ upcoming = true, now = siteNow() } = {}) {
   const all = (await load('events', eventSchema)).filter((e) => !e.data.draft);
-  const ends = (e: Event) => (e.data.end ?? endOfDay(e.data.start)).getTime();
+  // With no end, or no times at all, an event lasts to the end of its (last) day.
+  const ends = (e: Event) => (e.data.end && !e.data.allDay ? e.data.end : endOfDay(e.data.end ?? e.data.start)).getTime();
   return all
     .filter((e) => !upcoming || ends(e) >= now.getTime())
     .sort((a, b) => a.data.start.getTime() - b.data.start.getTime());
 }
 
-const endOfDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59);
+const endOfDay = (d: Date) => new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 23, 59, 59));
+const sameDate = (a: Date, b: Date) => localIso(a, true) === localIso(b, true);
 
-export const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-export const fmtTime = (d: Date) => d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).replace(':00', '').replace(' AM', ' a.m.').replace(' PM', ' p.m.');
-export const dayMonth = (d: Date) => ({ day: d.getDate(), month: d.toLocaleDateString('en-US', { month: 'short' }), weekday: d.toLocaleDateString('en-US', { weekday: 'short' }) });
+export const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { timeZone: 'UTC', year: 'numeric', month: 'long', day: 'numeric' });
+export const fmtTime = (d: Date) => d.toLocaleTimeString('en-US', { timeZone: 'UTC', hour: 'numeric', minute: '2-digit' }).replace(':00', '').replace(' AM', ' a.m.').replace(' PM', ' p.m.');
+export const dayMonth = (d: Date) => ({ day: d.getUTCDate(), month: d.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short' }), weekday: d.toLocaleDateString('en-US', { timeZone: 'UTC', weekday: 'short' }) });
 
 /** "Thursday 4 December, 5–8 p.m." */
 export function whenText(e: Event['data']) {
-  const day = e.start.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: e.start.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined });
-  if (e.allDay) return e.end && e.end.toDateString() !== e.start.toDateString() ? `${day} to ${fmtDate(e.end)}` : day;
-  const sameDay = e.end && e.end.toDateString() === e.start.toDateString();
+  const day = e.start.toLocaleDateString('en-US', { timeZone: 'UTC', weekday: 'long', month: 'long', day: 'numeric', year: e.start.getUTCFullYear() !== siteNow().getUTCFullYear() ? 'numeric' : undefined });
+  if (e.allDay) return e.end && !sameDate(e.end, e.start) ? `${day} to ${fmtDate(e.end)}` : day;
+  const sameDay = e.end && sameDate(e.end, e.start);
   if (!e.end) return `${day}, ${fmtTime(e.start)}`;
   if (!sameDay) return `${day}, ${fmtTime(e.start)} to ${fmtDate(e.end)}`;
   const [a, b] = [fmtTime(e.start), fmtTime(e.end)];
@@ -49,8 +52,8 @@ export function whenText(e: Event['data']) {
   return `${day}, ${a.match(suffix)?.[0] === b.match(suffix)?.[0] ? a.replace(suffix, '') : a}–${b}`;
 }
 
-/** A date as written, without converting to UTC: 2026-12-04T17:00, or 2026-12-04 for all-day. */
-export const localIso = (d: Date, allDay = false) => (allDay ? d.toLocaleDateString('sv-SE') : `${d.toLocaleDateString('sv-SE')}T${d.toTimeString().slice(0, 5)}`);
+/** A date as written, with no zone: 2026-12-04T17:00, or 2026-12-04 for all-day. */
+export const localIso = (d: Date, allDay = false) => d.toISOString().slice(0, allDay ? 10 : 16);
 
 export const readTime = (body?: string) => `${Math.max(1, Math.round((body ?? '').split(/\s+/).length / 230))} min read`;
 
