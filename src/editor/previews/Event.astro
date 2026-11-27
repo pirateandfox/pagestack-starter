@@ -1,10 +1,14 @@
 ---
 import EventPage from '../../components/EventPage.astro';
 import { localDate, siteNow } from '../../lib/dates';
+import { eventSchema } from '../../lib/schemas';
 import type { ItemPreviewProps } from '@pirateandfox/pagestack/runtime';
 const { item, editing } = Astro.props as ItemPreviewProps;
-const d = item.data;
-const when = (v: unknown) => (v ? new Date(localDate(v) as any) : undefined);
-const data = { ...d, title: d.title || 'Untitled', start: when(d.start) ?? siteNow(), end: when(d.end), allDay: d.allDay === true, draft: d.draft === true } as any;
+// A half-filled event must still open: without a usable start it is shown as now, and if it still
+// doesn't fit the schema, without its repeat settings.
+const start = new Date((item.data.start ? localDate(item.data.start) : NaN) as any);
+const raw = { ...item.data, title: item.data.title || 'Untitled', start: isNaN(+start) ? siteNow() : start, allDay: item.data.allDay === true, draft: item.data.draft === true };
+const parsed = eventSchema.safeParse(raw);
+const data = (parsed.success ? parsed.data : { ...raw, end: undefined, until: undefined, repeat: 'none', alsoOn: [], exceptions: [] }) as any;
 ---
 <EventPage id={item.id} data={data} editing={editing}><Fragment set:html={item.html} /></EventPage>

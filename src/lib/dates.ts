@@ -20,6 +20,16 @@ function clockTime(moment: Date): Date {
   return new Date(Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second));
 }
 
+/** The zone times on this site are in, if Site details says; undefined when it is left to the server. */
+export const siteZone = timeZone;
+
+/** The real moment of a venue clock time (the reverse of clockTime). */
+export function toMoment(d: Date): Date {
+  let t = +d;
+  for (let i = 0; i < 2; i++) t += +d - +clockTime(new Date(t));
+  return new Date(t);
+}
+
 /** Now, at the venue. Compare event and article dates with this, not with new Date(). */
 export const siteNow = () => clockTime(new Date());
 

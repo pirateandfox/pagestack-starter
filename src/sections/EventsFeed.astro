@@ -1,15 +1,18 @@
 ---
-// Upcoming events from src/content/events, soonest first. "Upcoming" is decided when the site is
+// Upcoming events from src/content/events, soonest first. One that repeats shows once, at its next
+// date, unless the section asks for every date. "Upcoming" is decided when the site is
 // built, so a nightly rebuild keeps it right (README: Nightly rebuild).
 import type { Node, EditCtx } from '@pirateandfox/pagestack/runtime';
 import Sec from './Sec.astro';
 import SecHead from './SecHead.astro';
 import EventRow from '../components/EventRow.astro';
-import { events } from '../lib/content';
+import { feedDates, overAt } from '../lib/content';
 interface Props { node: Node; edit?: EditCtx }
 const { node, edit } = Astro.props;
 const s = node.settings;
-const list = (await events()).slice(0, Math.max(1, Number(s.count) || 3));
+const once = s.repeating !== 'all';
+const limit = Math.max(1, Number(s.count) || 3);
+const list = (await feedDates(limit, once)).filter((o) => !edit || !o.hidden);
 const cards = s.layout === 'cards';
 ---
 <Sec node={node} edit={edit} class:list={['events', cards && 'events--cards']}>
@@ -17,7 +20,6 @@ const cards = s.layout === 'cards';
     <SecHead s={s} edit={edit} />
     {s.more && <a class="btn btn--text" href="/events/">{s.more} <span aria-hidden="true">→</span></a>}
   </div>
-  {list.length
-    ? <ul class:list={[cards ? 'events__cards' : 'events__list']}>{list.map((e) => <li><EventRow e={e} layout={cards ? 'card' : 'list'} /></li>)}</ul>
-    : <p class="muted">{s.empty || 'Nothing planned right now.'}</p>}
+  {list.length > 0 && <ul class:list={[cards ? 'events__cards' : 'events__list']} data-events={limit}>{list.map((o) => <li data-event-end={overAt(o)} data-event={once ? o.e.id : undefined} hidden={o.hidden}><EventRow o={o} layout={cards ? 'card' : 'list'} series={once} /></li>)}</ul>}
+  <p class="muted" data-events-none hidden={list.length > 0}>{s.empty || 'Nothing planned right now.'}</p>
 </Sec>

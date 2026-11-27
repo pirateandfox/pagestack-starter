@@ -35,6 +35,7 @@ There are three jobs, each with its own recipe below:
 | `npm run dev` | The site at http://localhost:4321 (pick another port with `npm run dev -- --port 4400`), with `/blocks`: every block, one after another, with a theme switcher. |
 | `npm run dev:editor` | The same, with the editor at `/edit` (storage: the working tree). |
 | `npm run check:contrast` | Checks every theme, and the Theme settings, for hard-to-read colour pairs. Add `--strict` to fail on one. |
+| `npm test` | The repeating-event dates (`test/`). Needs no server. |
 | `npm run build` | The public site in `dist/`. `/blocks` and the dev form endpoint aren't in it. |
 
 Forms ignore a submission sent less than three seconds after the page loaded, which is a spam
@@ -54,7 +55,7 @@ After adding `src/content.config.ts` or changing a date or schema in `src/lib/sc
 | `src/data/site.json` | Name, tagline, announcement bar, menu, header button, address, phone, email, time zone, footer links, and the titles and intros of the Journal and Events pages. Edited at `/edit/global/site`. A blank address, phone or email leaves it out of the footer. |
 | `src/content/pages/*.json` | One page each. `index.json` is `/`, and `about.json` is `/about/`. |
 | `src/content/articles/*.md` | Journal articles, listed at `/journal/`. |
-| `src/content/events/*.md` | Events, listed at `/events/`. Each has an "Add to calendar" file. |
+| `src/content/events/*.md` | Events, listed at `/events/`. Each has an "Add to calendar" file, and `/events.ics` is all of them. One file is one event, or one series that repeats (`src/lib/recurrence.ts`). |
 | `src/sections/schema.ts` | Every block's fields. **Read this before writing page JSON.** |
 | `src/sections/index.ts` | Presets (the "Add section" library and `/blocks`), page templates, globals, collections. |
 | `src/sections/*.astro` | One component per block. `components.ts` maps types to components. |
@@ -131,8 +132,8 @@ say what you chose.
    | For | Use |
    |---|---|
    | Dishes | `menu` |
-   | Weekly classes | `timetable` |
-   | Dated events | `events` |
+   | A fixed weekly timetable | `timetable` |
+   | Dated events, including ones that repeat | `events` |
    | Plans | `pricing` |
    | Rooms or products | `products` |
    | Practice areas | `cards` |
@@ -181,6 +182,14 @@ say what you chose.
    `src/lib/schemas.ts` (see the samples). Dates are the venue's clock time:
    `2027-03-14`, or `2027-03-14T19:30` for events. Never add a zone (`Z`, `-05:00`). In code, read
    them as `src/lib/dates.ts` says, and compare them with `siteNow()`, not `new Date()`.
+   - **An event that repeats is one file**, not one per date (`drawing-club.md` is a sample).
+     `start` and `end` are its first date; `repeat` is `weekly`, `biweekly`, `monthly-weekday` or
+     `monthly-date`; `alsoOn` lists other weekdays (`[thu]`); `until` is the last date, or leave it
+     out. `exceptions` changes single dates: the usual `date`, a `change` of `cancelled`, `moved`
+     (with a new `start`) or `skipped`, and a `note`.
+   - For its dates, use `eventDates()` or `datesOf()` in `src/lib/content.ts`. `events()` gives the
+     series itself, whose `start` may be long past. The editor keeps `until`, `alsoOn` and
+     `exceptions` when an event stops repeating, so check `repeats()` before using them.
 8. **Remove the starter's sample business.** Start with `npm run start-fresh`: it makes the
    sample home page, articles and events into hidden drafts (kept for reference, never built) and
    clears the announcement. `src/content/pages/reference.json` is a hidden draft with every

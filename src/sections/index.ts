@@ -497,7 +497,7 @@ export const globals: Record<string, GlobalDoc> = {
       address: { type: 'text', label: 'Address' },
       phone: { type: 'text', label: 'Phone' },
       email: { type: 'text', label: 'Email' },
-      timeZone: { type: 'select', label: 'Time zone', options: timeZones, help: 'Where the business is. Decides when an event is over and when an article dated in the future appears.' },
+      timeZone: { type: 'select', label: 'Time zone', options: timeZones, help: 'Where the business is. Decides when an event is over and when an article dated in the future appears, and sets the times in calendar files.' },
       footerLinks: { ...nav, label: 'Footer links' },
       journalTitle: { type: 'text', label: 'Journal page title', help: 'The /journal/ page, e.g. Journal, News, Changelog.' },
       journalIntro: { type: 'textarea', label: 'Journal page intro' },
@@ -538,6 +538,10 @@ export const templates: PageTemplate[] = [
 /** The sample business: Hide / Delete sample content on the editor's Pages screen. See src/lib/sample-content.ts. */
 export const sampleContent = { label: sampleLabel, home: sampleHome(site.name), globals: sampleGlobals };
 
+const weekdays = [['mon', 'Monday'], ['tue', 'Tuesday'], ['wed', 'Wednesday'], ['thu', 'Thursday'], ['fri', 'Friday'], ['sat', 'Saturday'], ['sun', 'Sunday']].map(([value, label]) => ({ value, label }));
+// Named values, not `not: 'none'`, so only a value lib/recurrence.ts knows counts as repeating.
+const repeating = { field: 'repeat', is: ['weekly', 'biweekly', 'monthly-weekday', 'monthly-date'] };
+
 /** Markdown folders, edited under Journal and Events. Fields match src/lib/schemas.ts. */
 export const collections: Record<string, CollectionDoc> = {
   articles: {
@@ -564,9 +568,22 @@ export const collections: Record<string, CollectionDoc> = {
     fields: {
       title: { type: 'text', label: 'Title' },
       description: { type: 'textarea', label: 'Summary' },
-      start: { type: 'date', label: 'Starts', help: 'In the venue’s local time.' },
-      end: { type: 'date', label: 'Ends' },
+      start: { type: 'date', label: 'Starts', help: 'In the venue’s local time. If it repeats, the first date.' },
+      end: { type: 'date', label: 'Ends', help: 'If it repeats, when the first date ends (not the last date: that is Until).' },
       allDay: { type: 'boolean', label: 'All day (times are ignored)' },
+      repeat: { type: 'select', label: 'Repeats', default: 'none', options: [{ value: 'none', label: 'Does not repeat' }, { value: 'weekly', label: 'Every week' }, { value: 'biweekly', label: 'Every other week' }, { value: 'monthly-weekday', label: 'Every month, same weekday (e.g. third Wednesday)' }, { value: 'monthly-date', label: 'Every month, same date' }] },
+      alsoOn: { type: 'multiselect', label: 'Also on', options: weekdays, help: 'Other days of the week, besides the day it starts on.', showIf: { field: 'repeat', is: ['weekly', 'biweekly'] } },
+      until: { type: 'date', label: 'Until', time: false, help: 'The last date. Blank repeats with no end.', showIf: repeating },
+      exceptions: {
+        type: 'list', label: 'Changes to single dates', itemLabel: 'date', showIf: repeating,
+        fields: {
+          date: { type: 'date', label: 'Usual date', time: false },
+          change: { type: 'select', label: 'Change', default: 'cancelled', options: [{ value: 'cancelled', label: 'Cancelled (listed as cancelled)' }, { value: 'moved', label: 'Different time or date' }, { value: 'skipped', label: 'Not held (not listed)' }] },
+          start: { type: 'date', label: 'New start', showIf: { field: 'change', is: 'moved' } },
+          end: { type: 'date', label: 'New end', showIf: { field: 'change', is: 'moved' } },
+          note: { type: 'text', label: 'Note', help: 'Shown beside the date.', showIf: { field: 'change', not: 'skipped' } },
+        },
+      },
       place: { type: 'text', label: 'Place' },
       address: { type: 'text', label: 'Address', help: 'Links to a map.' },
       online: { type: 'link', label: 'Online link', help: 'For online or hybrid events.' },

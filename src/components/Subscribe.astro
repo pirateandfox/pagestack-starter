@@ -1,0 +1,15 @@
+---
+// A calendar file as something to subscribe to or download. site.ts turns the first two links into
+// subscriptions from the address the page is on; without JavaScript they are the file too.
+interface Props { file: string; label: string }
+const { file, label } = Astro.props;
+---
+<details class="subscribe">
+  <summary class="btn btn--outline">{label}</summary>
+  <ul>
+    <li><a href={file} data-subscribe="google">Google Calendar</a></li>
+    <li><a href={file} data-subscribe="webcal">Apple Calendar or Outlook</a></li>
+    <li><a href={file} download>Download the file</a></li>
+  </ul>
+  <p class="muted">The first two keep up with new and changed dates. The file doesn’t.</p>
+</details>

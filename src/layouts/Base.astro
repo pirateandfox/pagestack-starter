@@ -4,7 +4,7 @@
 import site from '../data/site.json';
 import settings from '../data/theme.json';
 import { fontPairings } from '../data/themes';
-import { siteNow } from '../lib/dates';
+import { siteNow, siteZone } from '../lib/dates';
 import { plainText, safeColor } from '../lib/text';
 import { bestOn, parseColor } from '../lib/contrast';
 import '../styles/base.css';
@@ -26,7 +26,7 @@ const vars = [
 const pageTitle = title === 'Home' ? `${site.name} — ${site.tagline}` : `${plainText(title)} — ${site.name}`;
 ---
 <!doctype html>
-<html lang="en" data-corners={settings.corners || undefined} data-buttons={settings.buttons || undefined} data-spacing={settings.spacing || undefined}>
+<html lang="en" data-tz={siteZone} data-corners={settings.corners || undefined} data-buttons={settings.buttons || undefined} data-spacing={settings.spacing || undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

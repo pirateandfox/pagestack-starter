@@ -100,6 +100,40 @@ document.addEventListener('click', (e) => {
   show(items.indexOf(a));
 });
 
+/* ---------- Events that have ended since the site was built: hide them, and bring in the ones
+   waiting after them. Dates are the venue's clock time, so this needs the time zone in Site details.
+   A list's data-events is how many it shows (blank for all); rows of one data-event show once. ---------- */
+const zone = document.documentElement.dataset.tz;
+if (zone && !document.querySelector('[data-ps-node]')) {
+  const now = new Intl.DateTimeFormat('sv-SE', { timeZone: zone, dateStyle: 'short', timeStyle: 'medium' }).format(new Date()).replace(' ', 'T');
+  for (const list of $$<HTMLElement>(document, '[data-events]')) {
+    const limit = Number(list.dataset.events) || Infinity;
+    const seen = new Set<string>();
+    let shown = 0;
+    for (const row of $$<HTMLElement>(list, ':scope > [data-event-end]')) {
+      const id = row.dataset.event;
+      row.hidden = row.dataset.eventEnd! < now || shown >= limit || (!!id && seen.has(id));
+      if (row.hidden) continue;
+      shown++;
+      if (id) seen.add(id);
+    }
+    list.hidden = !shown;
+    const none = list.parentElement!.querySelector<HTMLElement>(':scope > [data-events-none]');
+    if (none) none.hidden = shown > 0;
+  }
+}
+
+/* ---------- Calendar links: subscribe, rather than download, so changed dates come through.
+   Built from the address the page is on; without JavaScript these links are the file. ---------- */
+document.addEventListener('click', (e) => {
+  const a = (e.target as Element).closest<HTMLAnchorElement>('a[data-subscribe]');
+  if (!a) return;
+  e.preventDefault();
+  const webcal = a.href.replace(/^https?:/, 'webcal:');
+  if (a.dataset.subscribe === 'google') window.open(`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`, '_blank', 'noopener');
+  else location.href = webcal;
+});
+
 /* ---------- Donate: typing an "other" amount replaces the chosen one ---------- */
 document.addEventListener('input', (e) => {
   const other = e.target as HTMLInputElement;

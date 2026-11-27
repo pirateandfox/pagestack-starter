@@ -370,9 +370,10 @@ a.card:hover .frame img { transform: scale(1.03); }
 .erow__when { display: flex; flex-wrap: wrap; gap: 0 0.9rem; font-weight: 500; font-size: 0.95rem; }
 .erow__when span { color: var(--color-muted); }
 .erow__body .muted { font-size: 0.95rem; max-width: 60ch; }
+.flag { justify-self: start; width: fit-content; border: 1px solid currentColor; border-radius: var(--radius); padding: 0.3rem 0.5rem; font: 600 0.75rem/1 var(--font-body); letter-spacing: 0.06em; text-transform: uppercase; }
 .erow__act { display: grid; justify-items: end; gap: 0.5rem; text-align: right; font-size: 0.9rem; }
 @media (max-width: 700px) { .erow { grid-template-columns: 4rem minmax(0, 1fr); } .erow__act { grid-column: 2; justify-items: start; text-align: left; } }
-.events__cards { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--gap); }
+.events__cards:not([hidden]) { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--gap); }
 .erow--card { grid-template-columns: 1fr; align-content: start; align-items: start; height: 100%; padding: clamp(1.4rem, 3vw, 1.9rem); border: 1px solid var(--color-line); border-radius: var(--radius); }
 .erow--card .erow__date { justify-self: start; }
 .erow--card .erow__act { justify-items: start; text-align: left; align-self: end; grid-auto-flow: column; align-items: center; }
@@ -389,6 +390,14 @@ a.card:hover .frame img { transform: scale(1.03); }
 .event__grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.8fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
 .event h1 { font-size: var(--step-4); }
 .event .eyebrow a { text-decoration: none; }
+.event__dates { list-style: none; padding: 0; display: grid; gap: 0.75rem; }
+.event__dates li:not([hidden]) { display: grid; gap: 0.35rem; }
+.event__dates .muted { font-weight: 400; font-size: var(--step--1); }
+.events__foot { margin-top: clamp(2rem, 4vw, 3rem); }
+.subscribe summary { list-style: none; cursor: pointer; }
+.subscribe summary::-webkit-details-marker { display: none; }
+.subscribe ul { list-style: none; padding: 0; margin-top: 1rem; display: grid; gap: 0.6rem; }
+.subscribe p { margin-top: 0.75rem; font-size: var(--step--1); }
 .event__card { position: sticky; top: 6rem; padding: clamp(1.4rem, 3vw, 2rem); background: var(--color-surface); border-radius: var(--radius); }
 @media (max-width: 860px) { .event__grid { grid-template-columns: 1fr; } .event__card { position: static; } }
 

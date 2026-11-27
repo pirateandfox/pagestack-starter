@@ -6,6 +6,8 @@
 //   colours or pixel values, so every theme can style them.
 // - Headings use `heading()`: bold and italic allowed, rendered with set:html.
 // - The first inline text field names the block in List View, so the title goes first.
+// - An option that does nothing with the current choices gets a `showIf`, so the sidebar hides it.
+//   Its stored value is kept, so the component must check the same condition.
 import type { BlockSchema, Field, SchemaRegistry } from '@pirateandfox/pagestack/runtime';
 
 const opt = (vals: [string, string][]) => vals.map(([value, label]) => ({ value, label }));
@@ -28,7 +30,7 @@ const head = (title = '', eyebrow = ''): Record<string, Field> => ({
   eyebrow: text('Eyebrow', eyebrow, { help: 'Small line above the title. Blank for none.' }),
   intro: rich('Intro', ''),
 });
-const align = (def = 'left') => select('Alignment', def, [['left', 'Left'], ['center', 'Centred']]);
+const align = (def = 'left', extra: Partial<Field> = {}) => select('Alignment', def, [['left', 'Left'], ['center', 'Centred']], extra);
 const item = (label: string, fields: Record<string, Field>, extra: Partial<BlockSchema> = {}): BlockSchema => ({ label, hidden: true, fields, ...extra });
 
 export const schemas: SchemaRegistry = {
@@ -43,9 +45,9 @@ export const schemas: SchemaRegistry = {
       title: heading('Title', 'Small buildings, <em>carefully</em> made'),
       eyebrow: text('Eyebrow', ''),
       text: rich('Text', '<p>One or two sentences that say what you do and who it is for.</p>'),
-      image: image(),
+      image: image('Image', { showIf: { field: 'layout', not: 'minimal' } }),
       layout: select('Layout', 'split', [['split', 'Split: text and image side by side'], ['image', 'Full image behind the text'], ['stacked', 'Text above a wide image (a screenshot, a room)'], ['minimal', 'Text only']]),
-      align: align('left'),
+      align: align('left', { showIf: { field: 'layout', not: 'image' } }),
       ...section(),
     },
   },
@@ -167,6 +169,7 @@ export const schemas: SchemaRegistry = {
       ...head('What’s on', ''),
       count: select('How many', '3', [['2', 'Two'], ['3', 'Three'], ['4', 'Four'], ['6', 'Six']]),
       layout: select('Layout', 'list', [['list', 'List'], ['cards', 'Cards']]),
+      repeating: select('Repeating events', 'once', [['once', 'Once each, at the next date'], ['all', 'Every date']]),
       more: text('Link to all', 'All events', { inline: false, help: 'Blank for no link.' }),
       empty: text('When nothing is planned', 'Nothing planned right now.', { inline: false }),
       ...section(),
@@ -281,8 +284,8 @@ export const schemas: SchemaRegistry = {
     fields: {
       ...head('', ''),
       yearly: bool('Monthly and yearly switch', false, { help: 'Each plan then shows its yearly price when the switch is on yearly.' }),
-      monthlyLabel: text('Monthly label', 'Monthly', { group: 'style' }),
-      yearlyLabel: text('Yearly label', 'Yearly (2 months free)', { group: 'style' }),
+      monthlyLabel: text('Monthly label', 'Monthly', { group: 'style', showIf: { field: 'yearly', is: true } }),
+      yearlyLabel: text('Yearly label', 'Yearly (2 months free)', { group: 'style', showIf: { field: 'yearly', is: true } }),
       ...section(),
     },
   },
@@ -504,7 +507,7 @@ export const schemas: SchemaRegistry = {
   },
 
   /* ---------- Items drawn by their parent ---------- */
-  feature: item('Feature', { title: heading('Title', 'A clear point'), text: rich('Text', '<p>One or two sentences about it.</p>'), href: link('Link (optional)'), linkLabel: text('Link text', '', { help: 'What the link says, e.g. "See the menu". Blank says "More on" and the title.' }) }),
+  feature: item('Feature', { title: heading('Title', 'A clear point'), text: rich('Text', '<p>One or two sentences about it.</p>'), href: link('Link (optional)'), linkLabel: text('Link text', '', { help: 'What the link says, e.g. "See the menu". Blank says "More on" and the title.', showIf: { field: 'href' } }) }),
   stat: item('Number', { value: text('Number', '120'), label: text('Label', 'Projects finished') }),
   'faq-item': item('Question', { question: text('Question', 'A question people ask?'), answer: rich('Answer', '<p>A short, direct answer.</p>') }),
   testimonial: item('Testimonial', { quote: rich('Quote', '<p>What the client said, in their words.</p>'), name: text('Name', 'Name'), role: text('Role or company', ''), image: image('Photo') }),
@@ -520,7 +523,7 @@ export const schemas: SchemaRegistry = {
     price: text('Price', '$20'),
     yearlyPrice: text('Yearly price', '', { help: 'Shown when the switch is on yearly.' }),
     period: text('Per', '/month'),
-    yearlyPeriod: text('Per (yearly)', '/year'),
+    yearlyPeriod: text('Per (yearly)', '/year', { showIf: { field: 'yearlyPrice' } }),
     text: rich('Description', ''),
     features: rich('What is included', '<ul><li>One thing</li><li>Another thing</li></ul>'),
     button: text('Button label', 'Choose'),
@@ -548,8 +551,8 @@ export const schemas: SchemaRegistry = {
     label: text('Label', 'Your name'),
     kind: select('Type', 'text', [['text', 'Short text'], ['email', 'Email'], ['phone', 'Phone'], ['textarea', 'Message (long text)'], ['select', 'Dropdown'], ['choice', 'Choose one (buttons)'], ['checkbox', 'Tick box'], ['date', 'Date'], ['number', 'Number']], { group: 'content' }),
     required: bool('Required', false, { group: 'content' }),
-    options: { type: 'tags', label: 'Choices', default: [], help: 'For Dropdown and Choose one.' },
-    placeholder: { type: 'text', label: 'Placeholder', default: '' },
+    options: { type: 'tags', label: 'Choices', default: [], showIf: { field: 'kind', is: ['select', 'choice'] } },
+    placeholder: { type: 'text', label: 'Placeholder', default: '', showIf: { field: 'kind', is: ['text', 'email', 'phone', 'textarea', 'number'] } },
     help: text('Help text', ''),
     width: select('Width', 'full', [['full', 'Full'], ['half', 'Half (two side by side)']]),
   }),

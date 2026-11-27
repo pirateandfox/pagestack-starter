@@ -1,26 +1,42 @@
 ---
-// One event. Used by the real page and the editor's preview.
+// One event, and its coming dates if it repeats. Used by the real page and the editor's preview.
 import { itemField } from '@pirateandfox/pagestack/runtime';
+import Subscribe from './Subscribe.astro';
 import Base from '../layouts/Base.astro';
 import site from '../data/site.json';
-import { localIso, whenText, type Event } from '../lib/content';
+import { datesOf, fmtDate, flagText, localIso, overAt, seriesText, whenText, type Event } from '../lib/content';
+import { siteNow } from '../lib/dates';
+import { occurrences, repeats, type Occurrence } from '../lib/recurrence';
 interface Props { id: string; data: Event['data']; editing?: boolean; url?: string }
 const { id, data, editing = false, url } = Astro.props;
 // Times are local to the venue, written without a zone, so they stay as written everywhere.
 const local = (d: Date) => localIso(d, data.allDay);
-const ld = {
+const series = repeats(data);
+const SHOWN = 6; // the rest wait, hidden, for site.ts to bring in as dates end
+const usualEnd = data.end && +data.end > +data.start ? data.end : undefined;
+const next = series ? datesOf(data).slice(0, 12) : [];
+// One-offs always have their one date. A series that has finished goes by its last.
+const one = series ? next : occurrences(data, new Date(0), data.start);
+const last = series && !next.length ? occurrences(data, new Date(0), siteNow()).at(-1) : undefined;
+const ld = (one.length ? one : last ? [last] : []).map((o) => ({
   '@context': 'https://schema.org', '@type': 'Event', name: data.title, description: data.description,
-  startDate: local(data.start), endDate: data.end ? local(data.end) : undefined,
+  startDate: local(o.start), endDate: o.ends ? local(o.ends) : undefined,
+  eventStatus: o.cancelled ? 'https://schema.org/EventCancelled' : o.moved ? 'https://schema.org/EventRescheduled' : undefined,
+  previousStartDate: o.moved ? local(o.usual) : undefined,
   eventAttendanceMode: data.online ? (data.place ? 'https://schema.org/MixedEventAttendanceMode' : 'https://schema.org/OnlineEventAttendanceMode') : 'https://schema.org/OfflineEventAttendanceMode',
   location: data.place ? { '@type': 'Place', name: data.place, address: data.address } : data.online ? { '@type': 'VirtualLocation', url: data.online } : undefined,
   image: data.image && url ? new URL(data.image, url).href : undefined,
   organizer: { '@type': 'Organization', name: site.name },
   offers: data.tickets ? { '@type': 'Offer', url: data.tickets } : undefined,
-};
+}));
+// The usual hours are given once, above the dates; a date says its own only when they differ.
+const clock = (d?: Date) => d && localIso(d).slice(11);
+const dateText = (o: Occurrence) => (data.allDay || (clock(o.start) === clock(data.start) && clock(o.ends) === clock(usualEnd)) ? whenText({ start: o.start, ends: data.allDay ? o.ends : undefined }, true) : whenText(o));
+const file = `/events/${id}.ics`;
 const map = data.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.address)}` : '';
 ---
 <Base title={data.title} description={data.description}>
-  {!editing && <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld).replace(/</g, '\\u003c')} />}
+  {!editing && ld.length > 0 && <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld.length > 1 ? ld : ld[0]).replace(/</g, '\\u003c')} />}
   <article class="event sec">
     <div class="wrap event__grid">
       <header class="stack">
@@ -32,15 +48,19 @@ const map = data.address ? `https://www.google.com/maps/search/?api=1&query=${en
       </header>
       <aside class="event__card stack">
         <dl class="facts facts--stacked">
-          <div><dt>When</dt><dd>{whenText(data)}</dd></div>
+          <div><dt>When</dt><dd>{series ? seriesText(data) : whenText(one[0], data.allDay)}{last && <><br />Last held {fmtDate(last.start)}</>}</dd></div>
+          {next.length > 0 && <div><dt>Next dates</dt><dd><ul class="event__dates" data-events={SHOWN}>{next.map((o, i) => <li data-event-end={overAt(o)} hidden={i >= SHOWN}><time datetime={local(o.start)}>{o.cancelled ? <s>{dateText(o)}</s> : dateText(o)}</time>{flagText(o) && <span class="flag">{flagText(o)}</span>}{o.note && <span class="muted">{o.note}</span>}</li>)}</ul></dd></div>}
           {data.place && <div><dt>Where</dt><dd>{data.place}{data.address && <><br /><a href={map} rel="noopener">{data.address}</a></>}</dd></div>}
           {data.online && <div><dt>Online</dt><dd><a href={data.online} rel="noopener">Join link</a></dd></div>}
           {data.price && <div><dt>Price</dt><dd>{data.price}</dd></div>}
         </dl>
-        <div class="actions">
-          {data.tickets && <a class="btn" href={data.tickets} rel="noopener">Get tickets</a>}
-          {!editing && <a class="btn btn--outline" href={`/events/${id}.ics`} download>Add to calendar</a>}
-        </div>
+        {(data.tickets || (!editing && !series)) && (
+          <div class="actions">
+            {data.tickets && <a class="btn" href={data.tickets} rel="noopener">Get tickets</a>}
+            {!editing && !series && <a class="btn btn--outline" href={file} download>Add to calendar</a>}
+          </div>
+        )}
+        {!editing && next.length > 0 && <Subscribe file={file} label="Add to calendar" />}
       </aside>
     </div>
   </article>

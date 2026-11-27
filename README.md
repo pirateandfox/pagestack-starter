@@ -147,6 +147,10 @@ Deploy to Cloudflare Pages (see **Deploy**), then:
   edited in the editor on their real page. `/journal/` and `/events/` list them, each has its own
   page, events have an **Add to calendar** file, and both carry search-engine markup. The
   **Articles feed** and **Events feed** blocks put the latest on any page.
+- **Repeating events**: weekly (on one or more days), every other week or monthly, with an optional
+  last date, and single dates cancelled, moved or left out. `/events/` lists every date for the next
+  three months; a feed shows each series once or every date. Visitors can subscribe to one series,
+  or to every event at `/events.ics`, and changed dates come through.
 - **Forms** that email you or send to your CRM (below).
 
 ## Forms
@@ -190,7 +194,8 @@ edit).
 The site is static, so "upcoming events" and "published articles" are worked out when it is built.
 A nightly rebuild keeps them right: past events drop off, and an article dated in the future
 appears on its day. "Now" is the time in **Site settings → Site details → Time zone**, wherever the
-build runs. Event times are the venue's clock time, shown as written.
+build runs. Event times are the venue's clock time, shown as written. With a time zone set, calendar
+files give the real moment, and dates that end between rebuilds hide themselves.
 
 1. Cloudflare → your Pages project → **Settings → Builds → Deploy hooks → Add** (the branch your
    live site builds from). Copy the URL.
@@ -222,6 +227,8 @@ src/data/                site details and theme settings
 src/lib/form-server.ts   the send function's logic
 src/content/pages/reference.json   hidden draft: every section, for reference
 src/editor/              /blocks, editor previews, the dev-only form route
+src/lib/recurrence.ts    the dates of a repeating event (npm test checks it)
+src/lib/ics.ts           calendar files
 scripts/check-contrast.ts  npm run check:contrast
 scripts/start-fresh.ts   npm run start-fresh: hide (or --delete) the sample content
 src/lib/sample-content.ts  what replaces the sample content
