@@ -542,7 +542,10 @@ const weekdays = [['mon', 'Monday'], ['tue', 'Tuesday'], ['wed', 'Wednesday'], [
 // Named values, not `not: 'none'`, so only a value lib/recurrence.ts knows counts as repeating.
 const repeating = { field: 'repeat', is: ['weekly', 'biweekly', 'monthly-weekday', 'monthly-date'] };
 
-/** Markdown folders, edited under Journal and Events. Fields match src/lib/schemas.ts. */
+/**
+ * Markdown folders, edited under Journal and Events. Fields match src/lib/schemas.ts: mark one
+ * `required` when the schema insists on it, or a file saved without it stops the whole build.
+ */
 export const collections: Record<string, CollectionDoc> = {
   articles: {
     label: 'Journal',
@@ -552,7 +555,7 @@ export const collections: Record<string, CollectionDoc> = {
     fields: {
       title: { type: 'text', label: 'Title' },
       description: { type: 'textarea', label: 'Summary', help: 'One or two sentences, shown on cards and in search results.' },
-      date: { type: 'date', label: 'Date', time: false, help: 'A future date schedules it: it appears on the first build on or after that day.' },
+      date: { type: 'date', label: 'Date', time: false, required: true, help: 'A future date schedules it: it appears on the first build on or after that day.' },
       author: { type: 'text', label: 'Author' },
       image: { type: 'image', label: 'Image', asUrl: true, altField: 'imageAlt' },
       imageAlt: { type: 'text', label: 'Image description' },
@@ -568,7 +571,7 @@ export const collections: Record<string, CollectionDoc> = {
     fields: {
       title: { type: 'text', label: 'Title' },
       description: { type: 'textarea', label: 'Summary' },
-      start: { type: 'date', label: 'Starts', help: 'In the venue’s local time. If it repeats, the first date.' },
+      start: { type: 'date', label: 'Starts', required: true, help: 'In the venue’s local time. If it repeats, the first date.' },
       end: { type: 'date', label: 'Ends', help: 'If it repeats, when the first date ends (not the last date: that is Until).' },
       allDay: { type: 'boolean', label: 'All day (times are ignored)' },
       repeat: { type: 'select', label: 'Repeats', default: 'none', options: [{ value: 'none', label: 'Does not repeat' }, { value: 'weekly', label: 'Every week' }, { value: 'biweekly', label: 'Every other week' }, { value: 'monthly-weekday', label: 'Every month, same weekday (e.g. third Wednesday)' }, { value: 'monthly-date', label: 'Every month, same date' }] },
@@ -577,7 +580,7 @@ export const collections: Record<string, CollectionDoc> = {
       exceptions: {
         type: 'list', label: 'Changes to single dates', itemLabel: 'date', showIf: repeating,
         fields: {
-          date: { type: 'date', label: 'Usual date', time: false },
+          date: { type: 'date', label: 'Usual date', time: false, required: true },
           change: { type: 'select', label: 'Change', default: 'cancelled', options: [{ value: 'cancelled', label: 'Cancelled (listed as cancelled)' }, { value: 'moved', label: 'Different time or date' }, { value: 'skipped', label: 'Not held (not listed)' }] },
           start: { type: 'date', label: 'New start', showIf: { field: 'change', is: 'moved' } },
           end: { type: 'date', label: 'New end', showIf: { field: 'change', is: 'moved' } },
