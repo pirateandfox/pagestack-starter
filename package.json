@@ -15,7 +15,7 @@
     "test": "node --no-warnings --test test/*.test.ts"
   },
   "dependencies": {
-    "@pirateandfox/pagestack": "0.1.0-beta.18",
+    "@pirateandfox/pagestack": "0.1.0-beta.19",
     "astro": "^7.4.7"
   },
   "engines": {
